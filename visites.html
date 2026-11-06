@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visites · LBC Visites</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="visites" data-role="visiteur">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+
+      <main class="content">
+        <div class="page-head anim">
+          <div>
+            <div class="eyebrow">Espace visiteur · Région Sud</div>
+            <h1>Visites</h1>
+            <p class="sub">Retrouvez, filtrez et pilotez l'ensemble de vos visites. Chaque visite donne lieu à un compte rendu PDF partageable.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-outline" data-demo-action="Export CSV" data-demo-msg="L'export des visites filtrées serait téléchargé.">
+              <svg class="icon"><use href="#i-download"></use></svg>Exporter
+            </button>
+            <a class="btn btn-primary" href="visite-nouvelle.html">
+              <svg class="icon"><use href="#i-plus"></use></svg>Nouvelle visite
+            </a>
+          </div>
+        </div>
+
+        <div class="tabs anim d1" data-tabs data-tab-root id="visitesTabs">
+          <button class="tab active" data-tab="all">Toutes <span class="count">128</span></button>
+          <button class="tab" data-tab="planned">Planifiées <span class="count">12</span></button>
+          <button class="tab" data-tab="pending">En attente de CR <span class="count">3</span></button>
+          <button class="tab" data-tab="done">Comptes rendus <span class="count">113</span></button>
+        </div>
+
+        <div class="tabpane active" data-pane="all">
+          <section class="card card-pad anim d2 mb-2">
+            <div class="row wrap" style="gap:12px">
+              <label class="input-icon" style="flex:1;min-width:240px">
+                <svg class="icon"><use href="#i-search"></use></svg>
+                <input class="input" type="search" placeholder="Rechercher un praticien, un produit, une ville…" data-table-filter="visitesTable" aria-label="Rechercher une visite">
+              </label>
+              <select class="select" style="width:auto;min-width:150px" aria-label="Période">
+                <option>Toutes les périodes</option>
+                <option>Ce mois-ci</option>
+                <option>30 derniers jours</option>
+                <option>Ce trimestre</option>
+              </select>
+              <select class="select" style="width:auto;min-width:150px" aria-label="Statut">
+                <option>Tous les statuts</option>
+                <option>CR généré</option>
+                <option>En attente de CR</option>
+                <option>Brouillon</option>
+                <option>Annulée</option>
+              </select>
+              <select class="select" style="width:auto;min-width:150px" aria-label="Type">
+                <option>Tous les types</option>
+                <option>Visite</option>
+                <option>Activité complémentaire</option>
+              </select>
+              <button class="btn btn-outline"><svg class="icon"><use href="#i-filter"></use></svg>Filtrer</button>
+            </div>
+          </section>
+
+          <div class="table-wrap anim d3">
+            <div class="table-scroll">
+              <table class="data" id="visitesTable">
+                <thead>
+                  <tr>
+                    <th>Praticien</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Produits présentés</th>
+                    <th>Échantillons</th>
+                    <th>Statut</th>
+                    <th style="text-align:right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="clickable" data-href="visite-detail.html">
+                    <td>
+                      <div class="cell-person">
+                        <span class="avatar blue">AD</span>
+                        <div><div class="cell-main">Dr Anne Dupuis</div><div class="cell-sub">Cardiologie · #1042 · Marseille</div></div>
+                      </div>
+                    </td>
+                    <td><div class="cell-main">04 nov. 2026</div><div class="cell-sub">10:30</div></td>
+                    <td><span class="pill">Visite</span></td>
+                    <td><div class="cell-main" style="font-weight:500">Cardiozen, Tensiofix</div><div class="cell-sub">2 produits</div></td>
+                    <td><span class="strong">2</span></td>
+                    <td><span class="badge green">CR généré</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <a class="mini-icon" href="visite-detail.html" title="Voir la visite"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                        <a class="mini-icon" href="visite-nouvelle.html" title="Modifier"><svg class="icon-sm"><use href="#i-edit"></use></svg></a>
+                        <a class="mini-icon" href="compte-rendu.html" title="Télécharger le CR"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="clickable" data-href="visite-detail.html">
+                    <td>
+                      <div class="cell-person">
+                        <span class="avatar amber">MR</span>
+                        <div><div class="cell-main">Dr Marc Rousseau</div><div class="cell-sub">Médecine générale · #0871 · Aix-en-Provence</div></div>
+                      </div>
+                    </td>
+                    <td><div class="cell-main">03 nov. 2026</div><div class="cell-sub">14:00</div></td>
+                    <td><span class="pill">Visite</span></td>
+                    <td><div class="cell-main" style="font-weight:500">Bronchovent, Immunoflor</div><div class="cell-sub">2 produits</div></td>
+                    <td><span class="strong">3</span></td>
+                    <td><span class="badge green">CR généré</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <a class="mini-icon" href="visite-detail.html" title="Voir la visite"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                        <a class="mini-icon" href="visite-nouvelle.html" title="Modifier"><svg class="icon-sm"><use href="#i-edit"></use></svg></a>
+                        <a class="mini-icon" href="compte-rendu.html" title="Télécharger le CR"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="clickable" data-href="visite-detail.html">
+                    <td>
+                      <div class="cell-person">
+                        <span class="avatar purple">LF</span>
+                        <div><div class="cell-main">Dr Léa Fontaine</div><div class="cell-sub">Pneumologie · #1120 · Toulon</div></div>
+                      </div>
+                    </td>
+                    <td><div class="cell-main">29 oct. 2026</div><div class="cell-sub">09:15</div></td>
+                    <td><span class="pill">Visite</span></td>
+                    <td><div class="cell-main" style="font-weight:500">Bronchovent</div><div class="cell-sub">1 produit</div></td>
+                    <td><span class="muted">—</span></td>
+                    <td><span class="badge amber">En attente de CR</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <a class="mini-icon" href="visite-detail.html" title="Voir la visite"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                        <a class="mini-icon" href="visite-nouvelle.html" title="Modifier"><svg class="icon-sm"><use href="#i-edit"></use></svg></a>
+                        <button class="mini-icon" disabled title="Suppression impossible : compte rendu existant" style="opacity:.4;cursor:not-allowed"><svg class="icon-sm"><use href="#i-trash"></use></svg></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="clickable" data-href="visite-detail.html">
+                    <td>
+                      <div class="cell-person">
+                        <span class="avatar rose">HB</span>
+                        <div><div class="cell-main">Dr Hugo Bernard</div><div class="cell-sub">Dermatologie · #0934 · Nice</div></div>
+                      </div>
+                    </td>
+                    <td><div class="cell-main">27 oct. 2026</div><div class="cell-sub">11:00</div></td>
+                    <td><span class="pill">Visite</span></td>
+                    <td><div class="cell-main" style="font-weight:500">Dermalis</div><div class="cell-sub">1 produit</div></td>
+                    <td><span class="strong">4</span></td>
+                    <td><span class="badge green">CR généré</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <a class="mini-icon" href="visite-detail.html" title="Voir la visite"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                        <a class="mini-icon" href="visite-nouvelle.html" title="Modifier"><svg class="icon-sm"><use href="#i-edit"></use></svg></a>
+                        <a class="mini-icon" href="compte-rendu.html" title="Télécharger le CR"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="clickable" data-href="visite-detail.html">
+                    <td>
+                      <div class="cell-person">
+                        <span class="avatar">PP</span>
+                        <div><div class="cell-main">Pharmacie du Port</div><div class="cell-sub">Officine · #2201 · Marseille</div></div>
+                      </div>
+                    </td>
+                    <td><div class="cell-main">24 oct. 2026</div><div class="cell-sub">15:45</div></td>
+                    <td><span class="pill">Visite</span></td>
+                    <td><div class="cell-main" style="font-weight:500">Immunoflor, Glycobalance</div><div class="cell-sub">2 produits</div></td>
+                    <td><span class="strong">6</span></td>
+                    <td><span class="badge green">CR généré</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <a class="mini-icon" href="visite-detail.html" title="Voir la visite"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                        <a class="mini-icon" href="visite-nouvelle.html" title="Modifier"><svg class="icon-sm"><use href="#i-edit"></use></svg></a>
+                        <a class="mini-icon" href="compte-rendu.html" title="Télécharger le CR"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="clickable" data-href="visite-detail.html">
+                    <td>
+                      <div class="cell-person">
+                        <span class="avatar purple">CP</span>
+                        <div><div class="cell-main">Dr Claire Petit</div><div class="cell-sub">Endocrinologie · #1188 · Aubagne</div></div>
+                      </div>
+                    </td>
+                    <td><div class="cell-main">22 oct. 2026</div><div class="cell-sub">16:30</div></td>
+                    <td><span class="pill">Visite</span></td>
+                    <td><div class="cell-main" style="font-weight:500">Glycobalance</div><div class="cell-sub">1 produit</div></td>
+                    <td><span class="strong">2</span></td>
+                    <td><span class="badge slate">Brouillon</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <a class="mini-icon" href="visite-detail.html" title="Voir la visite"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                        <a class="mini-icon" href="visite-nouvelle.html" title="Modifier"><svg class="icon-sm"><use href="#i-edit"></use></svg></a>
+                        <button class="mini-icon danger" data-open-modal="deleteModal" title="Supprimer"><svg class="icon-sm"><use href="#i-trash"></use></svg></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="clickable" data-href="visite-detail.html">
+                    <td>
+                      <div class="cell-person">
+                        <span class="avatar amber">SH</span>
+                        <div><div class="cell-main">Dr Samir Haddad</div><div class="cell-sub">Médecine générale · #0790 · La Ciotat</div></div>
+                      </div>
+                    </td>
+                    <td><div class="cell-main">18 oct. 2026</div><div class="cell-sub">08:45</div></td>
+                    <td><span class="pill">Visite</span></td>
+                    <td><div class="cell-main" style="font-weight:500">Neuroline</div><div class="cell-sub">1 produit</div></td>
+                    <td><span class="muted">—</span></td>
+                    <td><span class="badge amber">En attente de CR</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <a class="mini-icon" href="visite-detail.html" title="Voir la visite"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                        <a class="mini-icon" href="visite-nouvelle.html" title="Modifier"><svg class="icon-sm"><use href="#i-edit"></use></svg></a>
+                        <button class="mini-icon" disabled title="Suppression impossible : visite déjà réalisée" style="opacity:.4;cursor:not-allowed"><svg class="icon-sm"><use href="#i-trash"></use></svg></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="clickable" data-href="visite-detail.html">
+                    <td>
+                      <div class="cell-person">
+                        <span class="avatar rose">EM</span>
+                        <div><div class="cell-main">Dr Élodie Marchand</div><div class="cell-sub">Gynécologie · #1355 · Toulon</div></div>
+                      </div>
+                    </td>
+                    <td><div class="cell-main">15 oct. 2026</div><div class="cell-sub">10:15</div></td>
+                    <td><span class="pill">Visite</span></td>
+                    <td><div class="cell-main" style="font-weight:500">Immunoflor, Neuroline</div><div class="cell-sub">2 produits</div></td>
+                    <td><span class="strong">3</span></td>
+                    <td><span class="badge green">CR généré</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <a class="mini-icon" href="visite-detail.html" title="Voir la visite"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                        <a class="mini-icon" href="visite-nouvelle.html" title="Modifier"><svg class="icon-sm"><use href="#i-edit"></use></svg></a>
+                        <a class="mini-icon" href="compte-rendu.html" title="Télécharger le CR"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="clickable" data-href="visite-detail.html">
+                    <td>
+                      <div class="cell-person">
+                        <span class="avatar navy">PG</span>
+                        <div><div class="cell-main">Dr Paul Girard</div><div class="cell-sub">Cardiologie · #1067 · Marseille</div></div>
+                      </div>
+                    </td>
+                    <td><div class="cell-main">11 oct. 2026</div><div class="cell-sub">17:00</div></td>
+                    <td><span class="pill">Visite</span></td>
+                    <td><div class="cell-main" style="font-weight:500">Tensiofix</div><div class="cell-sub">1 produit</div></td>
+                    <td><span class="muted">—</span></td>
+                    <td><span class="badge red">Annulée</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <a class="mini-icon" href="visite-detail.html" title="Voir la visite"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                        <button class="mini-icon" disabled title="Visite annulée" style="opacity:.4;cursor:not-allowed"><svg class="icon-sm"><use href="#i-edit"></use></svg></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="clickable" data-href="visite-detail.html">
+                    <td>
+                      <div class="cell-person">
+                        <span class="avatar blue">AD</span>
+                        <div><div class="cell-main">Dr Anne Dupuis</div><div class="cell-sub">Cardiologie · #1042 · Marseille</div></div>
+                      </div>
+                    </td>
+                    <td><div class="cell-main">02 oct. 2026</div><div class="cell-sub">11:30</div></td>
+                    <td><span class="pill">Visite</span></td>
+                    <td><div class="cell-main" style="font-weight:500">Cardiozen</div><div class="cell-sub">1 produit</div></td>
+                    <td><span class="strong">2</span></td>
+                    <td><span class="badge green">CR généré</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <a class="mini-icon" href="visite-detail.html" title="Voir la visite"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                        <a class="mini-icon" href="visite-nouvelle.html" title="Modifier"><svg class="icon-sm"><use href="#i-edit"></use></svg></a>
+                        <a class="mini-icon" href="compte-rendu.html" title="Télécharger le CR"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-foot">
+              <span><strong data-filter-count="visitesTable">10</strong> visites affichées sur 128</span>
+              <div class="pager" aria-label="Pagination">
+                <button aria-label="Précédent">‹</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>…</button>
+                <button>13</button>
+                <button aria-label="Suivant">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabpane" data-pane="planned">
+          <div class="card card-pad">
+            <div class="empty"><svg class="icon"><use href="#i-calendar"></use></svg><p><strong>12 visites planifiées</strong></p><p class="small mt-1">Ouvrez l'onglet « Toutes » pour consulter le détail de votre planning.</p></div>
+          </div>
+        </div>
+        <div class="tabpane" data-pane="pending">
+          <div class="card card-pad">
+            <div class="empty"><svg class="icon"><use href="#i-reports"></use></svg><p><strong>3 comptes rendus à compléter</strong></p><p class="small mt-1">Dr Léa Fontaine, Dr Samir Haddad et Pharmacie du Port.</p></div>
+          </div>
+        </div>
+        <div class="tabpane" data-pane="done">
+          <div class="card card-pad">
+            <div class="empty"><svg class="icon"><use href="#i-file-check"></use></svg><p><strong>113 comptes rendus générés</strong></p><p class="small mt-1">Retrouvez-les depuis la rubrique « Comptes rendus ».</p></div>
+          </div>
+        </div>
+
+        <div class="note mt-3 anim d4">
+          <svg class="icon"><use href="#i-info"></use></svg>
+          <div><strong>Suppression encadrée —</strong> une visite ne peut être supprimée que si elle ne contient ni compte rendu ni échantillon, conformément au cahier des charges.</div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modale suppression -->
+  <div class="modal-backdrop" id="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteTitle">
+    <div class="modal" style="max-width:440px">
+      <div class="modal-head">
+        <div>
+          <h3 id="deleteTitle">Supprimer cette visite ?</h3>
+          <p>La visite du 22 octobre chez Dr Claire Petit sera définitivement supprimée. Cette action est irréversible.</p>
+        </div>
+        <button class="mini-icon" data-close-modal aria-label="Fermer"><svg class="icon-sm"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-outline" data-close-modal>Annuler</button>
+        <button class="btn btn-danger" data-save="Visite supprimée" data-save-msg="La visite du 22 octobre a été supprimée." data-close-modal>Supprimer définitivement</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/layout.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espace responsable · LBC Visites</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="responsable" data-role="responsable">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+
+      <main class="content">
+        <div class="page-head anim">
+          <div>
+            <div class="eyebrow">Espace responsable · Secteur Sud</div>
+            <h1>Pilotage de la région Sud</h1>
+            <p class="sub">Suivez l'activité de vos 8 visiteurs, consultez leurs comptes rendus et gérez l'allocation des échantillons.</p>
+          </div>
+          <div class="page-actions">
+            <span class="head-date"><svg class="icon-sm"><use href="#i-calendar"></use></svg>Novembre 2026</span>
+            <button class="btn btn-outline" data-demo-action="Export du rapport d'équipe" data-demo-msg="Le rapport mensuel au format Excel serait généré."><svg class="icon"><use href="#i-download"></use></svg>Rapport d'équipe</button>
+          </div>
+        </div>
+
+        <section class="grid grid-4 anim d1">
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Visites de l'équipe</span><span class="kpi-icon"><svg class="icon"><use href="#i-visits"></use></svg></span></div>
+            <div class="kpi-value">312</div>
+            <div class="kpi-bottom"><span class="delta up">+8 %</span><span>vs. octobre</span></div>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Taux de comptes rendus</span><span class="kpi-icon amber"><svg class="icon"><use href="#i-file-check"></use></svg></span></div>
+            <div class="kpi-value">88<small>%</small></div>
+            <div class="progress" style="height:6px"><span style="width:88%"></span></div>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Praticiens couverts</span><span class="kpi-icon blue"><svg class="icon"><use href="#i-users"></use></svg></span></div>
+            <div class="kpi-value">540<small>/ 620</small></div>
+            <div class="kpi-bottom"><span class="badge teal no-dot">87 % du secteur</span></div>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Échantillons distribués</span><span class="kpi-icon purple"><svg class="icon"><use href="#i-package"></use></svg></span></div>
+            <div class="kpi-value">1 240</div>
+            <div class="kpi-bottom"><span class="muted">sur 1 800 alloués</span></div>
+          </article>
+        </section>
+
+        <div class="grid grid-main mt-3">
+          <div class="stack">
+            <section class="card anim d2">
+              <div class="card-head">
+                <div>
+                  <h3>Performance de l'équipe</h3>
+                  <div class="sub">Visites réalisées · 8 dernières semaines</div>
+                </div>
+                <div class="row">
+                  <div class="segmented">
+                    <button class="active">8 semaines</button>
+                    <button>6 mois</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-wrap">
+                  <svg class="chart" data-chart data-values="31,36,34,42,40,46,44,52" data-second="34,35,37,39,40,42,44,46" data-max="60" viewBox="0 0 640 210" role="img" aria-label="Courbe des visites de l'équipe">
+                    <defs>
+                      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#0fa98f" stop-opacity=".24"/>
+                        <stop offset="1" stop-color="#0fa98f" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <g class="chart-grid">
+                      <line x1="0" y1="30" x2="640" y2="30"/>
+                      <line x1="0" y1="80" x2="640" y2="80"/>
+                      <line x1="0" y1="130" x2="640" y2="130"/>
+                      <line x1="0" y1="180" x2="640" y2="180"/>
+                    </g>
+                    <path class="chart-area" d=""/>
+                    <path class="chart-line-2" d=""/>
+                    <path class="chart-line" d=""/>
+                    <g class="chart-dots"></g>
+                  </svg>
+                </div>
+                <div class="chart-labels">
+                  <span>S38</span><span>S39</span><span>S40</span><span>S41</span>
+                  <span>S42</span><span>S43</span><span>S44</span><span>S45</span>
+                </div>
+                <div class="row-between mt-2">
+                  <div class="chart-legend">
+                    <span class="legend-item"><span class="legend-dot"></span>Visites réalisées</span>
+                    <span class="legend-item"><span class="legend-dot light"></span>Objectif</span>
+                  </div>
+                  <span class="tiny muted">Moyenne : <strong class="strong">39 visites / semaine</strong></span>
+                </div>
+              </div>
+            </section>
+
+            <section class="card anim d3">
+              <div class="card-head">
+                <div>
+                  <h3>Mon équipe</h3>
+                  <div class="sub">8 visiteurs · région Sud</div>
+                </div>
+                <button class="btn btn-sm btn-outline" data-demo-action="Gestion de l'équipe" data-demo-msg="La liste complète des visiteurs s'ouvrirait ici."><svg class="icon"><use href="#i-users"></use></svg>Gérer</button>
+              </div>
+              <div class="table-wrap" style="border:0;border-radius:0;box-shadow:none">
+                <div class="table-scroll">
+                  <table class="data">
+                    <thead>
+                      <tr><th>Visiteur</th><th>Visites</th><th style="min-width:150px">Taux de CR</th><th>Échantillons</th><th>Dernière activité</th><th>Statut</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><div class="cell-person"><span class="avatar" style="width:32px;height:32px;font-size:10px">CM</span><div><div class="cell-main">Camille Moreau</div><div class="cell-sub">Marseille · 87 praticiens</div></div></div></td>
+                        <td><span class="strong">24</span></td>
+                        <td><div class="progress-row"><div class="progress"><span style="width:92%"></span></div><span class="progress-val">92%</span></div></td>
+                        <td>38</td>
+                        <td class="muted">04/11/2026</td>
+                        <td><span class="badge green">À jour</span></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-person"><span class="avatar blue" style="width:32px;height:32px;font-size:10px">SB</span><div><div class="cell-main">Sofia Benali</div><div class="cell-sub">Marseille · 92 praticiens</div></div></div></td>
+                        <td><span class="strong">27</span></td>
+                        <td><div class="progress-row"><div class="progress"><span style="width:96%"></span></div><span class="progress-val">96%</span></div></td>
+                        <td>42</td>
+                        <td class="muted">05/11/2026</td>
+                        <td><span class="badge green">À jour</span></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-person"><span class="avatar amber" style="width:32px;height:32px;font-size:10px">MR</span><div><div class="cell-main">Marc Rousseau</div><div class="cell-sub">Aix-en-Provence · 64 praticiens</div></div></div></td>
+                        <td><span class="strong">21</span></td>
+                        <td><div class="progress-row"><div class="progress amber"><span style="width:81%"></span></div><span class="progress-val">81%</span></div></td>
+                        <td>29</td>
+                        <td class="muted">03/11/2026</td>
+                        <td><span class="badge amber">2 CR en retard</span></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-person"><span class="avatar purple" style="width:32px;height:32px;font-size:10px">LF</span><div><div class="cell-main">Léa Fontaine</div><div class="cell-sub">Toulon · 58 praticiens</div></div></div></td>
+                        <td><span class="strong">19</span></td>
+                        <td><div class="progress-row"><div class="progress red"><span style="width:74%"></span></div><span class="progress-val">74%</span></div></td>
+                        <td>24</td>
+                        <td class="muted">29/10/2026</td>
+                        <td><span class="badge red">3 CR en retard</span></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-person"><span class="avatar rose" style="width:32px;height:32px;font-size:10px">TG</span><div><div class="cell-main">Thomas Girard</div><div class="cell-sub">Nice · 71 praticiens</div></div></div></td>
+                        <td><span class="strong">23</span></td>
+                        <td><div class="progress-row"><div class="progress"><span style="width:89%"></span></div><span class="progress-val">89%</span></div></td>
+                        <td>31</td>
+                        <td class="muted">02/11/2026</td>
+                        <td><span class="badge green">À jour</span></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-person"><span class="avatar navy" style="width:32px;height:32px;font-size:10px">HB</span><div><div class="cell-main">Hugo Bernard</div><div class="cell-sub">Nice · 49 praticiens</div></div></div></td>
+                        <td><span class="strong">18</span></td>
+                        <td><div class="progress-row"><div class="progress amber"><span style="width:83%"></span></div><span class="progress-val">83%</span></div></td>
+                        <td>22</td>
+                        <td class="muted">27/10/2026</td>
+                        <td><span class="badge green">À jour</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-foot">
+                  <span>6 visiteurs affichés sur 8</span>
+                  <a class="link" href="comptes-rendus.html">Voir tous les comptes rendus <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="stack">
+            <section class="card card-pad anim d2">
+              <div class="row-between mb-2">
+                <div>
+                  <h3 style="font-size:15px">Budget échantillons</h3>
+                  <div class="tiny muted mt-1">Novembre 2026</div>
+                </div>
+                <span class="badge teal">69 %</span>
+              </div>
+              <div class="row" style="gap:18px">
+                <div class="donut" style="--p:69">
+                  <div class="donut-content"><strong>1 240</strong><span>sur 1 800</span></div>
+                </div>
+                <div class="stack" style="gap:10px;flex:1">
+                  <div>
+                    <div class="row-between"><span class="tiny muted">Cardiozen</span><span class="tiny strong">520</span></div>
+                    <div class="progress mt-1"><span style="width:42%"></span></div>
+                  </div>
+                  <div>
+                    <div class="row-between"><span class="tiny muted">Tensiofix</span><span class="tiny strong">384</span></div>
+                    <div class="progress blue mt-1"><span style="width:31%"></span></div>
+                  </div>
+                  <div>
+                    <div class="row-between"><span class="tiny muted">Autres produits</span><span class="tiny strong">336</span></div>
+                    <div class="progress amber mt-1"><span style="width:27%"></span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="divider"></div>
+              <div class="row-between">
+                <span class="tiny muted">Reste à allouer</span>
+                <span class="strong">560 unités</span>
+              </div>
+            </section>
+
+            <section class="card anim d3">
+              <div class="card-head">
+                <div>
+                  <h3>Alertes</h3>
+                  <div class="sub">3 points d'attention</div>
+                </div>
+                <span class="badge red no-dot">3</span>
+              </div>
+              <div class="card-body" style="padding-top:4px;padding-bottom:8px">
+                <div class="list">
+                  <div class="list-item">
+                    <span class="kpi-icon amber" style="width:32px;height:32px;border-radius:9px"><svg class="icon-sm"><use href="#i-clock"></use></svg></span>
+                    <div class="list-main"><div class="list-title" style="font-size:12px">5 comptes rendus en retard</div><div class="list-sub">Léa Fontaine et Marc Rousseau</div></div>
+                    <a class="link" href="comptes-rendus.html">Voir</a>
+                  </div>
+                  <div class="list-item">
+                    <span class="kpi-icon" style="width:32px;height:32px;border-radius:9px;background:var(--red-soft);color:#b91c1c"><svg class="icon-sm"><use href="#i-alert"></use></svg></span>
+                    <div class="list-main"><div class="list-title" style="font-size:12px">Stock bas — Tensiofix 5 mg</div><div class="list-sub">142 unités restantes · seuil 200</div></div>
+                    <a class="link" href="echantillons.html">Gérer</a>
+                  </div>
+                  <div class="list-item">
+                    <span class="kpi-icon blue" style="width:32px;height:32px;border-radius:9px"><svg class="icon-sm"><use href="#i-mail"></use></svg></span>
+                    <div class="list-main"><div class="list-title" style="font-size:12px">4 invitations sans réponse</div><div class="list-sub">AC du 20 novembre · Nice</div></div>
+                    <a class="link" href="activites.html">Voir</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card card-pad anim d4">
+              <h3 style="font-size:15px;margin-bottom:16px">Objectifs du secteur</h3>
+              <div class="stack" style="gap:14px">
+                <div>
+                  <div class="row-between mb-1"><span class="small">Visites réalisées</span><span class="small strong">312 / 360</span></div>
+                  <div class="progress"><span style="width:87%"></span></div>
+                </div>
+                <div>
+                  <div class="row-between mb-1"><span class="small">Couverture praticiens</span><span class="small strong">540 / 620</span></div>
+                  <div class="progress blue"><span style="width:87%"></span></div>
+                </div>
+                <div>
+                  <div class="row-between mb-1"><span class="small">Comptes rendus</span><span class="small strong">275 / 312</span></div>
+                  <div class="progress amber"><span style="width:88%"></span></div>
+                </div>
+              </div>
+            </section>
+
+            <div class="note blue anim d5">
+              <svg class="icon"><use href="#i-shield"></use></svg>
+              <div><strong>Accès responsable —</strong> vous visualisez les comptes rendus de tous les visiteurs de votre région et pouvez saisir les échantillons qui leur sont attribués.</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/layout.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

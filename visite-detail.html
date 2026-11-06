@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visite — Dr Anne Dupuis · LBC Visites</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="visites" data-role="visiteur">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+
+      <main class="content">
+        <div class="breadcrumb anim">
+          <a href="dashboard.html">Accueil</a>
+          <svg class="icon-sm"><use href="#i-chevron-right"></use></svg>
+          <a href="visites.html">Visites</a>
+          <svg class="icon-sm"><use href="#i-chevron-right"></use></svg>
+          <span class="current">VIS-2026-0412</span>
+        </div>
+
+        <div class="page-head anim">
+          <div>
+            <div class="row wrap mb-1">
+              <span class="badge green">Compte rendu généré</span>
+              <span class="pill"><svg class="icon-sm"><use href="#i-visits"></use></svg>Visite en cabinet</span>
+            </div>
+            <h1>Dr Anne Dupuis</h1>
+            <p class="sub">Cardiologie · #1042 · 12 rue Paradis, 13008 Marseille — visite du mardi 4 novembre 2026 à 10 h 30.</p>
+          </div>
+          <div class="page-actions">
+            <button class="icon-btn" disabled title="Suppression impossible : un compte rendu et des échantillons sont associés" style="opacity:.5;cursor:not-allowed">
+              <svg class="icon"><use href="#i-trash"></use></svg>
+            </button>
+            <a class="btn btn-outline" href="visite-nouvelle.html"><svg class="icon"><use href="#i-edit"></use></svg>Modifier</a>
+            <a class="btn btn-primary" href="compte-rendu.html"><svg class="icon"><use href="#i-download"></use></svg>Télécharger le CR</a>
+          </div>
+        </div>
+
+        <div class="grid grid-side anim d1" data-tab-root>
+          <div>
+            <div class="tabs" data-tabs>
+              <button class="tab active" data-tab="apercu" aria-selected="true">Aperçu</button>
+              <button class="tab" data-tab="cr" aria-selected="false">Compte rendu</button>
+              <button class="tab" data-tab="historique" aria-selected="false">Historique</button>
+            </div>
+
+            <!-- APERÇU -->
+            <div class="tabpane active" data-pane="apercu">
+              <div class="stack">
+                <section class="card">
+                  <div class="card-head">
+                    <div>
+                      <h3>Informations de la visite</h3>
+                      <div class="sub">Données saisies par le visiteur</div>
+                    </div>
+                    <span class="tiny muted">Réf. VIS-2026-0412</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="grid grid-2" style="gap:18px 28px">
+                      <div>
+                        <div class="tiny muted">Date &amp; heure</div>
+                        <div class="strong" style="margin-top:3px">Mardi 4 novembre 2026 · 10 h 30</div>
+                      </div>
+                      <div>
+                        <div class="tiny muted">Type de rendez-vous</div>
+                        <div class="strong" style="margin-top:3px">Visite en cabinet</div>
+                      </div>
+                      <div>
+                        <div class="tiny muted">Région / secteur</div>
+                        <div class="strong" style="margin-top:3px">Sud · Marseille 8ᵉ</div>
+                      </div>
+                      <div>
+                        <div class="tiny muted">Créée par</div>
+                        <div class="strong" style="margin-top:3px">Camille Moreau · le 04/11/2026 à 18:42</div>
+                      </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div>
+                      <div class="tiny muted">Motif de la visite</div>
+                      <p style="margin-top:5px;font-size:13px;line-height:1.65">Présentation de la nouvelle posologie de Cardiozen et point sur les retours d'usage en cabinet. Le praticien a évoqué plusieurs patients sous traitement au long cours.</p>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="card">
+                  <div class="card-head">
+                    <div>
+                      <h3>Produits présentés</h3>
+                      <div class="sub">2 produits · 2 échantillons remis</div>
+                    </div>
+                    <button class="btn btn-sm btn-soft" data-demo-action="Ajouter un produit" data-demo-msg="Le formulaire de modification s'ouvrirait ici."><svg class="icon"><use href="#i-plus"></use></svg>Ajouter</button>
+                  </div>
+                  <div class="table-wrap" style="border:0;border-radius:0;box-shadow:none">
+                    <table class="data">
+                      <thead>
+                        <tr><th>Produit</th><th>Présentation</th><th>Échantillons</th><th>Lot</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><div class="cell-person"><span class="kpi-icon" style="width:32px;height:32px;border-radius:9px"><svg class="icon-sm"><use href="#i-pill"></use></svg></span><div><div class="cell-main">Cardiozen 10 mg</div><div class="cell-sub">Antihypertenseur</div></div></div></td>
+                          <td>Comprimé pelliculé</td>
+                          <td><span class="badge teal">1 remis</span></td>
+                          <td class="cell-sub">LOT-CZ-2026-14</td>
+                        </tr>
+                        <tr>
+                          <td><div class="cell-person"><span class="kpi-icon" style="width:32px;height:32px;border-radius:9px"><svg class="icon-sm"><use href="#i-pill"></use></svg></span><div><div class="cell-main">Tensiofix 5 mg</div><div class="cell-sub">Antihypertenseur</div></div></div></td>
+                          <td>Comprimé sécable</td>
+                          <td><span class="badge teal">1 remis</span></td>
+                          <td class="cell-sub">LOT-TX-2026-08</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <section class="card">
+                  <div class="card-head">
+                    <div>
+                      <h3>Bilan de la visite</h3>
+                      <div class="sub">Ressenti du visiteur</div>
+                    </div>
+                    <span class="badge green">Convaincu</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="note" style="align-items:flex-start">
+                      <svg class="icon"><use href="#i-check"></use></svg>
+                      <div>
+                        <strong>Le praticien a été convaincu par la présentation.</strong>
+                        <p class="mt-1">Très bon accueil. Le praticien souhaite recevoir les données de l'étude observationnelle avant de modifier ses habitudes de prescription.</p>
+                      </div>
+                    </div>
+                    <div class="row-between mt-3 wrap" style="gap:14px">
+                      <div class="row" style="gap:10px">
+                        <span class="kpi-icon" style="width:34px;height:34px"><svg class="icon-sm"><use href="#i-calendar"></use></svg></span>
+                        <div>
+                          <div class="tiny muted">Prochaine visite planifiée</div>
+                          <div class="strong">Lundi 7 décembre 2026</div>
+                        </div>
+                      </div>
+                      <span class="pill"><svg class="icon-sm"><use href="#i-clock"></use></svg>Suivi à 30 jours</span>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+
+            <!-- COMPTE RENDU -->
+            <div class="tabpane" data-pane="cr">
+              <div class="doc-actions">
+                <div class="row">
+                  <span class="badge green">PDF généré le 04/11/2026 à 18:43</span>
+                  <span class="tiny muted">248 Ko · 2 pages</span>
+                </div>
+                <div class="row">
+                  <button class="btn btn-sm btn-outline" data-print><svg class="icon"><use href="#i-printer"></use></svg>Imprimer</button>
+                  <button class="btn btn-sm btn-primary" data-demo-action="Téléchargement lancé" data-demo-msg="Le fichier CR_VIS-2026-0412.pdf serait téléchargé."><svg class="icon"><use href="#i-download"></use></svg>Télécharger</button>
+                </div>
+              </div>
+
+              <div class="doc-shell">
+                <article class="doc">
+                  <header class="doc-head">
+                    <div class="doc-brand">
+                      <svg width="36" height="36" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                        <rect width="40" height="40" rx="11" fill="#0fa98f"/>
+                        <path d="M9 25.5c2.6-7 4.2 3.2 6.8-3.6 2.6-6.8 4.2 6.2 6.8-1.2 1.4-4 3.2-5.2 4.4-5.7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      <div>
+                        <div class="brand-name">LBC</div>
+                        <div class="brand-sub">Laboratoire Bio Company</div>
+                      </div>
+                    </div>
+                    <div class="doc-meta">
+                      Réf. VIS-2026-0412<br>
+                      Émis le 04/11/2026<br>
+                      LBC Europe · Paris
+                    </div>
+                  </header>
+
+                  <h2>Compte rendu de visite</h2>
+                  <p class="muted" style="font-size:11px">Document généré automatiquement par l'application LBC Visites.</p>
+
+                  <h4>Praticien visité</h4>
+                  <table>
+                    <tr><th style="width:180px">Nom</th><td>Dr Anne Dupuis</td><th style="width:150px">Spécialité</th><td>Cardiologie</td></tr>
+                    <tr><th>Identifiant</th><td>#1042</td><th>Région</th><td>Sud</td></tr>
+                    <tr><th>Adresse</th><td colspan="3">12 rue Paradis, 13008 Marseille</td></tr>
+                  </table>
+
+                  <h4>Détails de la visite</h4>
+                  <table>
+                    <tr><th style="width:180px">Date</th><td>Mardi 4 novembre 2026 · 10 h 30</td></tr>
+                    <tr><th>Type</th><td>Visite en cabinet</td></tr>
+                    <tr><th>Visiteur</th><td>Camille Moreau — Région Sud</td></tr>
+                    <tr><th>Motif</th><td>Présentation de la nouvelle posologie de Cardiozen et point sur les retours d'usage en cabinet.</td></tr>
+                  </table>
+
+                  <h4>Produits présentés &amp; échantillons</h4>
+                  <table>
+                    <thead><tr><th>Produit</th><th>Présentation</th><th>Lot</th><th style="width:90px">Échantillons</th></tr></thead>
+                    <tbody>
+                      <tr><td>Cardiozen 10 mg</td><td>Comprimé pelliculé</td><td>LOT-CZ-2026-14</td><td>1</td></tr>
+                      <tr><td>Tensiofix 5 mg</td><td>Comprimé sécable</td><td>LOT-TX-2026-08</td><td>1</td></tr>
+                      <tr><td colspan="3"><strong>Total remis</strong></td><td><strong>2</strong></td></tr>
+                    </tbody>
+                  </table>
+
+                  <h4>Bilan</h4>
+                  <table>
+                    <tr><th style="width:180px">Ressenti</th><td><strong>Convaincu</strong></td></tr>
+                    <tr><th>Prochaine visite</th><td>Lundi 7 décembre 2026</td></tr>
+                    <tr><th>Commentaire</th><td>Très bon accueil. Le praticien souhaite recevoir les données de l'étude observationnelle avant de modifier ses habitudes de prescription.</td></tr>
+                  </table>
+
+                  <div class="doc-sign">
+                    <div>Établi par <strong>Camille Moreau</strong><br>Visiteuse médicale · Région Sud</div>
+                    <div class="doc-stamp">Signature électronique — LBC Visites<br>04/11/2026 18:43</div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- HISTORIQUE -->
+            <div class="tabpane" data-pane="historique">
+              <section class="card card-pad">
+                <h3 style="font-size:15px;margin-bottom:18px">Historique de la visite</h3>
+                <div class="timeline">
+                  <div class="tl-item active">
+                    <span class="tl-dot"></span>
+                    <div class="tl-title">Compte rendu PDF généré</div>
+                    <div class="tl-sub">04/11/2026 à 18 h 43 · Camille Moreau</div>
+                  </div>
+                  <div class="tl-item">
+                    <span class="tl-dot"></span>
+                    <div class="tl-title">Visite enregistrée</div>
+                    <div class="tl-sub">04/11/2026 à 18 h 42 · Camille Moreau</div>
+                  </div>
+                  <div class="tl-item">
+                    <span class="tl-dot"></span>
+                    <div class="tl-title">Visite réalisée au cabinet</div>
+                    <div class="tl-sub">04/11/2026 à 10 h 30 · 12 rue Paradis, Marseille</div>
+                  </div>
+                  <div class="tl-item">
+                    <span class="tl-dot"></span>
+                    <div class="tl-title">Visite planifiée</div>
+                    <div class="tl-sub">01/11/2026 à 09 h 12 · Camille Moreau</div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- COLONNE DROITE -->
+          <aside class="stack" style="position:sticky;top:96px">
+            <section class="card card-pad">
+              <div class="row" style="gap:13px">
+                <span class="avatar xl blue">AD</span>
+                <div>
+                  <h3 style="font-size:16px">Dr Anne Dupuis</h3>
+                  <div class="tiny muted mt-1">Cardiologie · #1042</div>
+                  <span class="badge teal no-dot mt-1">Dans votre portefeuille</span>
+                </div>
+              </div>
+              <div class="divider"></div>
+              <div class="stack" style="gap:12px;font-size:11.5px;color:var(--muted)">
+                <div class="row" style="gap:9px;align-items:flex-start"><svg class="icon-sm" style="margin-top:2px"><use href="#i-map-pin"></use></svg><span>12 rue Paradis<br>13008 Marseille</span></div>
+                <div class="row" style="gap:9px"><svg class="icon-sm"><use href="#i-phone"></use></svg><span>04 91 22 18 40</span></div>
+                <div class="row" style="gap:9px"><svg class="icon-sm"><use href="#i-mail"></use></svg><span>a.dupuis@cabinet-paradis.fr</span></div>
+              </div>
+              <div class="divider"></div>
+              <div class="grid grid-2" style="gap:10px">
+                <div><div class="tiny muted">Visites</div><div class="stat-mini-num">6</div></div>
+                <div><div class="tiny muted">Dernière visite</div><div class="strong" style="font-size:12px;margin-top:4px">04/11/2026</div></div>
+              </div>
+              <a class="btn btn-outline btn-block mt-2" href="praticiens.html">Voir la fiche praticien</a>
+            </section>
+
+            <section class="card">
+              <div class="card-head"><h3>Documents</h3><span class="tiny muted">1 fichier</span></div>
+              <div class="card-body">
+                <a class="file-card" href="compte-rendu.html">
+                  <span class="file-icon">PDF</span>
+                  <span class="list-main">
+                    <span class="list-title" style="display:block">CR_VIS-2026-0412.pdf</span>
+                    <span class="list-sub">248 Ko · 04 nov. 2026</span>
+                  </span>
+                  <svg class="icon-sm muted"><use href="#i-download"></use></svg>
+                </a>
+              </div>
+            </section>
+
+            <section class="card card-pad">
+              <h3 style="font-size:13px;margin-bottom:12px">Traçabilité</h3>
+              <div class="stack" style="gap:9px">
+                <div class="row-between"><span class="tiny muted">Référence</span><span class="tiny strong">VIS-2026-0412</span></div>
+                <div class="row-between"><span class="tiny muted">Créée le</span><span class="tiny strong">04/11/2026 · 18:42</span></div>
+                <div class="row-between"><span class="tiny muted">Modifiée le</span><span class="tiny strong">04/11/2026 · 18:43</span></div>
+                <div class="row-between"><span class="tiny muted">Statut</span><span class="badge green">Généré</span></div>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/layout.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

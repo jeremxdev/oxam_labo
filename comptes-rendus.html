@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comptes rendus · LBC Visites</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="comptes-rendus" data-role="visiteur">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+
+      <main class="content">
+        <div class="page-head anim">
+          <div>
+            <div class="eyebrow">Documentation de terrain</div>
+            <h1>Comptes rendus</h1>
+            <p class="sub">Consultez les comptes rendus de vos praticiens, y compris ceux réalisés par d'autres visiteurs de votre région.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-outline" data-demo-action="Export mensuel" data-demo-msg="Une archive ZIP des comptes rendus filtrés serait générée."><svg class="icon"><use href="#i-download"></use></svg>Exporter</button>
+            <a class="btn btn-primary" href="visite-nouvelle.html"><svg class="icon"><use href="#i-plus"></use></svg>Nouvelle visite</a>
+          </div>
+        </div>
+
+        <section class="grid grid-4 anim d1 mb-3">
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Comptes rendus générés</span><span class="kpi-icon"><svg class="icon"><use href="#i-reports"></use></svg></span></div>
+            <div class="kpi-value">113</div>
+            <div class="kpi-bottom"><span class="delta up">+11</span><span>ce mois</span></div>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Taux de complétion</span><span class="kpi-icon amber"><svg class="icon"><use href="#i-file-check"></use></svg></span></div>
+            <div class="kpi-value">92<small>%</small></div>
+            <div class="progress" style="height:6px"><span style="width:92%"></span></div>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">En attente</span><span class="kpi-icon purple"><svg class="icon"><use href="#i-clock"></use></svg></span></div>
+            <div class="kpi-value">3</div>
+            <div class="kpi-bottom"><span class="muted">à compléter cette semaine</span></div>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Praticiens couverts</span><span class="kpi-icon blue"><svg class="icon"><use href="#i-users"></use></svg></span></div>
+            <div class="kpi-value">87</div>
+            <div class="kpi-bottom"><span class="muted">sur votre portefeuille</span></div>
+          </article>
+        </section>
+
+        <div class="stack">
+          <div class="stack">
+            <section class="card card-pad anim d2">
+              <div class="row wrap" style="gap:12px">
+                <label class="input-icon" style="flex:1;min-width:230px">
+                  <svg class="icon"><use href="#i-search"></use></svg>
+                  <input class="input" type="search" placeholder="Rechercher un praticien, un visiteur, une référence…" data-table-filter="crTable" aria-label="Rechercher un compte rendu">
+                </label>
+                <select class="select" style="width:auto;min-width:150px" aria-label="Visiteur">
+                  <option>Tous les visiteurs</option>
+                  <option>Camille Moreau</option>
+                  <option>Sofia Benali</option>
+                  <option>Thomas Girard</option>
+                </select>
+                <select class="select" style="width:auto;min-width:150px" aria-label="Période">
+                  <option>Toutes les périodes</option>
+                  <option>Novembre 2026</option>
+                  <option>Octobre 2026</option>
+                  <option>Ce trimestre</option>
+                </select>
+                <button class="btn btn-outline"><svg class="icon"><use href="#i-filter"></use></svg>Filtrer</button>
+              </div>
+            </section>
+
+            <div class="table-wrap anim d3">
+              <div class="table-scroll">
+                <table class="data" id="crTable">
+                  <thead>
+                    <tr><th>Document</th><th>Praticien</th><th>Visiteur</th><th>Date</th><th>Taille</th><th style="text-align:right">Actions</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><div class="cell-person"><span class="file-icon">PDF</span><div><div class="cell-main">CR_VIS-2026-0412</div><div class="cell-sub">Compte rendu de visite</div></div></div></td>
+                      <td><div class="cell-main">Dr Anne Dupuis</div><div class="cell-sub">Cardiologie · #1042</div></td>
+                      <td><div class="cell-person"><span class="avatar" style="width:28px;height:28px;font-size:9.5px">CM</span><span>Camille Moreau</span></div></td>
+                      <td>04 nov. 2026</td>
+                      <td class="muted">248 Ko</td>
+                      <td>
+                        <div class="cell-actions">
+                          <a class="mini-icon" href="compte-rendu.html" title="Prévisualiser"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                          <a class="mini-icon" href="compte-rendu.html" title="Télécharger"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                          <button class="mini-icon" data-demo-action="Partage du compte rendu" data-demo-msg="Un lien sécurisé serait copié dans le presse-papiers." title="Partager"><svg class="icon-sm"><use href="#i-share"></use></svg></button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="file-icon">PDF</span><div><div class="cell-main">CR_VIS-2026-0408</div><div class="cell-sub">Compte rendu de visite</div></div></div></td>
+                      <td><div class="cell-main">Dr Marc Rousseau</div><div class="cell-sub">Médecine générale · #0871</div></td>
+                      <td><div class="cell-person"><span class="avatar" style="width:28px;height:28px;font-size:9.5px">CM</span><span>Camille Moreau</span></div></td>
+                      <td>03 nov. 2026</td>
+                      <td class="muted">231 Ko</td>
+                      <td>
+                        <div class="cell-actions">
+                          <a class="mini-icon" href="compte-rendu.html" title="Prévisualiser"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                          <a class="mini-icon" href="compte-rendu.html" title="Télécharger"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                          <button class="mini-icon" data-demo-action="Partage du compte rendu" data-demo-msg="Un lien sécurisé serait copié dans le presse-papiers." title="Partager"><svg class="icon-sm"><use href="#i-share"></use></svg></button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="file-icon">PDF</span><div><div class="cell-main">CR_VIS-2026-0391</div><div class="cell-sub">Compte rendu de visite</div></div></div></td>
+                      <td><div class="cell-main">Dr Hugo Bernard</div><div class="cell-sub">Dermatologie · #0934</div></td>
+                      <td><div class="cell-person"><span class="avatar" style="width:28px;height:28px;font-size:9.5px">CM</span><span>Camille Moreau</span></div></td>
+                      <td>27 oct. 2026</td>
+                      <td class="muted">244 Ko</td>
+                      <td>
+                        <div class="cell-actions">
+                          <a class="mini-icon" href="compte-rendu.html" title="Prévisualiser"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                          <a class="mini-icon" href="compte-rendu.html" title="Télécharger"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                          <button class="mini-icon" data-demo-action="Partage du compte rendu" data-demo-msg="Un lien sécurisé serait copié dans le presse-papiers." title="Partager"><svg class="icon-sm"><use href="#i-share"></use></svg></button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="file-icon">PDF</span><div><div class="cell-main">CR_VIS-2026-0387</div><div class="cell-sub">Compte rendu de visite</div></div></div></td>
+                      <td><div class="cell-main">Pharmacie du Port</div><div class="cell-sub">Officine · #2201</div></td>
+                      <td><div class="cell-person"><span class="avatar" style="width:28px;height:28px;font-size:9.5px">CM</span><span>Camille Moreau</span></div></td>
+                      <td>24 oct. 2026</td>
+                      <td class="muted">252 Ko</td>
+                      <td>
+                        <div class="cell-actions">
+                          <a class="mini-icon" href="compte-rendu.html" title="Prévisualiser"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                          <a class="mini-icon" href="compte-rendu.html" title="Télécharger"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                          <button class="mini-icon" data-demo-action="Partage du compte rendu" data-demo-msg="Un lien sécurisé serait copié dans le presse-papiers." title="Partager"><svg class="icon-sm"><use href="#i-share"></use></svg></button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="file-icon">PDF</span><div><div class="cell-main">CR_VIS-2026-0372</div><div class="cell-sub">Compte rendu de visite</div></div></div></td>
+                      <td><div class="cell-main">Dr Élodie Marchand</div><div class="cell-sub">Gynécologie · #1355</div></td>
+                      <td><div class="cell-person"><span class="avatar blue" style="width:28px;height:28px;font-size:9.5px">SB</span><span>Sofia Benali</span></div></td>
+                      <td>15 oct. 2026</td>
+                      <td class="muted">236 Ko</td>
+                      <td>
+                        <div class="cell-actions">
+                          <a class="mini-icon" href="compte-rendu.html" title="Prévisualiser"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                          <a class="mini-icon" href="compte-rendu.html" title="Télécharger"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                          <button class="mini-icon" data-demo-action="Partage du compte rendu" data-demo-msg="Un lien sécurisé serait copié dans le presse-papiers." title="Partager"><svg class="icon-sm"><use href="#i-share"></use></svg></button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="file-icon">PDF</span><div><div class="cell-main">CR_VIS-2026-0369</div><div class="cell-sub">Compte rendu de visite</div></div></div></td>
+                      <td><div class="cell-main">Dr Anne Dupuis</div><div class="cell-sub">Cardiologie · #1042</div></td>
+                      <td><div class="cell-person"><span class="avatar blue" style="width:28px;height:28px;font-size:9.5px">SB</span><span>Sofia Benali</span></div></td>
+                      <td>14 oct. 2026</td>
+                      <td class="muted">241 Ko</td>
+                      <td>
+                        <div class="cell-actions">
+                          <a class="mini-icon" href="compte-rendu.html" title="Prévisualiser"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                          <a class="mini-icon" href="compte-rendu.html" title="Télécharger"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                          <button class="mini-icon" data-demo-action="Partage du compte rendu" data-demo-msg="Un lien sécurisé serait copié dans le presse-papiers." title="Partager"><svg class="icon-sm"><use href="#i-share"></use></svg></button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="file-icon">PDF</span><div><div class="cell-main">CR_VIS-2026-0354</div><div class="cell-sub">Compte rendu de visite</div></div></div></td>
+                      <td><div class="cell-main">Dr Paul Girard</div><div class="cell-sub">Cardiologie · #1067</div></td>
+                      <td><div class="cell-person"><span class="avatar amber" style="width:28px;height:28px;font-size:9.5px">TG</span><span>Thomas Girard</span></div></td>
+                      <td>11 oct. 2026</td>
+                      <td class="muted">228 Ko</td>
+                      <td>
+                        <div class="cell-actions">
+                          <a class="mini-icon" href="compte-rendu.html" title="Prévisualiser"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                          <a class="mini-icon" href="compte-rendu.html" title="Télécharger"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                          <button class="mini-icon" data-demo-action="Partage du compte rendu" data-demo-msg="Un lien sécurisé serait copié dans le presse-papiers." title="Partager"><svg class="icon-sm"><use href="#i-share"></use></svg></button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="file-icon">PDF</span><div><div class="cell-main">CR_VIS-2026-0348</div><div class="cell-sub">Compte rendu de visite</div></div></div></td>
+                      <td><div class="cell-main">Dr Léa Fontaine</div><div class="cell-sub">Pneumologie · #1120</div></td>
+                      <td><div class="cell-person"><span class="avatar" style="width:28px;height:28px;font-size:9.5px">CM</span><span>Camille Moreau</span></div></td>
+                      <td>08 oct. 2026</td>
+                      <td class="muted">239 Ko</td>
+                      <td>
+                        <div class="cell-actions">
+                          <a class="mini-icon" href="compte-rendu.html" title="Prévisualiser"><svg class="icon-sm"><use href="#i-eye"></use></svg></a>
+                          <a class="mini-icon" href="compte-rendu.html" title="Télécharger"><svg class="icon-sm"><use href="#i-download"></use></svg></a>
+                          <button class="mini-icon" data-demo-action="Partage du compte rendu" data-demo-msg="Un lien sécurisé serait copié dans le presse-papiers." title="Partager"><svg class="icon-sm"><use href="#i-share"></use></svg></button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-foot">
+                <span><strong data-filter-count="crTable">8</strong> comptes rendus affichés sur 113</span>
+                <div class="pager">
+                  <button aria-label="Précédent">‹</button>
+                  <button class="active">1</button>
+                  <button>2</button>
+                  <button>3</button>
+                  <button>…</button>
+                  <button>15</button>
+                  <button aria-label="Suivant">›</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-2">
+            <section class="card anim d2">
+              <div class="card-head">
+                <div>
+                  <h3>À compléter</h3>
+                  <div class="sub">3 visites sans compte rendu</div>
+                </div>
+                <span class="badge amber no-dot">3</span>
+              </div>
+              <div class="card-body" style="padding-top:4px;padding-bottom:8px">
+                <div class="list">
+                  <div class="list-item">
+                    <span class="avatar purple" style="width:32px;height:32px;font-size:10px">LF</span>
+                    <div class="list-main"><div class="list-title" style="font-size:12px">Dr Léa Fontaine</div><div class="list-sub">29 oct. 2026 · Pneumologie</div></div>
+                    <a class="btn btn-sm btn-soft" href="visite-nouvelle.html">Compléter</a>
+                  </div>
+                  <div class="list-item">
+                    <span class="avatar amber" style="width:32px;height:32px;font-size:10px">SH</span>
+                    <div class="list-main"><div class="list-title" style="font-size:12px">Dr Samir Haddad</div><div class="list-sub">18 oct. 2026 · Médecine générale</div></div>
+                    <a class="btn btn-sm btn-soft" href="visite-nouvelle.html">Compléter</a>
+                  </div>
+                  <div class="list-item">
+                    <span class="avatar" style="width:32px;height:32px;font-size:10px">PP</span>
+                    <div class="list-main"><div class="list-title" style="font-size:12px">Pharmacie du Port</div><div class="list-sub">12 oct. 2026 · Officine</div></div>
+                    <a class="btn btn-sm btn-soft" href="visite-nouvelle.html">Compléter</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card card-pad anim d3">
+              <h3 style="font-size:15px;margin-bottom:6px">Accès &amp; partage</h3>
+              <p class="small muted" style="line-height:1.65">Les comptes rendus sont accessibles :</p>
+              <div class="stack mt-2" style="gap:12px">
+                <div class="row" style="gap:10px">
+                  <span class="kpi-icon" style="width:30px;height:30px;border-radius:8px"><svg class="icon-sm"><use href="#i-user"></use></svg></span>
+                  <div class="tiny"><strong class="strong">Visiteur</strong><br><span class="muted">Ses propres CR et ceux de ses praticiens</span></div>
+                </div>
+                <div class="row" style="gap:10px">
+                  <span class="kpi-icon blue" style="width:30px;height:30px;border-radius:8px"><svg class="icon-sm"><use href="#i-shield"></use></svg></span>
+                  <div class="tiny"><strong class="strong">Responsable de région</strong><br><span class="muted">Tous les CR de sa région</span></div>
+                </div>
+              </div>
+              <div class="divider"></div>
+              <button class="btn btn-outline btn-block" data-demo-action="Export mensuel" data-demo-msg="L'archive ZIP du mois serait générée."><svg class="icon"><use href="#i-package"></use></svg>Exporter le mois</button>
+            </section>
+
+            <div class="note anim d4">
+              <svg class="icon"><use href="#i-lock"></use></svg>
+              <div>Chaque document est horodaté et signé électroniquement. Toute consultation est tracée dans le journal d'audit.</div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/layout.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

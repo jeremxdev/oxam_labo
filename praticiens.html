@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Praticiens · LBC Visites</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="praticiens" data-role="visiteur">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+
+      <main class="content">
+        <div class="page-head anim">
+          <div>
+            <div class="eyebrow">Portefeuille · Région Sud</div>
+            <h1>Praticiens</h1>
+            <p class="sub">Chaque praticien est identifié par sa spécialité et un numéro séquentiel. Retrouvez ici votre portefeuille et l'historique des visites.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-outline" data-demo-action="Importer un portefeuille" data-demo-msg="L'import CSV du portefeuille serait proposé."><svg class="icon"><use href="#i-upload"></use></svg>Importer</button>
+            <button class="btn btn-primary" data-demo-action="Nouveau praticien" data-demo-msg="Le formulaire de création d'un praticien s'ouvrirait ici."><svg class="icon"><use href="#i-user-plus"></use></svg>Ajouter un praticien</button>
+          </div>
+        </div>
+
+        <section class="card card-pad anim d1 mb-2">
+          <div class="row wrap" style="gap:14px">
+            <label class="input-icon" style="flex:1;min-width:240px">
+              <svg class="icon"><use href="#i-search"></use></svg>
+              <input class="input" type="search" placeholder="Rechercher un nom, une ville, un numéro…" data-card-filter="practGrid" aria-label="Rechercher un praticien">
+            </label>
+            <div class="row wrap" style="gap:6px">
+              <button class="btn btn-sm btn-primary">Tous</button>
+              <button class="btn btn-sm btn-outline">Cardiologie</button>
+              <button class="btn btn-sm btn-outline">Médecine générale</button>
+              <button class="btn btn-sm btn-outline">Pneumologie</button>
+              <button class="btn btn-sm btn-outline">Dermatologie</button>
+              <button class="btn btn-sm btn-outline">Autres</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="row-between mb-2 anim d2">
+          <span class="small muted"><strong class="strong" data-card-count="practGrid">9</strong> praticiens affichés sur 87</span>
+          <div class="segmented">
+            <button class="active">Portefeuille</button>
+            <button>Toute la région</button>
+          </div>
+        </div>
+
+        <div class="pract-grid anim d3" id="practGrid">
+          <article class="card pract" data-card>
+            <div class="pract-top">
+              <span class="avatar blue">AD</span>
+              <div style="flex:1">
+                <div class="pract-name">Dr Anne Dupuis</div>
+                <div class="pract-spec">Cardiologie · #1042</div>
+                <div class="pract-tags"><span class="badge teal no-dot">Portefeuille</span></div>
+              </div>
+            </div>
+            <div class="pract-info">
+              <div class="row"><svg class="icon-sm"><use href="#i-map-pin"></use></svg><span>12 rue Paradis, 13008 Marseille</span></div>
+              <div class="row"><svg class="icon-sm"><use href="#i-phone"></use></svg><span>04 91 22 18 40</span></div>
+            </div>
+            <div class="pract-stats">
+              <div><div class="tiny">Visites</div><strong>6</strong></div>
+              <div><div class="tiny">Dernière visite</div><strong>04/11/2026</strong></div>
+            </div>
+            <div class="pract-foot">
+              <a class="link" href="visite-detail.html">Voir la fiche <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              <a class="btn btn-soft" href="visite-nouvelle.html"><svg class="icon"><use href="#i-plus"></use></svg>Visiter</a>
+            </div>
+          </article>
+
+          <article class="card pract" data-card>
+            <div class="pract-top">
+              <span class="avatar amber">MR</span>
+              <div style="flex:1">
+                <div class="pract-name">Dr Marc Rousseau</div>
+                <div class="pract-spec">Médecine générale · #0871</div>
+                <div class="pract-tags"><span class="badge teal no-dot">Portefeuille</span></div>
+              </div>
+            </div>
+            <div class="pract-info">
+              <div class="row"><svg class="icon-sm"><use href="#i-map-pin"></use></svg><span>8 cours Mirabeau, 13100 Aix-en-Provence</span></div>
+              <div class="row"><svg class="icon-sm"><use href="#i-phone"></use></svg><span>04 42 38 11 20</span></div>
+            </div>
+            <div class="pract-stats">
+              <div><div class="tiny">Visites</div><strong>4</strong></div>
+              <div><div class="tiny">Dernière visite</div><strong>03/11/2026</strong></div>
+            </div>
+            <div class="pract-foot">
+              <a class="link" href="visite-detail.html">Voir la fiche <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              <a class="btn btn-soft" href="visite-nouvelle.html"><svg class="icon"><use href="#i-plus"></use></svg>Visiter</a>
+            </div>
+          </article>
+
+          <article class="card pract" data-card>
+            <div class="pract-top">
+              <span class="avatar purple">LF</span>
+              <div style="flex:1">
+                <div class="pract-name">Dr Léa Fontaine</div>
+                <div class="pract-spec">Pneumologie · #1120</div>
+                <div class="pract-tags"><span class="badge teal no-dot">Portefeuille</span><span class="badge amber no-dot">CR en attente</span></div>
+              </div>
+            </div>
+            <div class="pract-info">
+              <div class="row"><svg class="icon-sm"><use href="#i-map-pin"></use></svg><span>45 avenue de la République, 83000 Toulon</span></div>
+              <div class="row"><svg class="icon-sm"><use href="#i-phone"></use></svg><span>04 94 62 07 31</span></div>
+            </div>
+            <div class="pract-stats">
+              <div><div class="tiny">Visites</div><strong>3</strong></div>
+              <div><div class="tiny">Dernière visite</div><strong>29/10/2026</strong></div>
+            </div>
+            <div class="pract-foot">
+              <a class="link" href="visite-detail.html">Voir la fiche <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              <a class="btn btn-soft" href="visite-nouvelle.html"><svg class="icon"><use href="#i-plus"></use></svg>Visiter</a>
+            </div>
+          </article>
+
+          <article class="card pract" data-card>
+            <div class="pract-top">
+              <span class="avatar rose">HB</span>
+              <div style="flex:1">
+                <div class="pract-name">Dr Hugo Bernard</div>
+                <div class="pract-spec">Dermatologie · #0934</div>
+                <div class="pract-tags"><span class="badge teal no-dot">Portefeuille</span></div>
+              </div>
+            </div>
+            <div class="pract-info">
+              <div class="row"><svg class="icon-sm"><use href="#i-map-pin"></use></svg><span>27 boulevard Victor Hugo, 06000 Nice</span></div>
+              <div class="row"><svg class="icon-sm"><use href="#i-phone"></use></svg><span>04 93 88 45 12</span></div>
+            </div>
+            <div class="pract-stats">
+              <div><div class="tiny">Visites</div><strong>5</strong></div>
+              <div><div class="tiny">Dernière visite</div><strong>27/10/2026</strong></div>
+            </div>
+            <div class="pract-foot">
+              <a class="link" href="visite-detail.html">Voir la fiche <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              <a class="btn btn-soft" href="visite-nouvelle.html"><svg class="icon"><use href="#i-plus"></use></svg>Visiter</a>
+            </div>
+          </article>
+
+          <article class="card pract" data-card>
+            <div class="pract-top">
+              <span class="avatar purple">CP</span>
+              <div style="flex:1">
+                <div class="pract-name">Dr Claire Petit</div>
+                <div class="pract-spec">Endocrinologie · #1188</div>
+                <div class="pract-tags"><span class="badge teal no-dot">Portefeuille</span><span class="badge slate no-dot">Brouillon</span></div>
+              </div>
+            </div>
+            <div class="pract-info">
+              <div class="row"><svg class="icon-sm"><use href="#i-map-pin"></use></svg><span>3 avenue Antide Boyer, 13400 Aubagne</span></div>
+              <div class="row"><svg class="icon-sm"><use href="#i-phone"></use></svg><span>04 42 03 76 90</span></div>
+            </div>
+            <div class="pract-stats">
+              <div><div class="tiny">Visites</div><strong>2</strong></div>
+              <div><div class="tiny">Dernière visite</div><strong>22/10/2026</strong></div>
+            </div>
+            <div class="pract-foot">
+              <a class="link" href="visite-detail.html">Voir la fiche <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              <a class="btn btn-soft" href="visite-nouvelle.html"><svg class="icon"><use href="#i-plus"></use></svg>Visiter</a>
+            </div>
+          </article>
+
+          <article class="card pract" data-card>
+            <div class="pract-top">
+              <span class="avatar amber">SH</span>
+              <div style="flex:1">
+                <div class="pract-name">Dr Samir Haddad</div>
+                <div class="pract-spec">Médecine générale · #0790</div>
+                <div class="pract-tags"><span class="badge teal no-dot">Portefeuille</span><span class="badge amber no-dot">CR en attente</span></div>
+              </div>
+            </div>
+            <div class="pract-info">
+              <div class="row"><svg class="icon-sm"><use href="#i-map-pin"></use></svg><span>14 quai Ganteaume, 13600 La Ciotat</span></div>
+              <div class="row"><svg class="icon-sm"><use href="#i-phone"></use></svg><span>04 42 08 33 54</span></div>
+            </div>
+            <div class="pract-stats">
+              <div><div class="tiny">Visites</div><strong>1</strong></div>
+              <div><div class="tiny">Dernière visite</div><strong>18/10/2026</strong></div>
+            </div>
+            <div class="pract-foot">
+              <a class="link" href="visite-detail.html">Voir la fiche <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              <a class="btn btn-soft" href="visite-nouvelle.html"><svg class="icon"><use href="#i-plus"></use></svg>Visiter</a>
+            </div>
+          </article>
+
+          <article class="card pract" data-card>
+            <div class="pract-top">
+              <span class="avatar rose">EM</span>
+              <div style="flex:1">
+                <div class="pract-name">Dr Élodie Marchand</div>
+                <div class="pract-spec">Gynécologie · #1355</div>
+                <div class="pract-tags"><span class="badge teal no-dot">Portefeuille</span></div>
+              </div>
+            </div>
+            <div class="pract-info">
+              <div class="row"><svg class="icon-sm"><use href="#i-map-pin"></use></svg><span>22 rue d'Alger, 83000 Toulon</span></div>
+              <div class="row"><svg class="icon-sm"><use href="#i-phone"></use></svg><span>04 94 91 25 08</span></div>
+            </div>
+            <div class="pract-stats">
+              <div><div class="tiny">Visites</div><strong>4</strong></div>
+              <div><div class="tiny">Dernière visite</div><strong>15/10/2026</strong></div>
+            </div>
+            <div class="pract-foot">
+              <a class="link" href="visite-detail.html">Voir la fiche <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              <a class="btn btn-soft" href="visite-nouvelle.html"><svg class="icon"><use href="#i-plus"></use></svg>Visiter</a>
+            </div>
+          </article>
+
+          <article class="card pract" data-card>
+            <div class="pract-top">
+              <span class="avatar">PP</span>
+              <div style="flex:1">
+                <div class="pract-name">Pharmacie du Port</div>
+                <div class="pract-spec">Officine · #2201</div>
+                <div class="pract-tags"><span class="badge teal no-dot">Portefeuille</span></div>
+              </div>
+            </div>
+            <div class="pract-info">
+              <div class="row"><svg class="icon-sm"><use href="#i-map-pin"></use></svg><span>2 quai du Port, 13002 Marseille</span></div>
+              <div class="row"><svg class="icon-sm"><use href="#i-phone"></use></svg><span>04 91 90 44 17</span></div>
+            </div>
+            <div class="pract-stats">
+              <div><div class="tiny">Visites</div><strong>2</strong></div>
+              <div><div class="tiny">Dernière visite</div><strong>24/10/2026</strong></div>
+            </div>
+            <div class="pract-foot">
+              <a class="link" href="visite-detail.html">Voir la fiche <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              <a class="btn btn-soft" href="visite-nouvelle.html"><svg class="icon"><use href="#i-plus"></use></svg>Visiter</a>
+            </div>
+          </article>
+
+          <article class="card pract" data-card>
+            <div class="pract-top">
+              <span class="avatar navy">PG</span>
+              <div style="flex:1">
+                <div class="pract-name">Dr Paul Girard</div>
+                <div class="pract-spec">Cardiologie · #1067</div>
+                <div class="pract-tags"><span class="badge amber no-dot">À prospecter</span></div>
+              </div>
+            </div>
+            <div class="pract-info">
+              <div class="row"><svg class="icon-sm"><use href="#i-map-pin"></use></svg><span>5 rue Sainte, 13001 Marseille</span></div>
+              <div class="row"><svg class="icon-sm"><use href="#i-phone"></use></svg><span>04 91 33 82 60</span></div>
+            </div>
+            <div class="pract-stats">
+              <div><div class="tiny">Visites</div><strong>0</strong></div>
+              <div><div class="tiny">Dernière visite</div><strong class="muted">Aucune</strong></div>
+            </div>
+            <div class="pract-foot">
+              <a class="link" href="visite-detail.html">Voir la fiche <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              <a class="btn btn-primary" href="visite-nouvelle.html"><svg class="icon"><use href="#i-plus"></use></svg>Planifier</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="note mt-3 anim d4">
+          <svg class="icon"><use href="#i-info"></use></svg>
+          <div><strong>Règle de portefeuille —</strong> un praticien ne reçoit jamais deux visites différentes du même laboratoire. Ce contrôle est appliqué automatiquement lors de la saisie.</div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/layout.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

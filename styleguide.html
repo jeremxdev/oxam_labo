@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design system · LBC Visites</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="styleguide" data-role="visiteur">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+
+      <main class="content">
+        <div class="page-head anim">
+          <div>
+            <div class="eyebrow">Annexe maquette</div>
+            <h1>Design system</h1>
+            <p class="sub">Les fondations visuelles de LBC Visites : couleurs, typographie, composants et iconographie. Cette page sert de référence pour l'intégration.</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn btn-outline" href="dashboard.html"><svg class="icon"><use href="#i-arrow-left"></use></svg>Retour à l'app</a>
+          </div>
+        </div>
+
+        <section class="card card-pad anim d1 mb-3">
+          <div class="row wrap" style="gap:28px;justify-content:space-between">
+            <div class="row" style="gap:16px">
+              <svg width="56" height="56" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <defs><linearGradient id="lg2" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#2ed0b1"/><stop offset="1" stop-color="#0b8f79"/></linearGradient></defs>
+                <rect width="40" height="40" rx="12" fill="url(#lg2)"/>
+                <path d="M9 25.5c2.6-7 4.2 3.2 6.8-3.6 2.6-6.8 4.2 6.2 6.8-1.2 1.4-4 3.2-5.2 4.4-5.7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="30" cy="12.2" r="2.4" fill="#fff"/>
+              </svg>
+              <div>
+                <div class="brand-name" style="color:var(--navy);font-size:26px;letter-spacing:.04em">LBC</div>
+                <div class="tiny muted" style="letter-spacing:.12em;text-transform:uppercase;font-weight:700">Laboratoire Bio Company</div>
+                <p class="small muted mt-1">LBC Visites · plateforme de suivi des visites médicales</p>
+              </div>
+            </div>
+            <div class="note" style="max-width:420px">
+              <svg class="icon"><use href="#i-info"></use></svg>
+              <div>Direction artistique : <strong>institutionnelle, clinique et chaleureuse</strong>. Un bleu profond pour la confiance, un vert médical pour l'action, beaucoup d'air et des angles arrondis.</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="grid grid-2 mb-3" style="align-items:start">
+          <section class="card card-pad anim d2">
+            <h3 style="font-size:15px;margin-bottom:16px">Couleurs</h3>
+            <div class="grid grid-2" style="gap:10px">
+              <div>
+                <div style="height:64px;border-radius:10px;background:var(--navy)"></div>
+                <div class="small strong mt-1">Navy</div><div class="tiny muted">#0A2A33</div>
+              </div>
+              <div>
+                <div style="height:64px;border-radius:10px;background:var(--teal)"></div>
+                <div class="small strong mt-1">Teal</div><div class="tiny muted">#0FA98F</div>
+              </div>
+              <div>
+                <div style="height:64px;border-radius:10px;background:var(--mint)"></div>
+                <div class="small strong mt-1">Mint</div><div class="tiny muted">#E8F7F3</div>
+              </div>
+              <div>
+                <div style="height:64px;border-radius:10px;background:var(--bg);border:1px solid var(--line)"></div>
+                <div class="small strong mt-1">Background</div><div class="tiny muted">#F4F7F8</div>
+              </div>
+              <div>
+                <div style="height:64px;border-radius:10px;background:var(--green)"></div>
+                <div class="small strong mt-1">Succès</div><div class="tiny muted">#15803D</div>
+              </div>
+              <div>
+                <div style="height:64px;border-radius:10px;background:var(--amber)"></div>
+                <div class="small strong mt-1">Alerte</div><div class="tiny muted">#B45309</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card card-pad anim d3">
+            <h3 style="font-size:15px;margin-bottom:16px">Typographie</h3>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div><div class="tiny muted mb-1">Display · 28 / 700</div><div style="font-size:28px;font-weight:800;letter-spacing:-.035em;color:var(--ink)">Pilotez vos visites</div></div>
+              <div><div class="tiny muted mb-1">Titre · 18 / 700</div><div style="font-size:18px;font-weight:700;color:var(--ink)">Dr Anne Dupuis</div></div>
+              <div><div class="tiny muted mb-1">Corps · 14 / 400</div><div style="font-size:14px">Présentation de la nouvelle posologie et point sur les retours d'usage.</div></div>
+              <div><div class="tiny muted mb-1">Légende · 11 / 500</div><div class="tiny muted">Cardiologie · #1042 · Marseille</div></div>
+              <div class="divider" style="margin:2px 0"></div>
+              <div class="row wrap" style="gap:8px">
+                <span class="pill">Inter</span>
+                <span class="pill">600 / 700 / 800</span>
+                <span class="pill">letter-spacing −2 %</span>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="card card-pad anim d3 mb-3">
+          <h3 style="font-size:15px;margin-bottom:16px">Boutons &amp; badges</h3>
+          <div class="row wrap mb-3" style="gap:10px">
+            <button class="btn btn-primary"><svg class="icon"><use href="#i-plus"></use></svg>Action principale</button>
+            <button class="btn btn-outline">Action secondaire</button>
+            <button class="btn btn-soft">Action douce</button>
+            <button class="btn btn-ghost">Discret</button>
+            <button class="btn btn-danger">Supprimer</button>
+            <button class="btn btn-primary" disabled>Désactivé</button>
+          </div>
+          <div class="row wrap" style="gap:8px">
+            <span class="badge green">CR généré</span>
+            <span class="badge amber">En attente de CR</span>
+            <span class="badge slate">Brouillon</span>
+            <span class="badge red">Annulée</span>
+            <span class="badge blue">Planifiée</span>
+            <span class="badge purple">Activité</span>
+            <span class="badge teal">Portefeuille</span>
+          </div>
+        </section>
+
+        <div class="grid grid-2 mb-3" style="align-items:start">
+          <section class="card card-pad anim d4">
+            <h3 style="font-size:15px;margin-bottom:16px">Champs &amp; contrôles</h3>
+            <div class="stack" style="gap:16px">
+              <div class="field">
+                <label for="demoInput">Adresse e-mail</label>
+                <div class="input-icon">
+                  <svg class="icon"><use href="#i-mail"></use></svg>
+                  <input class="input" id="demoInput" type="email" placeholder="prenom.nom@lbc.fr">
+                </div>
+              </div>
+              <div class="field">
+                <label for="demoSelect">Statut</label>
+                <select class="select" id="demoSelect">
+                  <option>Compte rendu généré</option>
+                  <option>En attente</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="demoArea">Motif de la visite</label>
+                <textarea class="textarea" id="demoArea" placeholder="Saisir le motif…"></textarea>
+              </div>
+              <div class="row wrap" style="gap:20px">
+                <label class="switch"><input type="checkbox" checked><span class="switch-track"></span>Option active</label>
+                <label class="check"><input type="checkbox" checked><span>Case cochée</span></label>
+              </div>
+            </div>
+          </section>
+
+          <section class="card card-pad anim d4">
+            <h3 style="font-size:15px;margin-bottom:16px">Données &amp; indicateurs</h3>
+            <div class="row" style="gap:18px;margin-bottom:18px">
+              <div class="ring">
+                <svg width="96" height="96" viewBox="0 0 96 96">
+                  <circle class="ring-bg" cx="48" cy="48" r="41"/>
+                  <circle class="ring-fg" cx="48" cy="48" r="41" stroke-dasharray="257.6" stroke-dashoffset="56.7"/>
+                </svg>
+                <div class="ring-label"><strong>78%</strong><span>objectif</span></div>
+              </div>
+              <div class="stack" style="gap:10px;flex:1">
+                <div><div class="row-between mb-1"><span class="tiny muted">Visites</span><span class="tiny strong">24 / 30</span></div><div class="progress"><span style="width:80%"></span></div></div>
+                <div><div class="row-between mb-1"><span class="tiny muted">Praticiens</span><span class="tiny strong">4 / 6</span></div><div class="progress blue"><span style="width:67%"></span></div></div>
+                <div><div class="row-between mb-1"><span class="tiny muted">Comptes rendus</span><span class="tiny strong">22 / 24</span></div><div class="progress amber"><span style="width:92%"></span></div></div>
+              </div>
+            </div>
+            <div class="row wrap" style="gap:10px">
+              <span class="avatar">CM</span>
+              <span class="avatar blue">AD</span>
+              <span class="avatar amber">MR</span>
+              <span class="avatar purple">LF</span>
+              <span class="avatar rose">HB</span>
+              <span class="avatar navy">PG</span>
+            </div>
+          </section>
+        </div>
+
+        <section class="card card-pad anim d5">
+          <h3 style="font-size:15px;margin-bottom:16px">Iconographie</h3>
+          <div class="grid" style="grid-template-columns:repeat(10,1fr);gap:10px" id="iconGrid"></div>
+          <p class="tiny muted mt-2">Tracés linéaires 1,7 px, coins arrondis, 24 × 24. Les icônes sont injectées via un sprite SVG partagé.</p>
+        </section>
+
+        <div class="note mt-3">
+          <svg class="icon"><use href="#i-shield"></use></svg>
+          <div><strong>Accessibilité —</strong> contrastes AAA sur les textes principaux, focus visibles de 3 px, cibles tactiles de 40 px minimum, navigation clavier complète et libellés explicites sur les champs.</div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/layout.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      var names = ['dashboard','visits','users','calendar','reports','flask','shield','search','bell','plus','download','filter','clock','map-pin','pill','edit','eye','lock','mail','sparkles','trend-up','printer','alert','info','target','book','package','phone','chart','star'];
+      var grid = document.getElementById('iconGrid');
+      names.forEach(function (n) {
+        var d = document.createElement('div');
+        d.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border:1px solid var(--line-2);border-radius:10px;color:var(--text)';
+        d.innerHTML = '<svg class="icon" style="width:22px;height:22px"><use href="#i-' + n + '"></use></svg><span class="tiny muted" style="font-size:8.5px">' + n + '</span>';
+        grid.appendChild(d);
+      });
+    })();
+  </script>
+</body>
+</html>

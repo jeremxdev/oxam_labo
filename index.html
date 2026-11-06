@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connexion · LBC Visites</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="login-body" data-page="login">
+  <div class="login">
+    <section class="login-brand">
+      <a class="brand" href="index.html">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="lgLogin" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2ed0b1"/><stop offset="1" stop-color="#0b8f79"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="12" fill="url(#lgLogin)"/>
+          <path d="M9 25.5c2.6-7 4.2 3.2 6.8-3.6 2.6-6.8 4.2 6.2 6.8-1.2 1.4-4 3.2-5.2 4.4-5.7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="30" cy="12.2" r="2.4" fill="#fff"/>
+        </svg>
+        <span>
+          <span class="brand-name">LBC</span>
+          <span class="brand-sub">Laboratoire Bio Company</span>
+        </span>
+      </a>
+
+      <div class="login-hero">
+        <span class="login-kicker"><span style="width:6px;height:6px;border-radius:50%;background:#64dcc6"></span>Plateforme visiteurs médicaux</span>
+        <h1>La relation praticien,<br><em>simplifiée.</em></h1>
+        <p>Planifiez vos visites, retrouvez vos praticiens et partagez vos comptes rendus avec votre équipe — dans un espace unique, sécurisé et pensé pour le terrain.</p>
+        <div class="login-points">
+          <div class="login-point">
+            <span class="lp-ic"><svg class="icon-sm"><use href="#i-visits"></use></svg></span>
+            Saisie et suivi des visites en quelques clics
+          </div>
+          <div class="login-point">
+            <span class="lp-ic"><svg class="icon-sm"><use href="#i-reports"></use></svg></span>
+            Comptes rendus PDF générés automatiquement
+          </div>
+          <div class="login-point">
+            <span class="lp-ic"><svg class="icon-sm"><use href="#i-shield"></use></svg></span>
+            Accès cloisonné par rôle et par région
+          </div>
+        </div>
+      </div>
+
+      <div class="login-stat">
+        <span class="stat-num">92<span style="font-size:14px">%</span></span>
+        <div>
+          <strong>Taux de comptes rendus complétés</strong>
+          <span>Région Sud · novembre 2026</span>
+        </div>
+      </div>
+
+      <div class="login-foot">
+        <span>© 2026 Laboratoire Bio Company</span>
+        <span>Mentions légales</span>
+        <span>RGPD</span>
+      </div>
+    </section>
+
+    <section class="login-panel">
+      <div class="login-card">
+        <div class="eyebrow">Connexion sécurisée</div>
+        <h2>Bon retour parmi nous</h2>
+        <p class="lead">Accédez à votre espace LBC Visites.</p>
+
+        <form id="loginForm" class="login-form" autocomplete="off">
+          <div class="role-switch" role="group" aria-label="Type de compte">
+            <button type="button" class="active" data-role="visiteur" aria-pressed="true">
+              <svg class="icon-sm"><use href="#i-user"></use></svg>Visiteur
+            </button>
+            <button type="button" data-role="responsable" aria-pressed="false">
+              <svg class="icon-sm"><use href="#i-shield"></use></svg>Responsable
+            </button>
+          </div>
+
+          <div class="field">
+            <label for="loginEmail">Adresse e-mail professionnelle</label>
+            <div class="input-icon">
+              <svg class="icon"><use href="#i-mail"></use></svg>
+              <input class="input" id="loginEmail" type="email" value="camille.moreau@lbc.fr" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="row-between">
+              <label for="loginPassword">Mot de passe</label>
+              <a class="link" href="#" data-demo-action="Mot de passe oublié" data-demo-msg="Un lien de réinitialisation serait envoyé par e-mail.">Oublié ?</a>
+            </div>
+            <div class="input-icon">
+              <svg class="icon"><use href="#i-lock"></use></svg>
+              <input class="input" id="loginPassword" type="password" value="demo1234" required>
+            </div>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" checked>
+            <span>Rester connecté sur cet appareil</span>
+          </label>
+
+          <button class="btn btn-primary btn-lg btn-block" type="submit">
+            Se connecter
+            <svg class="icon"><use href="#i-arrow-right"></use></svg>
+          </button>
+
+          <div class="login-sep">accès de démonstration</div>
+
+          <div class="demo-box">
+            <div class="tiny">Choisissez un profil, les identifiants se remplissent automatiquement.</div>
+            <div class="demo-row"><span>Visiteur médical</span><code>camille.moreau@lbc.fr</code></div>
+            <div class="demo-row"><span>Responsable de région</span><code>julien.lefevre@lbc.fr</code></div>
+          </div>
+        </form>
+
+        <p class="login-legal">
+          En vous connectant, vous acceptez les <a href="#">conditions d'utilisation</a><br>
+          et la <a href="#">politique de protection des données</a> de LBC.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script src="assets/layout.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Échantillons · LBC Visites</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="echantillons" data-role="responsable">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+
+      <main class="content">
+        <div class="page-head anim">
+          <div>
+            <div class="eyebrow">Espace responsable · Gestion</div>
+            <h1>Échantillons</h1>
+            <p class="sub">Suivez les stocks de la région, allouez les dotations aux visiteurs et surveillez les seuils d'alerte.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-outline" data-demo-action="Inventaire" data-demo-msg="L'inventaire complet serait exporté au format CSV."><svg class="icon"><use href="#i-download"></use></svg>Inventaire</button>
+            <button class="btn btn-primary" data-open-modal="allocModal"><svg class="icon"><use href="#i-plus"></use></svg>Allouer des échantillons</button>
+          </div>
+        </div>
+
+        <section class="grid grid-4 anim d1">
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Stock total</span><span class="kpi-icon"><svg class="icon"><use href="#i-package"></use></svg></span></div>
+            <div class="kpi-value">4 820</div>
+            <div class="kpi-bottom"><span class="muted">unités · 6 références</span></div>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Distribués ce mois</span><span class="kpi-icon blue"><svg class="icon"><use href="#i-trend-up"></use></svg></span></div>
+            <div class="kpi-value">1 240</div>
+            <div class="kpi-bottom"><span class="delta up">+6 %</span><span>vs. octobre</span></div>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Sous le seuil</span><span class="kpi-icon amber"><svg class="icon"><use href="#i-alert"></use></svg></span></div>
+            <div class="kpi-value">2</div>
+            <div class="kpi-bottom"><span class="badge amber no-dot">Réappro. conseillé</span></div>
+          </article>
+          <article class="card kpi">
+            <div class="kpi-top"><span class="kpi-label">Ruptures</span><span class="kpi-icon purple"><svg class="icon"><use href="#i-x"></use></svg></span></div>
+            <div class="kpi-value">1</div>
+            <div class="kpi-bottom"><span class="badge red no-dot">Bronchovent</span></div>
+          </article>
+        </section>
+
+        <div class="grid grid-side mt-3">
+          <div class="stack">
+            <section class="card card-pad anim d2">
+              <div class="row wrap" style="gap:12px">
+                <label class="input-icon" style="flex:1;min-width:240px">
+                  <svg class="icon"><use href="#i-search"></use></svg>
+                  <input class="input" type="search" placeholder="Rechercher un produit, un lot…" data-table-filter="stockTable" aria-label="Rechercher un produit">
+                </label>
+                <select class="select" style="width:auto;min-width:160px" aria-label="Statut">
+                  <option>Tous les statuts</option>
+                  <option>Disponible</option>
+                  <option>Stock bas</option>
+                  <option>Rupture</option>
+                </select>
+                <select class="select" style="width:auto;min-width:160px" aria-label="Famille">
+                  <option>Toutes les familles</option>
+                  <option>Cardiologie</option>
+                  <option>Pneumologie</option>
+                  <option>Dermatologie</option>
+                  <option>Endocrinologie</option>
+                </select>
+                <button class="btn btn-outline"><svg class="icon"><use href="#i-filter"></use></svg>Filtrer</button>
+              </div>
+            </section>
+
+            <div class="table-wrap anim d3">
+              <div class="table-scroll">
+                <table class="data" id="stockTable">
+                  <thead>
+                    <tr><th>Produit</th><th>Lot</th><th>Stock</th><th>Distribué</th><th>Seuil</th><th>Statut</th><th style="text-align:right">Actions</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><div class="cell-person"><span class="kpi-icon" style="width:34px;height:34px;border-radius:9px"><svg class="icon-sm"><use href="#i-pill"></use></svg></span><div><div class="cell-main">Cardiozen 10 mg</div><div class="cell-sub">Comprimé pelliculé · Cardiologie</div></div></div></td>
+                      <td class="cell-sub">LOT-CZ-2026-14</td>
+                      <td><span class="strong">1 860</span></td>
+                      <td>520</td>
+                      <td class="muted">300</td>
+                      <td><span class="badge green">Disponible</span></td>
+                      <td><div class="cell-actions"><button class="mini-icon" data-open-modal="allocModal" title="Attribuer"><svg class="icon-sm"><use href="#i-plus"></use></svg></button><button class="mini-icon" data-demo-action="Historique des mouvements" data-demo-msg="L'historique détaillé du lot serait affiché." title="Historique"><svg class="icon-sm"><use href="#i-clock"></use></svg></button></div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="kpi-icon" style="width:34px;height:34px;border-radius:9px"><svg class="icon-sm"><use href="#i-pill"></use></svg></span><div><div class="cell-main">Tensiofix 5 mg</div><div class="cell-sub">Comprimé sécable · Cardiologie</div></div></div></td>
+                      <td class="cell-sub">LOT-TX-2026-08</td>
+                      <td><span class="strong" style="color:var(--amber)">142</span></td>
+                      <td>384</td>
+                      <td class="muted">200</td>
+                      <td><span class="badge amber">Stock bas</span></td>
+                      <td><div class="cell-actions"><button class="mini-icon" data-open-modal="allocModal" title="Attribuer"><svg class="icon-sm"><use href="#i-plus"></use></svg></button><button class="mini-icon" data-demo-action="Réapprovisionnement" data-demo-msg="Une demande de réapprovisionnement serait envoyée au siège." title="Réapprovisionner"><svg class="icon-sm"><use href="#i-upload"></use></svg></button></div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="kpi-icon" style="width:34px;height:34px;border-radius:9px"><svg class="icon-sm"><use href="#i-pill"></use></svg></span><div><div class="cell-main">Bronchovent 100 µg</div><div class="cell-sub">Suspension inhalation · Pneumologie</div></div></div></td>
+                      <td class="cell-sub">LOT-BV-2026-03</td>
+                      <td><span class="strong" style="color:var(--red)">0</span></td>
+                      <td>148</td>
+                      <td class="muted">150</td>
+                      <td><span class="badge red">Rupture</span></td>
+                      <td><div class="cell-actions"><button class="mini-icon" disabled title="Stock indisponible" style="opacity:.4;cursor:not-allowed"><svg class="icon-sm"><use href="#i-plus"></use></svg></button><button class="mini-icon" data-demo-action="Réapprovisionnement" data-demo-msg="Une demande de réapprovisionnement serait envoyée au siège." title="Réapprovisionner"><svg class="icon-sm"><use href="#i-upload"></use></svg></button></div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="kpi-icon" style="width:34px;height:34px;border-radius:9px"><svg class="icon-sm"><use href="#i-pill"></use></svg></span><div><div class="cell-main">Dermalis 0,1 %</div><div class="cell-sub">Crème · Dermatologie</div></div></div></td>
+                      <td class="cell-sub">LOT-DM-2026-11</td>
+                      <td><span class="strong">640</span></td>
+                      <td>96</td>
+                      <td class="muted">120</td>
+                      <td><span class="badge green">Disponible</span></td>
+                      <td><div class="cell-actions"><button class="mini-icon" data-open-modal="allocModal" title="Attribuer"><svg class="icon-sm"><use href="#i-plus"></use></svg></button><button class="mini-icon" data-demo-action="Historique des mouvements" data-demo-msg="L'historique détaillé du lot serait affiché." title="Historique"><svg class="icon-sm"><use href="#i-clock"></use></svg></button></div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="kpi-icon" style="width:34px;height:34px;border-radius:9px"><svg class="icon-sm"><use href="#i-pill"></use></svg></span><div><div class="cell-main">Glycobalance 500 mg</div><div class="cell-sub">Comprimé · Endocrinologie</div></div></div></td>
+                      <td class="cell-sub">LOT-GB-2026-06</td>
+                      <td><span class="strong">980</span></td>
+                      <td>214</td>
+                      <td class="muted">250</td>
+                      <td><span class="badge green">Disponible</span></td>
+                      <td><div class="cell-actions"><button class="mini-icon" data-open-modal="allocModal" title="Attribuer"><svg class="icon-sm"><use href="#i-plus"></use></svg></button><button class="mini-icon" data-demo-action="Historique des mouvements" data-demo-msg="L'historique détaillé du lot serait affiché." title="Historique"><svg class="icon-sm"><use href="#i-clock"></use></svg></button></div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="cell-person"><span class="kpi-icon" style="width:34px;height:34px;border-radius:9px"><svg class="icon-sm"><use href="#i-pill"></use></svg></span><div><div class="cell-main">Immunoflor 10⁹ UFC</div><div class="cell-sub">Gélule · Gastro-entérologie</div></div></div></td>
+                      <td class="cell-sub">LOT-IM-2026-09</td>
+                      <td><span class="strong">420</span></td>
+                      <td>158</td>
+                      <td class="muted">100</td>
+                      <td><span class="badge green">Disponible</span></td>
+                      <td><div class="cell-actions"><button class="mini-icon" data-open-modal="allocModal" title="Attribuer"><svg class="icon-sm"><use href="#i-plus"></use></svg></button><button class="mini-icon" data-demo-action="Historique des mouvements" data-demo-msg="L'historique détaillé du lot serait affiché." title="Historique"><svg class="icon-sm"><use href="#i-clock"></use></svg></button></div></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-foot">
+                <span><strong data-filter-count="stockTable">6</strong> références · valeur totale 4 820 unités</span>
+                <span class="tiny muted">Dernière synchronisation : 06/11/2026 · 09:12</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="stack">
+            <section class="card card-pad anim d2">
+              <div class="row-between mb-2">
+                <h3 style="font-size:15px">Répartition par visiteur</h3>
+                <span class="badge teal no-dot">Nov.</span>
+              </div>
+              <div class="stack" style="gap:12px">
+                <div>
+                  <div class="row-between mb-1"><span class="tiny">Sofia Benali</span><span class="tiny strong">42</span></div>
+                  <div class="progress"><span style="width:88%"></span></div>
+                </div>
+                <div>
+                  <div class="row-between mb-1"><span class="tiny">Camille Moreau</span><span class="tiny strong">38</span></div>
+                  <div class="progress"><span style="width:80%"></span></div>
+                </div>
+                <div>
+                  <div class="row-between mb-1"><span class="tiny">Thomas Girard</span><span class="tiny strong">31</span></div>
+                  <div class="progress blue"><span style="width:65%"></span></div>
+                </div>
+                <div>
+                  <div class="row-between mb-1"><span class="tiny">Marc Rousseau</span><span class="tiny strong">29</span></div>
+                  <div class="progress blue"><span style="width:61%"></span></div>
+                </div>
+                <div>
+                  <div class="row-between mb-1"><span class="tiny">Léa Fontaine</span><span class="tiny strong">24</span></div>
+                  <div class="progress amber"><span style="width:50%"></span></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card anim d3">
+              <div class="card-head">
+                <div>
+                  <h3>Dernières attributions</h3>
+                  <div class="sub">Aujourd'hui</div>
+                </div>
+              </div>
+              <div class="card-body" style="padding-top:6px;padding-bottom:8px">
+                <div class="timeline" style="padding-left:24px">
+                  <div class="tl-item active">
+                    <span class="tl-dot"></span>
+                    <div class="tl-title" style="font-size:12px">12 Cardiozen → Sofia Benali</div>
+                    <div class="tl-sub">09:12 · par Julien Lefèvre</div>
+                  </div>
+                  <div class="tl-item">
+                    <span class="tl-dot"></span>
+                    <div class="tl-title" style="font-size:12px">8 Tensiofix → Camille Moreau</div>
+                    <div class="tl-sub">08:47 · par Julien Lefèvre</div>
+                  </div>
+                  <div class="tl-item">
+                    <span class="tl-dot"></span>
+                    <div class="tl-title" style="font-size:12px">6 Glycobalance → Marc Rousseau</div>
+                    <div class="tl-sub">Hier · 17:20</div>
+                  </div>
+                  <div class="tl-item">
+                    <span class="tl-dot"></span>
+                    <div class="tl-title" style="font-size:12px">4 Dermalis → Hugo Bernard</div>
+                    <div class="tl-sub">Hier · 15:05</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="note amber anim d4">
+              <svg class="icon"><use href="#i-alert"></use></svg>
+              <div><strong>Seuil d'alerte —</strong> une notification est envoyée au responsable dès qu'un lot passe sous son seuil de réapprovisionnement.</div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modale allocation -->
+  <div class="modal-backdrop" id="allocModal" role="dialog" aria-modal="true" aria-labelledby="allocTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h3 id="allocTitle">Allouer des échantillons</h3>
+          <p>Attribuez une dotation à un visiteur de votre région.</p>
+        </div>
+        <button class="mini-icon" data-close-modal aria-label="Fermer"><svg class="icon-sm"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label for="allocVisiteur">Visiteur <span class="req">*</span></label>
+          <select class="select" id="allocVisiteur">
+            <option>Camille Moreau — Marseille</option>
+            <option>Sofia Benali — Marseille</option>
+            <option>Marc Rousseau — Aix-en-Provence</option>
+            <option>Léa Fontaine — Toulon</option>
+            <option>Thomas Girard — Nice</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="allocProduit">Produit <span class="req">*</span></label>
+          <select class="select" id="allocProduit">
+            <option>Cardiozen 10 mg — stock 1 860</option>
+            <option>Tensiofix 5 mg — stock 142</option>
+            <option>Dermalis 0,1 % — stock 640</option>
+            <option>Glycobalance 500 mg — stock 980</option>
+            <option>Immunoflor 10⁹ UFC — stock 420</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="allocQty">Quantité</label>
+            <div class="stepper">
+              <button type="button" data-step="-1" aria-label="Diminuer">−</button>
+              <input id="allocQty" type="number" value="10" min="1" max="200">
+              <button type="button" data-step="1" aria-label="Augmenter">+</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="allocLot">Lot</label>
+            <select class="select" id="allocLot">
+              <option>LOT-CZ-2026-14</option>
+              <option>LOT-TX-2026-08</option>
+              <option>LOT-DM-2026-11</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="allocNote">Note interne</label>
+          <textarea class="textarea" id="allocNote" style="min-height:76px" placeholder="Ex. Dotation pour les visites de novembre."></textarea>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-outline" data-close-modal>Annuler</button>
+        <button class="btn btn-primary" data-save="Dotation enregistrée" data-save-msg="10 échantillons ont été attribués à Camille Moreau." data-close-modal>Confirmer la dotation</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/layout.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

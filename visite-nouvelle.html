@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nouvelle visite · LBC Visites</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="visites" data-role="visiteur">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+
+      <main class="content">
+        <div class="breadcrumb anim">
+          <a href="dashboard.html">Accueil</a>
+          <svg class="icon-sm"><use href="#i-chevron-right"></use></svg>
+          <a href="visites.html">Visites</a>
+          <svg class="icon-sm"><use href="#i-chevron-right"></use></svg>
+          <span class="current">Nouvelle visite</span>
+        </div>
+
+        <div class="page-head anim">
+          <div>
+            <div class="eyebrow">Saisie terrain</div>
+            <h1>Nouvelle visite</h1>
+            <p class="sub">Renseignez les informations de votre visite. Un compte rendu PDF pourra être généré dès l'enregistrement.</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn btn-ghost" href="visites.html">Annuler</a>
+          </div>
+        </div>
+
+        <form class="grid grid-side anim d1" id="visiteForm" novalidate>
+          <div class="card">
+            <div class="form-section" style="padding-bottom:20px">
+              <div class="form-section-head">
+                <span class="form-step">1</span>
+                <div>
+                  <h3>Praticien concerné</h3>
+                  <p>Seuls les praticiens de votre portefeuille et de votre région sont proposés.</p>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fPraticien">Praticien <span class="req">*</span></label>
+                <select class="select" id="fPraticien" required>
+                  <option value="">Rechercher un praticien…</option>
+                  <option value="dupuis" selected>Dr Anne Dupuis — Cardiologie · #1042 · Marseille</option>
+                  <option value="rousseau">Dr Marc Rousseau — Médecine générale · #0871 · Aix-en-Provence</option>
+                  <option value="fontaine">Dr Léa Fontaine — Pneumologie · #1120 · Toulon</option>
+                  <option value="bernard">Dr Hugo Bernard — Dermatologie · #0934 · Nice</option>
+                </select>
+                <span class="help">Identifié par sa spécialité et son numéro séquentiel, conformément aux règles métier.</span>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="form-step">2</span>
+                <div>
+                  <h3>Détails de la visite</h3>
+                  <p>Date, lieu et motif de la rencontre.</p>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="fDate">Date de la visite <span class="req">*</span></label>
+                  <input class="input" id="fDate" type="date" value="2026-11-09" required>
+                </div>
+                <div class="field">
+                  <label for="fType">Type de rendez-vous</label>
+                  <select class="select" id="fType">
+                    <option>Visite en cabinet</option>
+                    <option>Visite en établissement</option>
+                    <option>Visite en officine</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field mt-2">
+                <label for="fMotif">Motif de la visite <span class="req">*</span></label>
+                <textarea class="textarea" id="fMotif" required placeholder="Ex. Présentation de la nouvelle posologie de Cardiozen et point sur les retours d'usage en cabinet.">Présentation de la nouvelle posologie de Cardiozen et point sur les retours d'usage en cabinet.</textarea>
+                <span class="help">Rédigé librement par le visiteur. 240 caractères maximum recommandés.</span>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="form-step">3</span>
+                <div>
+                  <h3>Produits &amp; échantillons</h3>
+                  <p>Listez les médicaments présentés et les échantillons remis.</p>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fProduits">Médicaments présentés</label>
+                <div class="tag-input" data-tag-input>
+                  <span class="chip"><span>Cardiozen 10 mg</span><button type="button" aria-label="Retirer"><svg class="icon-sm" style="width:12px;height:12px"><use href="#i-x"></use></svg></button></span>
+                  <span class="chip"><span>Tensiofix 5 mg</span><button type="button" aria-label="Retirer"><svg class="icon-sm" style="width:12px;height:12px"><use href="#i-x"></use></svg></button></span>
+                  <input id="fProduits" type="text" placeholder="Ajouter un produit puis Entrée…" aria-label="Ajouter un médicament">
+                </div>
+                <span class="help">Appuyez sur Entrée pour valider chaque produit.</span>
+              </div>
+              <div class="field-row mt-2">
+                <div class="field">
+                  <label for="fEchantillons">Échantillons remis</label>
+                  <div class="stepper">
+                    <button type="button" data-step="-1" aria-label="Diminuer">−</button>
+                    <input id="fEchantillons" type="number" value="2" min="0" max="20" aria-label="Nombre d'échantillons">
+                    <button type="button" data-step="1" aria-label="Augmenter">+</button>
+                  </div>
+                  <span class="help">Décomptés du stock alloué à votre région.</span>
+                </div>
+                <div class="field">
+                  <label for="fLot">Lot associé</label>
+                  <select class="select" id="fLot">
+                    <option>LOT-CZ-2026-14 — Cardiozen 10 mg</option>
+                    <option>LOT-TX-2026-08 — Tensiofix 5 mg</option>
+                    <option>Aucun lot spécifique</option>
+                  </select>
+                  <span class="help">Traçabilité des échantillons remis.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="form-section-head">
+                <span class="form-step">4</span>
+                <div>
+                  <h3>Bilan de la visite</h3>
+                  <p>Le ressenti du visiteur sur l'accueil réservé au produit.</p>
+                </div>
+              </div>
+              <div class="field">
+                <label>Le praticien a-t-il été convaincu ?</label>
+                <div class="radio-cards">
+                  <label class="radio-card">
+                    <input type="radio" name="bilan" value="convaincu" checked>
+                    <span class="rc-title"><span class="rc-dot"></span>Convaincu</span>
+                    <small>Prêt à prescrire</small>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="bilan" value="reserve">
+                    <span class="rc-title"><span class="rc-dot"></span>Réservé</span>
+                    <small>À recontacter</small>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="bilan" value="non">
+                    <span class="rc-title"><span class="rc-dot"></span>Non convaincu</span>
+                    <small>Argumentaire à revoir</small>
+                  </label>
+                </div>
+              </div>
+              <div class="row-between mt-3" style="gap:16px;flex-wrap:wrap">
+                <label class="switch">
+                  <input type="checkbox" id="fSuivi" checked>
+                  <span class="switch-track"></span>
+                  Une autre visite est planifiée
+                </label>
+                <div class="field" style="min-width:190px">
+                  <input class="input" type="date" value="2026-12-07" aria-label="Date de la prochaine visite">
+                </div>
+              </div>
+              <div class="field mt-2">
+                <label for="fCommentaire">Commentaire du bilan</label>
+                <textarea class="textarea" id="fCommentaire" placeholder="Ex. Très bon accueil, le praticien souhaite recevoir les données de l'étude observationnelle.">Très bon accueil. Le praticien souhaite recevoir les données de l'étude observationnelle avant de modifier ses habitudes de prescription.</textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <span class="tiny muted">Les champs marqués <span class="req">*</span> sont obligatoires.</span>
+              <div class="row">
+                <button type="button" class="btn btn-outline" data-save="Brouillon enregistré" data-save-msg="La visite a été enregistrée en brouillon.">Enregistrer le brouillon</button>
+                <button type="button" class="btn btn-primary" data-save="Visite enregistrée" data-save-msg="Le compte rendu PDF a été généré." data-redirect="visite-detail.html">
+                  <svg class="icon"><use href="#i-file-check"></use></svg>Enregistrer &amp; générer le CR
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Récapitulatif -->
+          <aside class="stack" style="position:sticky;top:96px">
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Récapitulatif</h3>
+                  <div class="sub">Mise à jour en direct</div>
+                </div>
+                <span class="badge slate">Brouillon</span>
+              </div>
+              <div class="card-body">
+                <div class="row" style="gap:12px">
+                  <span class="avatar lg blue" id="sumAvatar">AD</span>
+                  <div>
+                    <div class="strong" id="sumPraticien" style="font-size:13.5px">Dr Anne Dupuis</div>
+                    <div class="tiny muted" id="sumPraticienMeta">Cardiologie · #1042 · Marseille</div>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="stack" style="gap:11px">
+                  <div class="row-between"><span class="tiny muted">Date</span><span class="small strong" id="sumDate">9 novembre 2026</span></div>
+                  <div class="row-between"><span class="tiny muted">Type</span><span class="small strong">Visite en cabinet</span></div>
+                  <div class="row-between"><span class="tiny muted">Produits</span><span class="small strong" id="sumProduits">2 produits</span></div>
+                  <div class="row-between"><span class="tiny muted">Échantillons</span><span class="small strong"><span id="sumEchantillons">2</span> remis</span></div>
+                  <div class="row-between"><span class="tiny muted">Bilan</span><span class="badge green">Convaincu</span></div>
+                </div>
+                <div class="divider"></div>
+                <div class="note" style="padding:11px 12px">
+                  <svg class="icon icon-sm"><use href="#i-sparkles"></use></svg>
+                  <span>Un compte rendu PDF reprenant tous les éléments de la visite sera généré automatiquement.</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="card card-pad">
+              <h3 style="font-size:13px;margin-bottom:12px">Contrôles automatiques</h3>
+              <div class="stack" style="gap:10px">
+                <div class="row" style="gap:9px;font-size:11.5px;color:var(--text)">
+                  <span class="kpi-icon" style="width:22px;height:22px;border-radius:6px"><svg class="icon-sm" style="width:12px;height:12px"><use href="#i-check"></use></svg></span>
+                  Praticien unique par visite
+                </div>
+                <div class="row" style="gap:9px;font-size:11.5px;color:var(--text)">
+                  <span class="kpi-icon" style="width:22px;height:22px;border-radius:6px"><svg class="icon-sm" style="width:12px;height:12px"><use href="#i-check"></use></svg></span>
+                  Praticien rattaché à votre région
+                </div>
+                <div class="row" style="gap:9px;font-size:11.5px;color:var(--text)">
+                  <span class="kpi-icon" style="width:22px;height:22px;border-radius:6px"><svg class="icon-sm" style="width:12px;height:12px"><use href="#i-check"></use></svg></span>
+                  Stock d'échantillons disponible
+                </div>
+              </div>
+            </section>
+          </aside>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/layout.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

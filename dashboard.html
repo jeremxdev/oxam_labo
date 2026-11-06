@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tableau de bord · LBC Visites</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="dashboard" data-role="visiteur">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+
+      <main class="content">
+        <div class="page-head anim">
+          <div>
+            <div class="eyebrow">Espace visiteur · Région Sud</div>
+            <h1>Bonjour Camille</h1>
+            <p class="sub">Voici l'activité de votre portefeuille pour ce mois de novembre. Trois comptes rendus sont en attente de complétion.</p>
+          </div>
+          <div class="page-actions">
+            <span class="head-date"><svg class="icon-sm"><use href="#i-calendar"></use></svg>Vendredi 6 novembre 2026</span>
+            <a class="btn btn-primary" href="visite-nouvelle.html">
+              <svg class="icon"><use href="#i-plus"></use></svg>Nouvelle visite
+            </a>
+          </div>
+        </div>
+
+        <!-- KPI -->
+        <section class="grid grid-4 anim d1" aria-label="Indicateurs clés">
+          <article class="card kpi">
+            <div class="kpi-top">
+              <span class="kpi-label">Visites ce mois</span>
+              <span class="kpi-icon"><svg class="icon"><use href="#i-visits"></use></svg></span>
+            </div>
+            <div class="kpi-value">24</div>
+            <div class="kpi-bottom">
+              <span class="delta up"><svg class="icon-sm" style="width:11px;height:11px"><use href="#i-trend-up"></use></svg>12 %</span>
+              <span>vs. octobre</span>
+            </div>
+          </article>
+
+          <article class="card kpi">
+            <div class="kpi-top">
+              <span class="kpi-label">Praticiens suivis</span>
+              <span class="kpi-icon blue"><svg class="icon"><use href="#i-users"></use></svg></span>
+            </div>
+            <div class="kpi-value">87</div>
+            <div class="kpi-bottom">
+              <span class="delta up">+4</span>
+              <span>nouveaux ce mois</span>
+            </div>
+          </article>
+
+          <article class="card kpi">
+            <div class="kpi-top">
+              <span class="kpi-label">Activités à venir</span>
+              <span class="kpi-icon purple"><svg class="icon"><use href="#i-calendar"></use></svg></span>
+            </div>
+            <div class="kpi-value">3</div>
+            <div class="kpi-bottom">
+              <span class="badge purple no-dot">Prochaine le 12 nov.</span>
+            </div>
+          </article>
+
+          <article class="card kpi">
+            <div class="kpi-top">
+              <span class="kpi-label">Comptes rendus complétés</span>
+              <span class="kpi-icon amber"><svg class="icon"><use href="#i-reports"></use></svg></span>
+            </div>
+            <div class="kpi-value">92<small>%</small></div>
+            <div class="progress" style="height:6px"><span style="width:92%"></span></div>
+          </article>
+        </section>
+
+        <!-- Contenu principal -->
+        <div class="grid grid-main mt-3">
+          <div class="stack">
+            <section class="card anim d2">
+              <div class="card-head">
+                <div>
+                  <h3>Activité des visites</h3>
+                  <div class="sub">8 dernières semaines · région Sud</div>
+                </div>
+                <div class="row">
+                  <div class="segmented" role="group" aria-label="Période">
+                    <button class="active">8 semaines</button>
+                    <button>6 mois</button>
+                  </div>
+                  <a class="link" href="visites.html">Tout voir <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-wrap">
+                  <svg class="chart" data-chart data-values="14,18,16,24,21,28,26,33" data-second="10,13,15,17,18,21,23,25" data-max="38" viewBox="0 0 640 210" role="img" aria-label="Courbe des visites réalisées par semaine">
+                    <defs>
+                      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#0fa98f" stop-opacity=".24"/>
+                        <stop offset="1" stop-color="#0fa98f" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <g class="chart-grid">
+                      <line x1="0" y1="30" x2="640" y2="30"/>
+                      <line x1="0" y1="80" x2="640" y2="80"/>
+                      <line x1="0" y1="130" x2="640" y2="130"/>
+                      <line x1="0" y1="180" x2="640" y2="180"/>
+                    </g>
+                    <path class="chart-area" d=""/>
+                    <path class="chart-line-2" d=""/>
+                    <path class="chart-line" d=""/>
+                    <g class="chart-dots"></g>
+                  </svg>
+                </div>
+                <div class="chart-labels">
+                  <span>S38</span><span>S39</span><span>S40</span><span>S41</span>
+                  <span>S42</span><span>S43</span><span>S44</span><span>S45</span>
+                </div>
+                <div class="row-between mt-2">
+                  <div class="chart-legend">
+                    <span class="legend-item"><span class="legend-dot"></span>Visites réalisées</span>
+                    <span class="legend-item"><span class="legend-dot light"></span>Objectif hebdomadaire</span>
+                  </div>
+                  <span class="tiny muted">Total : <strong class="strong">180 visites</strong></span>
+                </div>
+              </div>
+            </section>
+
+            <section class="card anim d3">
+              <div class="card-head">
+                <div>
+                  <h3>Prochaines visites</h3>
+                  <div class="sub">Votre agenda des 7 prochains jours</div>
+                </div>
+                <a class="link" href="visites.html">Voir le planning <svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              </div>
+              <div class="card-body" style="padding-top:6px;padding-bottom:8px">
+                <div class="list">
+                  <div class="list-item">
+                    <div class="activity-date"><div class="d">09</div><div class="m">Nov</div></div>
+                    <div class="list-main">
+                      <div class="list-title">Dr Anne Dupuis</div>
+                      <div class="list-sub">Cardiologie · #1042 · Marseille 8ᵉ</div>
+                    </div>
+                    <span class="badge blue no-dot">Visite · 10 h 30</span>
+                    <a class="mini-icon" href="visite-detail.html" aria-label="Ouvrir"><svg class="icon-sm"><use href="#i-chevron-right"></use></svg></a>
+                  </div>
+                  <div class="list-item">
+                    <div class="activity-date"><div class="d">10</div><div class="m">Nov</div></div>
+                    <div class="list-main">
+                      <div class="list-title">Dr Marc Rousseau</div>
+                      <div class="list-sub">Médecine générale · #0871 · Aix-en-Provence</div>
+                    </div>
+                    <span class="badge blue no-dot">Visite · 14 h 00</span>
+                    <a class="mini-icon" href="visite-detail.html" aria-label="Ouvrir"><svg class="icon-sm"><use href="#i-chevron-right"></use></svg></a>
+                  </div>
+                  <div class="list-item">
+                    <div class="activity-date"><div class="d">12</div><div class="m">Nov</div></div>
+                    <div class="list-main">
+                      <div class="list-title">Soirée d'information — Hypertension</div>
+                      <div class="list-sub">Activité complémentaire · Hôtel Le Méridien, Marseille</div>
+                    </div>
+                    <span class="badge purple no-dot">AC · 19 h 00</span>
+                    <a class="mini-icon" href="activites.html" aria-label="Ouvrir"><svg class="icon-sm"><use href="#i-chevron-right"></use></svg></a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="note anim d4">
+              <svg class="icon"><use href="#i-info"></use></svg>
+              <div><strong>Règle métier —</strong> un praticien ne peut recevoir qu'une seule visite de votre laboratoire. Vérifiez son historique avant de planifier un nouveau rendez-vous.</div>
+            </div>
+          </div>
+
+          <div class="stack">
+            <section class="card card-pad anim d2">
+              <div class="row-between mb-2">
+                <div>
+                  <h3 style="font-size:15px">Objectif du mois</h3>
+                  <div class="tiny muted mt-1">Novembre 2026</div>
+                </div>
+                <span class="badge teal">En cours</span>
+              </div>
+              <div class="row" style="gap:18px">
+                <div class="ring">
+                  <svg width="96" height="96" viewBox="0 0 96 96">
+                    <circle class="ring-bg" cx="48" cy="48" r="41"/>
+                    <circle class="ring-fg" cx="48" cy="48" r="41" stroke-dasharray="257.6" stroke-dashoffset="56.7"/>
+                  </svg>
+                  <div class="ring-label"><strong>78%</strong><span>de l'objectif</span></div>
+                </div>
+                <div class="stack" style="gap:12px;flex:1">
+                  <div>
+                    <div class="row-between"><span class="tiny muted">Visites réalisées</span><span class="tiny strong">24 / 30</span></div>
+                    <div class="progress mt-1"><span style="width:80%"></span></div>
+                  </div>
+                  <div>
+                    <div class="row-between"><span class="tiny muted">Nouveaux praticiens</span><span class="tiny strong">4 / 6</span></div>
+                    <div class="progress blue mt-1"><span style="width:67%"></span></div>
+                  </div>
+                  <div>
+                    <div class="row-between"><span class="tiny muted">Comptes rendus</span><span class="tiny strong">22 / 24</span></div>
+                    <div class="progress amber mt-1"><span style="width:92%"></span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card anim d3">
+              <div class="card-head">
+                <div>
+                  <h3>Activités à venir</h3>
+                  <div class="sub">2 invitations confirmées</div>
+                </div>
+                <a class="link" href="activites.html"><svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              </div>
+              <div class="card-body" style="padding-top:4px;padding-bottom:6px">
+                <div class="list">
+                  <div class="list-item">
+                    <div class="activity-date" style="width:46px"><div class="d" style="font-size:17px">12</div><div class="m">Nov</div></div>
+                    <div class="list-main">
+                      <div class="list-title" style="font-size:12px">Hypertension : nouvelles recommandations</div>
+                      <div class="list-sub">Marseille · 18 praticiens invités</div>
+                    </div>
+                  </div>
+                  <div class="list-item">
+                    <div class="activity-date" style="width:46px"><div class="d" style="font-size:17px">20</div><div class="m">Nov</div></div>
+                    <div class="list-main">
+                      <div class="list-title" style="font-size:12px">Atelier diabète &amp; observance</div>
+                      <div class="list-sub">Nice · 12 praticiens invités</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card anim d4">
+              <div class="card-head">
+                <div>
+                  <h3>Derniers comptes rendus</h3>
+                  <div class="sub">Générés cette semaine</div>
+                </div>
+                <a class="link" href="comptes-rendus.html"><svg class="icon-sm"><use href="#i-arrow-right"></use></svg></a>
+              </div>
+              <div class="card-body" style="padding-top:4px;padding-bottom:8px">
+                <div class="list">
+                  <a class="list-item" href="compte-rendu.html">
+                    <span class="file-icon">PDF</span>
+                    <span class="list-main">
+                      <span class="list-title" style="display:block">CR — Dr Anne Dupuis</span>
+                      <span class="list-sub">04 nov. 2026 · 248 Ko</span>
+                    </span>
+                    <svg class="icon-sm muted"><use href="#i-download"></use></svg>
+                  </a>
+                  <a class="list-item" href="compte-rendu.html">
+                    <span class="file-icon">PDF</span>
+                    <span class="list-main">
+                      <span class="list-title" style="display:block">CR — Dr Marc Rousseau</span>
+                      <span class="list-sub">03 nov. 2026 · 231 Ko</span>
+                    </span>
+                    <svg class="icon-sm muted"><use href="#i-download"></use></svg>
+                  </a>
+                  <a class="list-item" href="compte-rendu.html">
+                    <span class="file-icon">PDF</span>
+                    <span class="list-main">
+                      <span class="list-title" style="display:block">CR — Dr Léa Fontaine</span>
+                      <span class="list-sub">29 oct. 2026 · 244 Ko</span>
+                    </span>
+                    <svg class="icon-sm muted"><use href="#i-download"></use></svg>
+                  </a>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/layout.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
