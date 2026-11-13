@@ -1,3 +1,4 @@
+-- Ajoute les identifiants de connexion aux praticiens déjà enregistrés.
 USE oxam_labo;
 
 -- Compte de connexion du praticien : email (identifiant) et mot de passe haché

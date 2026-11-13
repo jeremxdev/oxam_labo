@@ -2,6 +2,9 @@
 require_once __DIR__ . '/../models/Visiteur.php';
 require_once __DIR__ . '/../models/Practicien.php';
 
+/**
+ * Traite la connexion, l'inscription et la déconnexion des visiteurs et praticiens.
+ */
 class AuthController {
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
+/**
+ * Accède aux comptes du personnel, aux régions et aux secteurs géographiques.
+ */
 class User {
     private $db;
 

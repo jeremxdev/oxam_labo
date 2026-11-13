@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Liste les rapports de visite du visiteur connecté et propose leur recherche et leurs actions.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="header-action">
     <h1>Comptes Rendus de Visites Médicales</h1>
     <a href="index.php?action=visite_create" class="btn-primary">+ Saisir une visite</a>

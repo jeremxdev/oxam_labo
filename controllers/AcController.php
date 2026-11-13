@@ -2,6 +2,9 @@
 require_once __DIR__ . '/../models/AC.php';
 require_once __DIR__ . '/../models/Visiteur.php';
 
+/**
+ * Gère l'affichage et la création des activités complémentaires réservées aux visiteurs.
+ */
 class AcController {
     private $acModel;
 

@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Formulaire d'inscription d'un praticien et de sélection ou création de sa spécialité.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="auth-card">
     <h2>Créer un compte praticien</h2>
     <p class="subtitle">Votre profil sera proposé lors de la saisie des visites médicales et vos identifiants vous permettront de vous connecter à l'espace praticien</p>

@@ -1,3 +1,4 @@
+<?php // Ouvre la page HTML et affiche la navigation adaptée à la session et au rôle. ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

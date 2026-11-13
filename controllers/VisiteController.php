@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../models/Visite.php';
 
+/**
+ * Gère les rapports de visite : liste, création, suppression et rendu imprimable.
+ */
 class VisiteController {
     private $visiteModel;
 

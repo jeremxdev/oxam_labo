@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
+/**
+ * Gère les données des praticiens, leurs spécialités et leurs comptes de connexion.
+ */
 class Practicien {
     private $db;
 

@@ -1,3 +1,4 @@
+-- Schéma initial de la base oxam_labo : tables métier, relations et données de démonstration.
 -- Base de données Merise exacte (oxam_labo)
 CREATE DATABASE IF NOT EXISTS oxam_labo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE oxam_labo;

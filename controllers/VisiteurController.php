@@ -2,6 +2,9 @@
 require_once __DIR__ . '/../models/Visiteur.php';
 require_once __DIR__ . '/../models/Practicien.php';
 
+/**
+ * Gère la liste des visiteurs, leur création et la modification de leur profil.
+ */
 class VisiteurController {
     private $visiteurModel;
 

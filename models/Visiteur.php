@@ -1,13 +1,22 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
+/**
+ * Gère l'accès aux données des visiteurs et à leurs affectations régionales.
+ */
 class Visiteur {
     private $db;
 
+    /**
+     * Initialise la connexion à la base de données utilisée par les méthodes du modèle.
+     */
     public function __construct() {
         $this->db = Database::getConnection();
     }
 
+    /**
+     * Recherche un visiteur par adresse e-mail et récupère sa dernière région affectée.
+     */
     public function findByMail($email) {
         $stmt = $this->db->prepare("SELECT v.*, t.reg_code 
                                     FROM Visiteur v 
@@ -18,10 +27,16 @@ class Visiteur {
         return $stmt->fetch();
     }
 
+    /**
+     * Vérifie qu'un mot de passe correspond à son empreinte enregistrée.
+     */
     public function verifyPassword($hash, $password) {
         return is_string($hash) && $hash !== '' && password_verify($password, $hash);
     }
 
+    /**
+     * Récupère tous les visiteurs, triés par nom et prénom, avec leur dernière région connue.
+     */
     public function getAllVisiteurs() {
         $stmt = $this->db->query("SELECT v.id_vis, v.telephone_vis, v.nom_vis, v.prenom_vis, v.mail_vis, v.adresse_vis, 
                                   (SELECT t.reg_code FROM Travailler t WHERE t.id_vis = v.id_vis ORDER BY t.dateaffect DESC LIMIT 1) AS reg_code
@@ -30,10 +45,16 @@ class Visiteur {
         return $stmt->fetchAll();
     }
 
+    /**
+     * Récupère la liste des régions, triées par code.
+     */
     public function getAllRegions() {
         return $this->db->query("SELECT * FROM Region ORDER BY reg_code ASC")->fetchAll();
     }
 
+    /**
+     * Recherche un visiteur par identifiant et renvoie également sa dernière région connue.
+     */
     public function getVisiteurById($idVis) {
         $stmt = $this->db->prepare("SELECT v.id_vis, v.telephone_vis, v.nom_vis, v.prenom_vis, v.mail_vis, v.adresse_vis, 
                                     (SELECT t.reg_code FROM Travailler t WHERE t.id_vis = v.id_vis ORDER BY t.dateaffect DESC LIMIT 1) AS reg_code
@@ -45,8 +66,9 @@ class Visiteur {
     }
 
     /**
-     * Modifie les informations d'un visiteur. $password null = mot de passe inchangé.
-     * Une nouvelle affectation (Travailler) est enregistrée si la région change.
+     * Modifie les informations d'un visiteur et, si nécessaire, son affectation régionale.
+     * Un mot de passe null signifie que le mot de passe actuel reste inchangé.
+     * Les modifications sont réalisées dans une transaction ; la méthode renvoie false en cas d'échec.
      */
     public function updateVisiteur($idVis, $nom, $prenom, $email, $telephone, $adresse, $regCode, $password = null) {
         try {
@@ -98,6 +120,10 @@ class Visiteur {
         }
     }
 
+    /**
+     * Crée un visiteur, enregistre son mot de passe sous forme d'empreinte et ajoute sa région initiale.
+     * La création et l'affectation sont réalisées dans une transaction ; la méthode renvoie false en cas d'échec.
+     */
     public function createVisiteur($nom, $prenom, $email, $telephone, $adresse, $regCode, $password) {
         try {
             $this->db->beginTransaction();

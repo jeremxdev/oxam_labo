@@ -1,3 +1,4 @@
+-- Ajoute un champ de mot de passe haché aux visiteurs et initialise les comptes déjà existants.
 USE oxam_labo;
 
 -- Ajout du champ de connexion (mot de passe haché avec password_hash / bcrypt)

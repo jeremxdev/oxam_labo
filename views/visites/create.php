@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Formulaire de saisie d'un rapport de visite, des médicaments présentés et des échantillons.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="form-card">
     <h1>Saisie d'un Rapport de Visite</h1>
     <form action="index.php?action=visite_create" method="POST" id="visitForm">

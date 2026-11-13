@@ -1,3 +1,4 @@
+// Ajoute les contrôles côté navigateur aux formulaires et tableaux de visites.
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('visitForm');
     if (form) {

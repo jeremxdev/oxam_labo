@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Formulaire de connexion commun aux visiteurs et aux praticiens.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="auth-card">
     <h2>Portail OXAM LABO - Connexion</h2>
     <p class="subtitle">Saisissez votre adresse email et votre mot de passe (visiteur ou praticien)</p>

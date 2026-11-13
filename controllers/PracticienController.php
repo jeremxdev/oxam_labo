@@ -3,6 +3,9 @@ require_once __DIR__ . '/../models/Practicien.php';
 require_once __DIR__ . '/../models/Visiteur.php';
 require_once __DIR__ . '/../models/Visite.php';
 
+/**
+ * Gère l'inscription, l'espace personnel et la mise à jour du profil des praticiens.
+ */
 class PracticienController {
     public function register() {
         $error = null;

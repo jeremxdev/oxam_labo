@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Formulaire de consultation et de modification du profil praticien.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="form-card">
     <h1>Mon profil</h1>
     <p class="subtitle">Modifiez vos informations personnelles et votre mot de passe</p>

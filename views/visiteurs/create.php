@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Formulaire de création d'un visiteur et de son affectation régionale.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="form-card">
     <h1>Créer un profil Visiteur</h1>
     <?php if (isset($error)): ?>

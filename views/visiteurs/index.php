@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Tableau de consultation des visiteurs et de leurs coordonnées.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="header-action">
     <h1>Flotte des Visiteurs Médicaux</h1>
     <a href="index.php?action=visiteur_create" class="btn-primary">+ Nouveau Visiteur</a>

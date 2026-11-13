@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Formulaire d'inscription d'un visiteur avec son affectation régionale.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="auth-card">
     <h2>Créer un Profil Utilisateur</h2>
     <p class="subtitle">Inscrivez-vous pour accéder au portail de suivi des visites</p>

@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Espace praticien : affiche le profil du compte et les visites qui lui sont associées.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="header-action">
     <h1>Espace Praticien</h1>
     <a href="index.php?action=practicien_profil" class="btn-primary">Modifier mon profil</a>

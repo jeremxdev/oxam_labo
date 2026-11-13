@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Tableau récapitulatif des comptes du personnel, de leurs rôles et régions.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="header-action">
     <h1>Gestion de la Flotte & du Personnel (RH)</h1>
     <a href="index.php?action=user_create" class="btn-primary">+ Créer un profil</a>

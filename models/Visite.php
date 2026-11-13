@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
+/**
+ * Gère les rapports de visite et les données associées (praticiens, médicaments, échantillons).
+ */
 class Visite {
     private $db;
 

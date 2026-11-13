@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Liste les activités complémentaires et leurs organisateurs.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="header-action">
     <h1>Activités Complémentaires (AC)</h1>
     <a href="index.php?action=ac_create" class="btn-primary">+ Organiser une AC</a>

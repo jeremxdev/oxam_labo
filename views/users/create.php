@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Formulaire de création d'un compte du personnel et de son affectation géographique.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="form-card">
     <h1>Créer un profil Utilisateur (LBC)</h1>
     <?php if (isset($error)): ?>

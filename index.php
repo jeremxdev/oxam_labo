@@ -1,4 +1,5 @@
 <?php
+// Point d'entrée HTTP : démarre la session et distribue les actions vers leurs contrôleurs.
 session_start();
 
 $action = $_GET['action'] ?? 'visites';

@@ -1,3 +1,4 @@
+<?php // Présente un compte-rendu de visite en page autonome pour impression ou enregistrement PDF. ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

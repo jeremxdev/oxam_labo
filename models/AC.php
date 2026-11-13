@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
+/**
+ * Fournit les opérations de lecture et de création des activités complémentaires.
+ */
 class ACModel {
     private $db;
 

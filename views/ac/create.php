@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layout/header.php'; ?>
+<?php
+// Formulaire de création d'une activité complémentaire.
+include __DIR__ . '/../layout/header.php';
+?>
 <div class="form-card">
     <h1>Organiser une Activité Complémentaire</h1>
     <form action="index.php?action=ac_create" method="POST">

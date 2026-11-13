@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../models/User.php';
 
+/**
+ * Gère la consultation et la création des comptes du personnel du laboratoire.
+ */
 class UserController {
     private $userModel;
 

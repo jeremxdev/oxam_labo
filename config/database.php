@@ -1,4 +1,7 @@
 <?php
+/**
+ * Centralise la création et la configuration de la connexion PDO à MySQL.
+ */
 class Database {
     private static $host = "localhost";
     private static $db_name = "oxam_labo";
