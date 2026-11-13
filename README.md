@@ -54,6 +54,44 @@ Une adresse email ne peut être utilisée que par un seul compte, visiteur ou pr
 
 ## Navigation
 
+Le diagramme ci-dessous résume les parcours accessibles depuis l'interface. Après connexion, les liens proposés dépendent du rôle du compte.
+
+```mermaid
+flowchart TD
+    A[Visiteur non connecté] --> B[Connexion]
+    A --> C[Inscription visiteur]
+    A --> D[Inscription praticien]
+    C --> B
+    D --> B
+
+    B -->|Compte visiteur| V[Liste des visites]
+    B -->|Compte praticien| P[Espace praticien]
+
+    subgraph Parcours visiteur
+        V --> V1[Nouvelle visite]
+        V --> V2[Mon profil]
+        V --> V3[Flotte des visiteurs]
+        V --> V4[Activités complémentaires]
+        V3 --> V5[Créer un visiteur]
+        V4 --> V6[Organiser une activité]
+        V --> V7[Compte rendu imprimable]
+        V1 --> V
+        V2 --> V
+        V5 --> V3
+        V6 --> V4
+    end
+
+    subgraph Parcours praticien
+        P --> P1[Mon profil]
+        P --> P2[Compte rendu de ses visites]
+        P1 --> P
+        P2 --> P
+    end
+
+    V -->|Déconnexion| B
+    P -->|Déconnexion| B
+```
+
 Les pages sont routées par le paramètre `action` de `index.php` :
 
 | Action | Description |
@@ -62,6 +100,7 @@ Les pages sont routées par le paramètre `action` de `index.php` :
 | `register` | Inscription d'un visiteur |
 | `practicien_register` | Inscription d'un compte praticien |
 | `practicien` | Espace praticien (profil et visites reçues) |
+| `practicien_profil` | Consultation et modification du profil praticien |
 | `logout` | Déconnexion |
 | `visites` | Liste des visites du visiteur connecté |
 | `visite_create` | Saisie d'une visite |
@@ -69,6 +108,7 @@ Les pages sont routées par le paramètre `action` de `index.php` :
 | `visite_pdf&id=<id>` | Affichage du compte rendu imprimable (visiteur émetteur ou praticien concerné) |
 | `visiteurs` | Liste des visiteurs |
 | `visiteur_create` | Création d'un visiteur connecté |
+| `visiteur_profil` | Consultation et modification du profil visiteur |
 | `ac` | Liste des activités complémentaires |
 | `ac_create` | Création d'une activité complémentaire |
 
