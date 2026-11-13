@@ -50,14 +50,24 @@ class Visite {
         return $visite;
     }
 
-    public function getPracticiensByPortefeuille($idVis) {
-        $sql = "SELECT p.*, s.nom_spe 
+    public function getAllPracticiens() {
+        $sql = "SELECT p.id_spe, p.Id_pra, p.note_par, p.nom_par, p.prenom_par, p.rue_par, p.codePostal, p.ville_par, s.nom_spe 
                 FROM Practicien p 
-                JOIN Specialite s ON p.id_spe = s.id_spe 
-                JOIN portefeuille pf ON (p.Id_pra = pf.Id_pra AND p.id_spe = pf.id_spe)
-                WHERE pf.id_vis = :id_vis";
+                JOIN Specialite s ON p.id_spe = s.id_spe
+                ORDER BY p.nom_par, p.prenom_par";
+        $stmt = $this->db->query($sql);
+        return $stmt->fetchAll();
+    }
+
+    public function getVisitesByPracticien($idSpe, $idPra) {
+        $sql = "SELECT v.*, vis.nom_vis, vis.prenom_vis, s.nom_spe 
+                FROM Visite v
+                JOIN Visiteur vis ON v.id_vis_1 = vis.id_vis
+                JOIN Specialite s ON v.id_spe = s.id_spe
+                WHERE v.id_spe = :id_spe AND v.Id_pra = :id_pra
+                ORDER BY v.date_vis DESC";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(['id_vis' => $idVis]);
+        $stmt->execute(['id_spe' => $idSpe, 'id_pra' => $idPra]);
         return $stmt->fetchAll();
     }
 

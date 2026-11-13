@@ -12,6 +12,7 @@
             <a href="index.php?action=login" class="btn-primary">Accéder à la connexion</a>
         </div>
     <?php else: ?>
+        <p>Vous êtes praticien ? <a href="index.php?action=practicien_register">Créer un profil praticien</a></p>
         <form action="index.php?action=register" method="POST">
             <div class="form-group">
                 <label for="nom_vis">Nom</label>
@@ -26,6 +27,16 @@
             <div class="form-group">
                 <label for="mail_vis">Adresse Email (Identifiant de connexion)</label>
                 <input type="email" id="mail_vis" name="mail_vis" maxlength="50" required placeholder="jean.dupont@oxam-labo.fr">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe (8 caractères minimum)</label>
+                <input type="password" id="password" name="password" minlength="8" required autocomplete="new-password">
+            </div>
+
+            <div class="form-group">
+                <label for="password_confirm">Confirmer le mot de passe</label>
+                <input type="password" id="password_confirm" name="password_confirm" minlength="8" required autocomplete="new-password">
             </div>
 
             <div class="form-group">

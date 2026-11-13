@@ -8,6 +8,7 @@ CREATE TABLE Visiteur(
    nom_vis VARCHAR(25) ,
    prenom_vis VARCHAR(20) ,
    mail_vis VARCHAR(50) ,
+   mot_de_passe_vis VARCHAR(255) NOT NULL DEFAULT '' ,
    adresse_vis VARCHAR(100) ,
    PRIMARY KEY(id_vis)
 ) ENGINE=InnoDB;
@@ -43,6 +44,8 @@ CREATE TABLE Practicien(
    note_par VARCHAR(50),
    nom_par VARCHAR(50),
    prenom_par VARCHAR(50),
+   mail_par VARCHAR(50) ,
+   mot_de_passe_par VARCHAR(255) ,
    rue_par VARCHAR(50),
    codePostal INT,
    ville_par VARCHAR(50),
@@ -131,19 +134,33 @@ CREATE TABLE portefeuille(
 -- Données initiales
 INSERT INTO Region (reg_code) VALUES ('OUEST'), ('IDF-CENTRE'), ('SUD');
 
-INSERT INTO Visiteur (telephone_vis, nom_vis, prenom_vis, mail_vis, adresse_vis) VALUES
-(612345678, 'Dupont', 'Jean', 'jean.dupont@oxam-labo.fr', '12 Rue des Fleurs, Cholet'),
-(698765432, 'Martin', 'Sophie', 'sophie.martin@oxam-labo.fr', '45 Avenue de la République, Paris');
+-- Mot de passe de démonstration des comptes ci-dessous : oxam2025 (haché en bcrypt)
+INSERT INTO Visiteur (telephone_vis, nom_vis, prenom_vis, mail_vis, mot_de_passe_vis, adresse_vis) VALUES
+(612345678, 'Dupont', 'Jean', 'jean.dupont@oxam-labo.fr', '$2y$12$CX/lQSqAG0fRghkt7Jzd7./HKdJynBW1k5zTi6kth9qm6W/.S/jgW', '12 Rue des Fleurs, Cholet'),
+(698765432, 'Martin', 'Sophie', 'sophie.martin@oxam-labo.fr', '$2y$12$CX/lQSqAG0fRghkt7Jzd7./HKdJynBW1k5zTi6kth9qm6W/.S/jgW', '45 Avenue de la République, Paris');
 
 INSERT INTO Travailler (id_vis, reg_code, dateaffect) VALUES
 (1, 'OUEST', '2025-01-01'),
 (2, 'IDF-CENTRE', '2025-01-01');
 
-INSERT INTO Specialite (nom_spe) VALUES ('Cardiologie'), ('Médecine Générale');
+INSERT INTO Specialite (nom_spe) VALUES
+('Cardiologie'),
+('Médecine Générale'),
+('Dermatologie'),
+('Endocrinologie'),
+('Gastro-entérologie'),
+('Gynécologie'),
+('Neurologie'),
+('Oncologie'),
+('Ophtalmologie'),
+('Pédiatrie'),
+('Pneumologie'),
+('Rhumatologie');
 
-INSERT INTO Practicien (id_spe, note_par, nom_par, prenom_par, rue_par, codePostal, ville_par, longitude_par, latitude) VALUES
-(1, 'Très réceptif', 'Bernard', 'Luc', '15 Rue de la Paix', 49300, 'Cholet', '-0.88', '47.06'),
-(2, 'À relancer', 'Moreau', 'Claire', '8 Place du Ralliement', 49000, 'Angers', '-0.55', '47.47');
+-- Email et mot de passe de démonstration des praticiens ci-dessous : oxam2025 (haché en bcrypt)
+INSERT INTO Practicien (id_spe, note_par, nom_par, prenom_par, mail_par, mot_de_passe_par, rue_par, codePostal, ville_par, longitude_par, latitude) VALUES
+(1, 'Très réceptif', 'Bernard', 'Luc', 'luc.bernard@oxam-labo.fr', '$2y$12$CX/lQSqAG0fRghkt7Jzd7./HKdJynBW1k5zTi6kth9qm6W/.S/jgW', '15 Rue de la Paix', 49300, 'Cholet', '-0.88', '47.06'),
+(2, 'À relancer', 'Moreau', 'Claire', 'claire.moreau@oxam-labo.fr', '$2y$12$CX/lQSqAG0fRghkt7Jzd7./HKdJynBW1k5zTi6kth9qm6W/.S/jgW', '8 Place du Ralliement', 49000, 'Angers', '-0.55', '47.47');
 
 INSERT INTO portefeuille (id_vis, id_spe, Id_pra) VALUES
 (1, 1, 1),

@@ -3,7 +3,7 @@
     <h1>Saisie d'un Rapport de Visite</h1>
     <form action="index.php?action=visite_create" method="POST" id="visitForm">
         <div class="form-group">
-            <label for="practicien">Practicien Visité (Portefeuille)</label>
+            <label for="practicien">Praticien visité</label>
             <select name="practicien" id="practicien" required>
                 <option value="">-- Choisir un praticien --</option>
                 <?php foreach ($practiciens as $p): ?>

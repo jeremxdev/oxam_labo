@@ -12,6 +12,18 @@ switch ($action) {
         require_once __DIR__ . '/controllers/AuthController.php';
         (new AuthController())->register();
         break;
+    case 'practicien_register':
+        require_once __DIR__ . '/controllers/PracticienController.php';
+        (new PracticienController())->register();
+        break;
+    case 'practicien':
+        require_once __DIR__ . '/controllers/PracticienController.php';
+        (new PracticienController())->index();
+        break;
+    case 'practicien_profil':
+        require_once __DIR__ . '/controllers/PracticienController.php';
+        (new PracticienController())->profil();
+        break;
     case 'logout':
         require_once __DIR__ . '/controllers/AuthController.php';
         (new AuthController())->logout();
@@ -39,6 +51,10 @@ switch ($action) {
     case 'visiteur_create':
         require_once __DIR__ . '/controllers/VisiteurController.php';
         (new VisiteurController())->create();
+        break;
+    case 'visiteur_profil':
+        require_once __DIR__ . '/controllers/VisiteurController.php';
+        (new VisiteurController())->profil();
         break;
     case 'ac':
         require_once __DIR__ . '/controllers/AcController.php';

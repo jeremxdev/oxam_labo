@@ -10,6 +10,10 @@ class AcController {
             header("Location: index.php?action=login");
             exit();
         }
+        if (($_SESSION['user']['role'] ?? 'visiteur') !== 'visiteur') {
+            header("Location: index.php?action=practicien");
+            exit();
+        }
         $this->acModel = new ACModel();
     }
 
