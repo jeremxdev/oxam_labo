@@ -75,6 +75,36 @@ class Visite {
         return $stmt->fetchAll();
     }
 
+    public function getVisitesRefuseesByVisiteur($idVis) {
+        $sql = "SELECT v.id_vis, v.date_vis, v.motif_vis, p.nom_par, p.prenom_par, s.nom_spe
+                FROM Visite v
+                JOIN Practicien p ON (v.Id_pra = p.Id_pra AND v.id_spe = p.id_spe)
+                JOIN Specialite s ON p.id_spe = s.id_spe
+                WHERE v.id_vis_1 = :id_vis AND v.statut_vis = 'refusee'
+                ORDER BY v.date_vis DESC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id_vis' => $idVis]);
+        return $stmt->fetchAll();
+    }
+
+    public function setStatutVisite($idVisite, $idSpe, $idPra, $statut) {
+        if (!in_array($statut, ['acceptee', 'refusee'], true)) {
+            return false;
+        }
+        $stmt = $this->db->prepare("UPDATE Visite
+                                    SET statut_vis = :statut
+                                    WHERE id_vis = :id_vis
+                                      AND id_spe = :id_spe
+                                      AND Id_pra = :id_pra
+                                      AND statut_vis = 'en_attente'");
+        return $stmt->execute([
+            'statut' => $statut,
+            'id_vis' => $idVisite,
+            'id_spe' => $idSpe,
+            'id_pra' => $idPra
+        ]) && $stmt->rowCount() > 0;
+    }
+
     public function getMedicaments() {
         return $this->db->query("SELECT * FROM Medicament ORDER BY nomCommercial_med")->fetchAll();
     }

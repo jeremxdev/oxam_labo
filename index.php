@@ -79,6 +79,10 @@ switch ($action) {
         require_once __DIR__ . '/controllers/VisiteController.php';
         (new VisiteController())->delete();
         break;
+    case 'visite_statut':
+        require_once __DIR__ . '/controllers/VisiteController.php';
+        (new VisiteController())->setStatut();
+        break;
     case 'visite_pdf':
         require_once __DIR__ . '/controllers/VisiteController.php';
         (new VisiteController())->pdf();

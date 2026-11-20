@@ -66,6 +66,30 @@ class VisiteController {
         exit();
     }
 
+    public function setStatut() {
+        if (!isset($_SESSION['user'])) {
+            header("Location: index.php?action=login");
+            exit();
+        }
+        if (($_SESSION['user']['role'] ?? '') !== 'practicien') {
+            $destination = ($_SESSION['user']['role'] ?? '') === 'admin' ? 'admin' : 'visites';
+            header("Location: index.php?action=$destination");
+            exit();
+        }
+
+        $idVisite = (int) ($_POST['id'] ?? 0);
+        $statut = $_POST['statut'] ?? '';
+        $idSpe = (int) $_SESSION['user']['id_spe'];
+        $idPra = (int) $_SESSION['user']['id_pra'];
+
+        if ($this->visiteModel->setStatutVisite($idVisite, $idSpe, $idPra, $statut)) {
+            header("Location: index.php?action=practicien&msg=" . $statut);
+        } else {
+            header("Location: index.php?action=practicien&err=statut");
+        }
+        exit();
+    }
+
     public function pdf() {
         $id = $_GET['id'] ?? 0;
         $visite = $this->visiteModel->getVisiteById($id);

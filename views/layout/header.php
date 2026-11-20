@@ -17,6 +17,8 @@
                     <?php if ($role === 'admin'): ?>
                         <span class="user-info"><strong>Administrateur</strong></span>
                         <a href="index.php?action=admin" class="btn-link">Gestion des comptes</a>
+                        <a href="index.php?action=visiteurs" class="btn-link">Visiteurs</a>
+                        <a href="index.php?action=visiteur_create" class="btn-primary-sm">+ Nouveau Visiteur</a>
                     <?php elseif ($role === 'practicien'): ?>
                         <span class="user-info">
                             <strong>Dr. <?= htmlspecialchars($_SESSION['user']['prenom'] . ' ' . $_SESSION['user']['nom']) ?></strong> 
@@ -32,7 +34,6 @@
                         <a href="index.php?action=visites" class="btn-link">Visites</a>
                         <a href="index.php?action=visiteur_profil" class="btn-link">Mon Profil</a>
                         <a href="index.php?action=ac" class="btn-link">Activités Comp. (AC)</a>
-                        <a href="index.php?action=visiteurs" class="btn-link">Flotte Visiteurs</a>
                         <a href="index.php?action=visite_create" class="btn-primary-sm">+ Nouvelle Visite</a>
                     <?php endif; ?>
                     <a href="index.php?action=logout" class="btn-logout">Déconnexion</a>

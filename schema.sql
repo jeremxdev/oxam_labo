@@ -74,6 +74,7 @@ CREATE TABLE Visite(
    date_vis DATE,
    motif_vis VARCHAR(15) ,
    bilan_vis VARCHAR(200) ,
+   statut_vis ENUM('en_attente', 'acceptee', 'refusee') NOT NULL DEFAULT 'en_attente',
    id_spe INT NOT NULL,
    Id_pra INT NOT NULL,
    id_vis_1 INT NOT NULL,

@@ -57,6 +57,7 @@ include __DIR__ . '/../layout/header.php';
         </div>
 
         <button type="submit" class="btn-primary">Créer le Visiteur</button>
+        <a href="index.php?action=visiteurs" class="btn-secondary" style="margin-left: 0.5rem;">Retour à la liste</a>
     </form>
 </div>
 <?php include __DIR__ . '/../layout/footer.php'; ?>

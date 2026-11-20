@@ -11,6 +11,19 @@ include __DIR__ . '/../layout/header.php';
     <?php if (isset($success)): ?>
         <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
     <?php endif; ?>
+    <?php if (!empty($visitesRefusees)): ?>
+        <div class="alert alert-danger">
+            <strong>Visite(s) annulée(s) :</strong> le praticien n'est pas disponible, les visites suivantes n'auront pas lieu :
+            <ul>
+                <?php foreach ($visitesRefusees as $visite): ?>
+                    <li>
+                        <?= htmlspecialchars($visite['date_vis']) ?> — Dr. <?= htmlspecialchars($visite['prenom_par'] . ' ' . $visite['nom_par']) ?>
+                        (<?= htmlspecialchars($visite['nom_spe']) ?>)
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 
     <form action="index.php?action=visiteur_profil" method="POST">
         <div class="form-group">

@@ -2,9 +2,10 @@
 require_once __DIR__ . '/../models/Visiteur.php';
 require_once __DIR__ . '/../models/Practicien.php';
 require_once __DIR__ . '/../models/Admin.php';
+require_once __DIR__ . '/../models/Visite.php';
 
 /**
- * Gère la liste des visiteurs, leur création et la modification de leur profil.
+ * Gère la liste et la création des visiteurs (administrateur) ainsi que le profil du visiteur connecté.
  */
 class VisiteurController {
     private $visiteurModel;
@@ -14,20 +15,34 @@ class VisiteurController {
             header("Location: index.php?action=login");
             exit();
         }
+        $this->visiteurModel = new Visiteur();
+    }
+
+    private function requireAdmin() {
+        if (($_SESSION['user']['role'] ?? '') !== 'admin') {
+            $role = $_SESSION['user']['role'] ?? '';
+            $destination = $role === 'visiteur' ? 'visites' : ($role === 'practicien' ? 'practicien' : 'login');
+            header("Location: index.php?action=$destination");
+            exit();
+        }
+    }
+
+    private function requireVisiteur() {
         if (($_SESSION['user']['role'] ?? 'visiteur') !== 'visiteur') {
             $destination = ($_SESSION['user']['role'] ?? '') === 'admin' ? 'admin' : 'practicien';
             header("Location: index.php?action=$destination");
             exit();
         }
-        $this->visiteurModel = new Visiteur();
     }
 
     public function index() {
+        $this->requireAdmin();
         $visiteurs = $this->visiteurModel->getAllVisiteurs();
         require __DIR__ . '/../views/visiteurs/index.php';
     }
 
     public function create() {
+        $this->requireAdmin();
         $error = null;
         $success = null;
 
@@ -60,6 +75,7 @@ class VisiteurController {
     }
 
     public function profil() {
+        $this->requireVisiteur();
         $error = null;
         $success = null;
         $idVis = (int) $_SESSION['user']['id_vis'];
@@ -114,6 +130,7 @@ class VisiteurController {
             exit();
         }
         $regions = $this->visiteurModel->getAllRegions();
+        $visitesRefusees = (new Visite())->getVisitesRefuseesByVisiteur($idVis);
         require __DIR__ . '/../views/visiteurs/profil.php';
     }
 }

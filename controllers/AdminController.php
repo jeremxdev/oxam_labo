@@ -59,7 +59,8 @@ class AdminController {
             $errors = [
                 'last_admin' => "Le dernier compte administrateur actif ne peut pas être désactivé ou supprimé.",
                 'history' => "Ce compte est lié à des visites ou activités et ne peut pas être supprimé. Désactivez-le plutôt.",
-                'not_found' => "Le compte sélectionné est introuvable."
+                'not_found' => "Le compte sélectionné est introuvable.",
+                'account_readonly' => "Les informations personnelles d'un visiteur ou d'un praticien ne peuvent être modifiées que par lui-même."
             ];
             $error = $errors[$_GET['error'] ?? ''] ?? null;
         }
@@ -81,6 +82,10 @@ class AdminController {
             header("Location: index.php?action=admin&error=not_found");
             exit();
         }
+        if ($type !== 'admin') {
+            header("Location: index.php?action=admin&error=account_readonly");
+            exit();
+        }
 
         $account = $adminModel->getAccountForEdit($type, $id, $idSpe);
         if (!$account) {
@@ -90,7 +95,6 @@ class AdminController {
 
         $error = null;
         $success = null;
-        $regions = $type === 'visiteur' ? (new Visiteur())->getAllRegions() : [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = $this->validateCsrfToken();
@@ -109,7 +113,7 @@ class AdminController {
                         $success = "Le mot de passe a été réinitialisé.";
                     }
                 } elseif ($operation === 'save') {
-                    $error = $this->saveAccount($adminModel, $type, $id, $idSpe, $regions);
+                    $error = $this->saveAccount($adminModel, $type, $id, $idSpe);
                     if ($error === null) {
                         $this->redirectWithMessage('account_updated');
                     }
@@ -124,12 +128,12 @@ class AdminController {
         require __DIR__ . '/../views/admin/edit.php';
     }
 
-    private function saveAccount($adminModel, $type, $id, $idSpe, $regions) {
+    private function saveAccount($adminModel, $type, $id, $idSpe) {
         $email = $this->postText('email');
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return "Veuillez saisir une adresse email valide.";
         }
-        $maxEmail = $type === 'admin' ? 254 : 50;
+        $maxEmail = 254;
         if (mb_strlen($email) > $maxEmail) {
             return "L'adresse email dépasse la longueur autorisée.";
         }
@@ -137,48 +141,13 @@ class AdminController {
             return "Cette adresse email est déjà utilisée par un autre compte.";
         }
 
-        if ($type === 'admin') {
-            return $adminModel->updateAdminEmail($id, $email)
-                ? null
-                : "Le compte administrateur n'a pas pu être modifié.";
+        if ($type !== 'admin') {
+            return "Les informations de ce compte ne peuvent pas être modifiées ici.";
         }
 
-        if ($type === 'visiteur') {
-            $nom = $this->postText('nom');
-            $prenom = $this->postText('prenom');
-            $telephone = $this->postText('telephone');
-            $adresse = $this->postText('adresse');
-            $regCode = $this->postText('reg_code');
-            $regionCodes = array_column($regions, 'reg_code');
-            if ($nom === '' || $prenom === '' || $telephone === '' || $adresse === '' ||
-                !in_array($regCode, $regionCodes, true)) {
-                return "Tous les champs sont obligatoires et la région doit exister.";
-            }
-            if (mb_strlen($nom) > 25 || mb_strlen($prenom) > 20 || mb_strlen($telephone) > 20 ||
-                mb_strlen($adresse) > 100) {
-                return "Certains champs dépassent la longueur autorisée.";
-            }
-            $updated = (new Visiteur())->updateVisiteur($id, $nom, $prenom, $email, $telephone, $adresse, $regCode);
-            return $updated ? null : "Le compte visiteur n'a pas pu être modifié.";
-        }
-
-        $nom = $this->postText('nom');
-        $prenom = $this->postText('prenom');
-        $adresse = $this->postText('adresse');
-        $codePostal = $this->postText('code_postal');
-        $ville = $this->postText('ville');
-        if ($nom === '' || $prenom === '' || $adresse === '' || $ville === '' ||
-            !preg_match('/^\d{1,5}$/', $codePostal)) {
-            return "Tous les champs sont obligatoires et le code postal doit contenir de 1 à 5 chiffres.";
-        }
-        if (mb_strlen($nom) > 50 || mb_strlen($prenom) > 50 || mb_strlen($adresse) > 50 ||
-            mb_strlen($ville) > 50) {
-            return "Certains champs dépassent la longueur autorisée.";
-        }
-        $updated = (new Practicien())->updatePracticien(
-            $id, $nom, $prenom, $email, $adresse, $codePostal, $ville
-        );
-        return $updated ? null : "Le compte praticien n'a pas pu être modifié.";
+        return $adminModel->updateAdminEmail($id, $email)
+            ? null
+            : "Le compte administrateur n'a pas pu être modifié.";
     }
 
     private function requireAdmin() {

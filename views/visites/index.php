@@ -1,5 +1,9 @@
 <?php
 // Liste les rapports de visite du visiteur connecté et propose leur recherche et leurs actions.
+$statutsVisite = ['en_attente' => 'En attente', 'acceptee' => 'Acceptée', 'refusee' => 'Refusée'];
+$visitesRefusees = array_filter($visites, function ($v) {
+    return ($v['statut_vis'] ?? 'en_attente') === 'refusee';
+});
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="header-action">
@@ -12,6 +16,11 @@ include __DIR__ . '/../layout/header.php';
 <?php endif; ?>
 <?php if (isset($_GET['msg']) && $_GET['msg'] === 'deleted'): ?>
     <div class="alert alert-success">Visite supprimée avec succès.</div>
+<?php endif; ?>
+<?php if (!empty($visitesRefusees)): ?>
+    <div class="alert alert-danger">
+        Une ou plusieurs visites ont été refusées par le praticien : elles n'auront pas lieu. Le détail est indiqué sur votre profil.
+    </div>
 <?php endif; ?>
 
 <div class="search-box">
@@ -26,6 +35,7 @@ include __DIR__ . '/../layout/header.php';
                 <th>Practicien</th>
                 <th>Spécialité</th>
                 <th>Motif</th>
+                <th>Statut</th>
                 <th>Bilan / Compte Rendu</th>
                 <th>Actions</th>
             </tr>
@@ -37,6 +47,7 @@ include __DIR__ . '/../layout/header.php';
                     <td><strong><?= htmlspecialchars($v['nom_par'] . ' ' . $v['prenom_par']) ?></strong></td>
                     <td><span class="badge"><?= htmlspecialchars($v['nom_spe']) ?></span></td>
                     <td><?= htmlspecialchars($v['motif_vis']) ?></td>
+                    <td><span class="badge badge-<?= htmlspecialchars($v['statut_vis'] ?? 'en_attente') ?>"><?= $statutsVisite[$v['statut_vis'] ?? 'en_attente'] ?></span></td>
                     <td><?= htmlspecialchars($v['bilan_vis'] ?? 'Non rédigé') ?></td>
                     <td class="actions-cell">
                         <a href="index.php?action=visite_pdf&id=<?= $v['id_vis'] ?>" target="_blank" class="btn-pdf">PDF</a>

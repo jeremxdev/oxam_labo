@@ -1,11 +1,21 @@
 <?php
 // Espace praticien : affiche le profil du compte et les visites qui lui sont associées.
+$statutsVisite = ['en_attente' => 'En attente', 'acceptee' => 'Acceptée', 'refusee' => 'Refusée'];
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="header-action">
     <h1>Espace Praticien</h1>
     <a href="index.php?action=practicien_profil" class="btn-primary">Modifier mon profil</a>
 </div>
+
+<?php if (isset($_GET['msg']) && ($_GET['msg'] === 'acceptee' || $_GET['msg'] === 'refusee')): ?>
+    <div class="alert alert-success">
+        Visite <?= $_GET['msg'] === 'acceptee' ? 'acceptée' : 'refusée' ?>. Le visiteur est informé sur son profil.
+    </div>
+<?php endif; ?>
+<?php if (isset($_GET['err']) && $_GET['err'] === 'statut'): ?>
+    <div class="alert alert-danger">Cette visite ne peut plus être acceptée ou refusée.</div>
+<?php endif; ?>
 
 <div class="form-card">
     <h2>Mon profil</h2>
@@ -50,6 +60,7 @@ include __DIR__ . '/../layout/header.php';
                     <th>Visiteur</th>
                     <th>Spécialité</th>
                     <th>Motif</th>
+                    <th>Statut</th>
                     <th>Bilan / Compte Rendu</th>
                     <th>Actions</th>
                 </tr>
@@ -61,9 +72,22 @@ include __DIR__ . '/../layout/header.php';
                         <td><strong><?= htmlspecialchars($v['nom_vis'] . ' ' . $v['prenom_vis']) ?></strong></td>
                         <td><span class="badge"><?= htmlspecialchars($v['nom_spe']) ?></span></td>
                         <td><?= htmlspecialchars($v['motif_vis']) ?></td>
+                        <td><span class="badge badge-<?= htmlspecialchars($v['statut_vis'] ?? 'en_attente') ?>"><?= $statutsVisite[$v['statut_vis'] ?? 'en_attente'] ?></span></td>
                         <td><?= htmlspecialchars($v['bilan_vis'] ?? 'Non rédigé') ?></td>
                         <td class="actions-cell">
                             <a href="index.php?action=visite_pdf&id=<?= $v['id_vis'] ?>" target="_blank" class="btn-pdf">PDF</a>
+                            <?php if (($v['statut_vis'] ?? 'en_attente') === 'en_attente'): ?>
+                                <form method="POST" action="index.php?action=visite_statut" class="inline-form">
+                                    <input type="hidden" name="id" value="<?= $v['id_vis'] ?>">
+                                    <input type="hidden" name="statut" value="acceptee">
+                                    <button type="submit" class="btn-accept">Accepter</button>
+                                </form>
+                                <form method="POST" action="index.php?action=visite_statut" class="inline-form">
+                                    <input type="hidden" name="id" value="<?= $v['id_vis'] ?>">
+                                    <input type="hidden" name="statut" value="refusee">
+                                    <button type="submit" class="btn-refuse" onclick="return confirm('Refuser cette visite ? Le visiteur sera informé sur son profil.')">Refuser</button>
+                                </form>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

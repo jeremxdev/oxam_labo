@@ -72,7 +72,9 @@ $approvalLabels = ['en_attente' => 'En attente', 'approuve' => 'Approuvé', 'ref
                         <td><?= htmlspecialchars($account['email'] ?? '') ?></td>
                         <td><?= htmlspecialchars($statusText) ?></td>
                         <td>
-                            <a class="btn-secondary" href="index.php?action=admin_edit&amp;type=<?= urlencode($type) ?>&amp;id=<?= $id ?>&amp;id_spe=<?= $idSpe ?>">Modifier</a>
+                            <?php if ($type === 'admin'): ?>
+                                <a class="btn-secondary" href="index.php?action=admin_edit&amp;type=<?= urlencode($type) ?>&amp;id=<?= $id ?>&amp;id_spe=<?= $idSpe ?>">Modifier</a>
+                            <?php endif; ?>
 
                             <?php if ($type === 'practicien'): ?>
                                 <form action="index.php?action=admin" method="POST" style="display:inline-block;">
