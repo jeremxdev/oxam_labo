@@ -6,6 +6,7 @@ Application web PHP/MySQL de suivi des visites de visiteurs médicaux, de leur p
 
 - Création d'un profil visiteur et affectation à une région.
 - Inscription d'un compte praticien avec email, mot de passe et spécialité (choix ou ajout).
+- Saisie de la région du praticien à l'inscription, avec ajout automatique si elle est nouvelle.
 - Connexion et déconnexion, pour les visiteurs **et** les praticiens (un seul formulaire, email unique sur toute l'application).
 - Espace praticien : profil personnel et liste des visites dont il est le praticien.
 - Consultation de la flotte des visiteurs.
@@ -48,7 +49,7 @@ Le script d'initialisation ajoute notamment les comptes de démonstration suivan
 
 Pour créer un autre profil visiteur, utilisez **Créer un compte**, renseignez les coordonnées, choisissez une région et définissez un mot de passe d'au moins 8 caractères. Une inscription réussie ajoute le visiteur dans `Visiteur` (avec son mot de passe haché) et son affectation dans `Travailler`.
 
-Un praticien peut utiliser **Créer un profil praticien** depuis la page de connexion. Il choisit une spécialité existante ou en ajoute une, renseigne son identité, son adresse, **une adresse email et un mot de passe** (8 caractères minimum). Son profil est ensuite disponible dans la liste des praticiens lors de la saisie d'une visite, et il peut se connecter à **l'espace praticien** (`index.php?action=practicien`) pour consulter son profil et les visites dont il est le praticien.
+Un praticien peut utiliser **Créer un profil praticien** depuis la page de connexion. Il choisit une spécialité existante ou en ajoute une, indique sa région (une suggestion peut être sélectionnée ou une nouvelle région saisie), puis renseigne son identité, son adresse, **une adresse email et un mot de passe** (8 caractères minimum). Une région qui n'existe pas encore est créée automatiquement. Son profil est ensuite disponible dans la liste des praticiens lors de la saisie d'une visite, et il peut se connecter à **l'espace praticien** (`index.php?action=practicien`) pour consulter son profil, sa région et les visites dont il est le praticien.
 
 Une adresse email ne peut être utilisée que par un seul compte, visiteur ou praticien : l'inscription refuse les doublons même entre les deux tables. Les comptes créés avant la migration `003` (praticiens déjà présents en base) reçoivent un email provisoire `prenom.nom@oxam-labo.fr` et le mot de passe `oxam2025`, à corriger après la première connexion.
 

@@ -17,13 +17,22 @@ function check($label, $cond) {
 }
 
 $email = 'test.pra@oxam-labo.fr';
+$regionTest = 'TEST-' . bin2hex(random_bytes(5));
 $specialite = $db->query("SELECT id_spe FROM Specialite ORDER BY id_spe LIMIT 1")->fetchColumn();
 
 // Nettoyage préalable
-$db->exec("DELETE FROM Practicien WHERE mail_par = '$email'");
+$stmtAncien = $db->prepare("SELECT id_spe, Id_pra FROM Practicien WHERE mail_par = :email");
+$stmtAncien->execute(['email' => $email]);
+foreach ($stmtAncien->fetchAll() as $ancien) {
+    $stmtAffectation = $db->prepare("DELETE FROM affecter WHERE id_spe = :id_spe AND Id_pra = :id_pra");
+    $stmtAffectation->execute(['id_spe' => $ancien['id_spe'], 'id_pra' => $ancien['Id_pra']]);
+}
+$stmtAncien = $db->prepare("DELETE FROM Practicien WHERE mail_par = :email");
+$stmtAncien->execute(['email' => $email]);
 
 // 1. Création avec email + mot de passe
-check('Création du compte praticien', $pra->createPracticien((int) $specialite, null, 'TestPra', 'Essai', '1 Rue Test', '49000', 'Angers', $email, 'secretpra123'));
+check('Création du compte praticien avec région', $pra->createPracticien((int) $specialite, null, 'TestPra', 'Essai', '1 Rue Test', '49000', 'Angers', $email, 'secretpra123', $regionTest));
+check('La nouvelle région est créée en base', (bool) $db->query("SELECT reg_code FROM Region WHERE reg_code = " . $db->quote($regionTest))->fetchColumn());
 
 // 2. Récupération + hash
 $user = $pra->findByMail($email);
@@ -49,6 +58,7 @@ check('Compte Gasnier existant connectable avec "oxam2025"', $gasnier && $pra->v
 $profil = $pra->getPracticienById((int) $user['id_spe'], (int) $user['Id_pra']);
 check('Profil trouve pour l espace', (bool) $profil);
 check('Le profil n expose pas le hash', is_array($profil) && !array_key_exists('mot_de_passe_par', $profil));
+check('La région est associée au praticien', $profil && $profil['reg_code'] === $regionTest);
 $visitesModel = new Visite();
 $visitesPra = $visitesModel->getVisitesByPracticien((int) $user['id_spe'], (int) $user['Id_pra']);
 check('Visites du praticien lues sans erreur', is_array($visitesPra));
@@ -62,8 +72,12 @@ check('Hash exclu de getAllPracticiens', !in_array('mot_de_passe_par', $colsPra,
 
 // Nettoyage
 if ($user) {
+    $stmtAffectation = $db->prepare("DELETE FROM affecter WHERE id_spe = :id_spe AND Id_pra = :id_pra");
+    $stmtAffectation->execute(['id_spe' => $user['id_spe'], 'id_pra' => $user['Id_pra']]);
     $db->exec("DELETE FROM Practicien WHERE Id_pra = " . (int) $user['Id_pra']);
 }
+$stmtRegion = $db->prepare("DELETE FROM Region WHERE reg_code = :reg_code");
+$stmtRegion->execute(['reg_code' => $regionTest]);
 check('Donnees de test nettoyees', !$pra->findByMail($email));
 
 echo PHP_EOL . ($ok ? 'TOUS LES TESTS PASSENT' : 'DES TESTS ONT ECHOUE') . PHP_EOL;

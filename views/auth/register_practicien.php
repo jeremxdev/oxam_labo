@@ -1,5 +1,5 @@
 <?php
-// Formulaire d'inscription d'un praticien et de sélection ou création de sa spécialité.
+// Formulaire d'inscription d'un praticien et de sélection ou création de sa spécialité et région.
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="auth-card">
@@ -69,6 +69,17 @@ include __DIR__ . '/../layout/header.php';
             <div class="form-group">
                 <label for="ville_par">Ville</label>
                 <input type="text" id="ville_par" name="ville_par" maxlength="50" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reg_code">Région</label>
+                <input type="text" id="reg_code" name="reg_code" list="regions" maxlength="50" required placeholder="Ex. : OUEST">
+                <datalist id="regions">
+                    <?php foreach ($regions as $region): ?>
+                        <option value="<?= htmlspecialchars($region['reg_code']) ?>">
+                    <?php endforeach; ?>
+                </datalist>
+                <small>Choisissez une région existante ou saisissez-en une nouvelle.</small>
             </div>
 
             <button type="submit" class="btn-primary">Créer mon compte praticien</button>

@@ -22,15 +22,16 @@ class PracticienController {
             $rue = trim($_POST['rue_par'] ?? '');
             $codePostal = trim($_POST['codePostal'] ?? '');
             $ville = trim($_POST['ville_par'] ?? '');
+            $regCode = trim($_POST['reg_code'] ?? '');
             $idSpe = ($_POST['id_spe'] ?? '') === '' ? null : filter_var($_POST['id_spe'], FILTER_VALIDATE_INT);
             $nouvelleSpecialite = trim($_POST['nouvelle_specialite'] ?? '');
             $aChoisiSpecialite = $idSpe !== null && $idSpe !== false && $idSpe > 0;
             $specialiteValide = ($aChoisiSpecialite && $nouvelleSpecialite === '') ||
                 ($idSpe === null && $nouvelleSpecialite !== '');
 
-            if ($nom === '' || $prenom === '' || $rue === '' || $ville === '' ||
+            if ($nom === '' || $prenom === '' || $rue === '' || $ville === '' || $regCode === '' ||
                 !preg_match('/^\d{1,5}$/', $codePostal) || !$specialiteValide) {
-                $error = "Veuillez vérifier les champs, le code postal et le choix de spécialité.";
+                $error = "Veuillez vérifier les champs, le code postal, la région et le choix de spécialité.";
             }
 
             if ($error === null && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -53,11 +54,12 @@ class PracticienController {
             if ($error === null && (
                 mb_strlen($nom) > 50 || mb_strlen($prenom) > 50 ||
                 mb_strlen($rue) > 50 || mb_strlen($ville) > 50 ||
-                mb_strlen($nouvelleSpecialite) > 50 || mb_strlen($email) > 50)) {
+                mb_strlen($nouvelleSpecialite) > 50 || mb_strlen($email) > 50 ||
+                mb_strlen($regCode) > 50)) {
                 $error = "Les champs texte ne doivent pas dépasser 50 caractères.";
             }
 
-            if ($error === null && $practicienModel->createPracticien($aChoisiSpecialite ? $idSpe : null, $nouvelleSpecialite, $nom, $prenom, $rue, $codePostal, $ville, $email, $password)) {
+            if ($error === null && $practicienModel->createPracticien($aChoisiSpecialite ? $idSpe : null, $nouvelleSpecialite, $nom, $prenom, $rue, $codePostal, $ville, $email, $password, $regCode)) {
                 $success = "Votre compte praticien a été créé. Vous pouvez maintenant vous connecter avec votre adresse email ($email) et votre mot de passe.";
             } elseif ($error === null) {
                 $error = "Une erreur est survenue lors de la création du compte praticien.";
@@ -65,6 +67,7 @@ class PracticienController {
         }
 
         $specialites = $practicienModel->getAllSpecialites();
+        $regions = $practicienModel->getAllRegions();
         require __DIR__ . '/../views/auth/register_practicien.php';
     }
 

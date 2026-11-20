@@ -15,6 +15,13 @@ class Practicien {
         return $this->db->query("SELECT id_spe, nom_spe FROM Specialite ORDER BY nom_spe")->fetchAll();
     }
 
+    /**
+     * Récupère les régions existantes pour les proposer lors de l'inscription d'un praticien.
+     */
+    public function getAllRegions() {
+        return $this->db->query("SELECT reg_code FROM Region ORDER BY reg_code")->fetchAll();
+    }
+
     public function findByMail($email) {
         $stmt = $this->db->prepare("SELECT p.*, s.nom_spe 
                                     FROM Practicien p 
@@ -30,7 +37,8 @@ class Practicien {
     }
 
     public function getPracticienById($idSpe, $idPra) {
-        $stmt = $this->db->prepare("SELECT p.id_spe, p.Id_pra, p.note_par, p.nom_par, p.prenom_par, p.mail_par, p.rue_par, p.codePostal, p.ville_par, s.nom_spe 
+        $stmt = $this->db->prepare("SELECT p.id_spe, p.Id_pra, p.note_par, p.nom_par, p.prenom_par, p.mail_par, p.rue_par, p.codePostal, p.ville_par, s.nom_spe,
+                                    (SELECT a.reg_code FROM affecter a WHERE a.id_spe = p.id_spe AND a.Id_pra = p.Id_pra ORDER BY a.dateArrivee DESC LIMIT 1) AS reg_code
                                     FROM Practicien p 
                                     LEFT JOIN Specialite s ON p.id_spe = s.id_spe 
                                     WHERE p.id_spe = :id_spe AND p.Id_pra = :id_pra 
@@ -67,9 +75,22 @@ class Practicien {
         }
     }
 
-    public function createPracticien($idSpe, $nouvelleSpecialite, $nom, $prenom, $rue, $codePostal, $ville, $email, $password) {
+    public function createPracticien($idSpe, $nouvelleSpecialite, $nom, $prenom, $rue, $codePostal, $ville, $email, $password, $regCode = null) {
         try {
             $this->db->beginTransaction();
+
+            if ($regCode !== null && $regCode !== '') {
+                $stmtRegion = $this->db->prepare("SELECT reg_code FROM Region WHERE reg_code = :reg_code LIMIT 1");
+                $stmtRegion->execute(['reg_code' => $regCode]);
+                $regionExistante = $stmtRegion->fetchColumn();
+
+                if ($regionExistante === false) {
+                    $stmtRegion = $this->db->prepare("INSERT INTO Region (reg_code) VALUES (:reg_code)");
+                    $stmtRegion->execute(['reg_code' => $regCode]);
+                } else {
+                    $regCode = $regionExistante;
+                }
+            }
 
             if ($idSpe === null) {
                 $stmtSpecialite = $this->db->prepare("SELECT id_spe FROM Specialite WHERE nom_spe = :nom LIMIT 1");
@@ -97,6 +118,17 @@ class Practicien {
                 'email' => $email,
                 'password' => password_hash($password, PASSWORD_DEFAULT)
             ]);
+            $idPra = $this->db->lastInsertId();
+
+            if ($regCode !== null && $regCode !== '') {
+                $stmtRegion = $this->db->prepare("INSERT INTO affecter (id_spe, Id_pra, reg_code, dateArrivee) VALUES (:id_spe, :id_pra, :reg_code, CURDATE())");
+                $stmtRegion->execute([
+                    'id_spe' => $idSpe,
+                    'id_pra' => $idPra,
+                    'reg_code' => $regCode
+                ]);
+            }
+
             $this->db->commit();
             return $created;
         } catch (PDOException $e) {

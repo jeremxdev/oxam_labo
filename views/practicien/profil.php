@@ -35,6 +35,11 @@ include __DIR__ . '/../layout/header.php';
         </div>
 
         <div class="form-group">
+            <label>Région</label>
+            <p><?= htmlspecialchars($profil['reg_code'] ?? 'Non renseignée') ?></p>
+        </div>
+
+        <div class="form-group">
             <label for="rue_par">Adresse</label>
             <input type="text" id="rue_par" name="rue_par" maxlength="50" required value="<?= htmlspecialchars($profil['rue_par']) ?>">
         </div>

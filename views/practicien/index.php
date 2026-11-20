@@ -23,6 +23,10 @@ include __DIR__ . '/../layout/header.php';
         <label>Adresse</label>
         <p><?= htmlspecialchars($profil['rue_par'] . ', ' . $profil['codePostal'] . ' ' . $profil['ville_par']) ?></p>
     </div>
+    <div class="form-group">
+        <label>Région</label>
+        <p><?= htmlspecialchars($profil['reg_code'] ?? 'Non renseignée') ?></p>
+    </div>
     <?php if (!empty($profil['note_par'])): ?>
         <div class="form-group">
             <label>Note</label>
