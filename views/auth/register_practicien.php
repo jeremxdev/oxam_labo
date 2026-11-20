@@ -4,7 +4,7 @@ include __DIR__ . '/../layout/header.php';
 ?>
 <div class="auth-card">
     <h2>Créer un compte praticien</h2>
-    <p class="subtitle">Votre profil sera proposé lors de la saisie des visites médicales et vos identifiants vous permettront de vous connecter à l'espace praticien</p>
+    <p class="subtitle">Après votre inscription, un administrateur devra valider votre compte avant que vous puissiez vous connecter.</p>
 
     <?php if (isset($error)): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>

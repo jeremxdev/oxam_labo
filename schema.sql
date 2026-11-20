@@ -10,6 +10,7 @@ CREATE TABLE Visiteur(
    prenom_vis VARCHAR(20) ,
    mail_vis VARCHAR(50) ,
    mot_de_passe_vis VARCHAR(255) NOT NULL DEFAULT '' ,
+   statut_compte ENUM('actif', 'inactif') NOT NULL DEFAULT 'actif',
    adresse_vis VARCHAR(100) ,
    PRIMARY KEY(id_vis)
 ) ENGINE=InnoDB;
@@ -47,6 +48,8 @@ CREATE TABLE Practicien(
    prenom_par VARCHAR(50),
    mail_par VARCHAR(50) ,
    mot_de_passe_par VARCHAR(255) ,
+   statut_validation ENUM('en_attente', 'approuve', 'refuse') NOT NULL DEFAULT 'approuve',
+   statut_compte ENUM('actif', 'inactif') NOT NULL DEFAULT 'actif',
    rue_par VARCHAR(50),
    codePostal INT,
    ville_par VARCHAR(50),
@@ -55,6 +58,15 @@ CREATE TABLE Practicien(
    PRIMARY KEY(id_spe, Id_pra),
    KEY (Id_pra),
    FOREIGN KEY(id_spe) REFERENCES Specialite(id_spe)
+) ENGINE=InnoDB;
+
+CREATE TABLE Administrateur(
+   id_admin INT AUTO_INCREMENT,
+   mail_admin VARCHAR(254) NOT NULL,
+   mot_de_passe_admin VARCHAR(255) NOT NULL,
+   statut_compte ENUM('actif', 'inactif') NOT NULL DEFAULT 'actif',
+   PRIMARY KEY(id_admin),
+   UNIQUE KEY uq_administrateur_mail (mail_admin)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Visite(
@@ -161,11 +173,13 @@ INSERT INTO Specialite (nom_spe) VALUES
 -- Email et mot de passe de démonstration des praticiens ci-dessous : oxam2025 (haché en bcrypt)
 INSERT INTO Practicien (id_spe, note_par, nom_par, prenom_par, mail_par, mot_de_passe_par, rue_par, codePostal, ville_par, longitude_par, latitude) VALUES
 (1, 'Très réceptif', 'Bernard', 'Luc', 'luc.bernard@oxam-labo.fr', '$2y$12$CX/lQSqAG0fRghkt7Jzd7./HKdJynBW1k5zTi6kth9qm6W/.S/jgW', '15 Rue de la Paix', 49300, 'Cholet', '-0.88', '47.06'),
-(2, 'À relancer', 'Moreau', 'Claire', 'claire.moreau@oxam-labo.fr', '$2y$12$CX/lQSqAG0fRghkt7Jzd7./HKdJynBW1k5zTi6kth9qm6W/.S/jgW', '8 Place du Ralliement', 49000, 'Angers', '-0.55', '47.47');
+(2, 'À relancer', 'Moreau', 'Claire', 'claire.moreau@oxam-labo.fr', '$2y$12$CX/lQSqAG0fRghkt7Jzd7./HKdJynBW1k5zTi6kth9qm6W/.S/jgW', '8 Place du Ralliement', 49000, 'Angers', '-0.55', '47.47'),
+(1, 'À suivre', 'Gasnier', 'Hugo', 'hugo.gasnier@oxam-labo.fr', '$2y$12$CX/lQSqAG0fRghkt7Jzd7./HKdJynBW1k5zTi6kth9qm6W/.S/jgW', '22 Avenue de la Gare', 49300, 'Cholet', '-0.88', '47.06');
 
 INSERT INTO portefeuille (id_vis, id_spe, Id_pra) VALUES
 (1, 1, 1),
-(1, 2, 2);
+(1, 2, 2),
+(1, 1, 3);
 
 INSERT INTO Medicament (nomCommercial_med) VALUES
 ('Oxam-Cardio 50mg'),

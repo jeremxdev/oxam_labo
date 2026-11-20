@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../models/Practicien.php';
 require_once __DIR__ . '/../models/Visiteur.php';
+require_once __DIR__ . '/../models/Admin.php';
 require_once __DIR__ . '/../models/Visite.php';
 
 /**
@@ -47,7 +48,8 @@ class PracticienController {
             }
 
             // Email unique sur toute l'application (visiteurs ET praticiens)
-            if ($error === null && ($practicienModel->findByMail($email) || $visiteurModel->findByMail($email))) {
+            if ($error === null && ($practicienModel->findByMail($email) || $visiteurModel->findByMail($email) ||
+                (new Admin())->isEmailReserved($email))) {
                 $error = "Cette adresse email est déjà utilisée.";
             }
 
@@ -60,7 +62,7 @@ class PracticienController {
             }
 
             if ($error === null && $practicienModel->createPracticien($aChoisiSpecialite ? $idSpe : null, $nouvelleSpecialite, $nom, $prenom, $rue, $codePostal, $ville, $email, $password, $regCode)) {
-                $success = "Votre compte praticien a été créé. Vous pouvez maintenant vous connecter avec votre adresse email ($email) et votre mot de passe.";
+                $success = "Votre demande de compte praticien a été enregistrée. Vous pourrez vous connecter après validation par un administrateur.";
             } elseif ($error === null) {
                 $error = "Une erreur est survenue lors de la création du compte praticien.";
             }
@@ -77,7 +79,8 @@ class PracticienController {
             exit();
         }
         if (($_SESSION['user']['role'] ?? 'visiteur') !== 'practicien') {
-            header("Location: index.php?action=visites");
+            $destination = ($_SESSION['user']['role'] ?? '') === 'admin' ? 'admin' : 'visites';
+            header("Location: index.php?action=$destination");
             exit();
         }
 
@@ -101,7 +104,8 @@ class PracticienController {
             exit();
         }
         if (($_SESSION['user']['role'] ?? 'visiteur') !== 'practicien') {
-            header("Location: index.php?action=visites");
+            $destination = ($_SESSION['user']['role'] ?? '') === 'admin' ? 'admin' : 'visites';
+            header("Location: index.php?action=$destination");
             exit();
         }
 
@@ -140,7 +144,8 @@ class PracticienController {
                 // Email unique sur toute l'application, hors son propre compte
                 $practicienExistant = $practicienModel->findByMail($email);
                 $visiteurExistant = $visiteurModel->findByMail($email);
-                $emailOccupe = ($practicienExistant && (int) $practicienExistant['Id_pra'] !== $idPra) || $visiteurExistant;
+                $adminExistant = (new Admin())->isEmailReserved($email);
+                $emailOccupe = ($practicienExistant && (int) $practicienExistant['Id_pra'] !== $idPra) || $visiteurExistant || $adminExistant;
 
                 if ($emailOccupe) {
                     $error = "Cette adresse email est déjà utilisée par un autre compte.";

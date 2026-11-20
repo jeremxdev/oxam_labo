@@ -4,6 +4,7 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/Practicien.php';
 require_once __DIR__ . '/../models/Visiteur.php';
 require_once __DIR__ . '/../models/Visite.php';
+require_once __DIR__ . '/../models/Admin.php';
 
 $pra = new Practicien();
 $vis = new Visiteur();
@@ -37,6 +38,8 @@ check('La nouvelle région est créée en base', (bool) $db->query("SELECT reg_c
 // 2. Récupération + hash
 $user = $pra->findByMail($email);
 check('Praticien retrouvé par email', (bool) $user);
+check('Nouveau praticien en attente de validation', ($user['statut_validation'] ?? '') === 'en_attente');
+check('Nouveau compte praticien actif par défaut', ($user['statut_compte'] ?? '') === 'actif');
 check('Mot de passe stocké haché (bcrypt)', isset($user['mot_de_passe_par']) && str_starts_with($user['mot_de_passe_par'], '$2y$'));
 check('Hash sans mot de passe en clair', !str_contains($user['mot_de_passe_par'], 'secretpra123'));
 
@@ -69,12 +72,33 @@ check('Gasnier a bien sa visite de demo (' . count($visitesGasnier) . ')', count
 $listePra = $visitesModel->getAllPracticiens();
 $colsPra = $listePra ? array_keys($listePra[0]) : [];
 check('Hash exclu de getAllPracticiens', !in_array('mot_de_passe_par', $colsPra, true));
+$listedBeforeApproval = array_filter($listePra, function ($row) use ($user) {
+    return (int) $row['Id_pra'] === (int) $user['Id_pra'] && (int) $row['id_spe'] === (int) $user['id_spe'];
+});
+check('Praticien en attente absent des choix de visite', !$listedBeforeApproval);
+
+$adminModel = new Admin();
+check('Approbation du praticien par Admin', $adminModel->setApprovalStatus((int) $user['id_spe'], (int) $user['Id_pra'], 'approuve'));
+check('Praticien approuvé visible pour les visites', count(array_filter(
+    $visitesModel->getAllPracticiens(),
+    function ($row) use ($user) {
+        return (int) $row['Id_pra'] === (int) $user['Id_pra'] && (int) $row['id_spe'] === (int) $user['id_spe'];
+    }
+)) === 1);
+check('Désactivation du compte praticien', $adminModel->setAccountStatus('practicien', (int) $user['Id_pra'], (int) $user['id_spe'], 'inactif') === 'updated');
+check('Praticien inactif non considéré comme actif', !$adminModel->isAccountActive('practicien', (int) $user['Id_pra'], (int) $user['id_spe']));
+check('Réactivation du compte praticien', $adminModel->setAccountStatus('practicien', (int) $user['Id_pra'], (int) $user['id_spe'], 'actif') === 'updated');
+check('Réinitialisation du mot de passe praticien', $adminModel->resetPassword('practicien', (int) $user['Id_pra'], (int) $user['id_spe'], 'newsecret123'));
+$userUpdated = $pra->findByMail($email);
+check('Nouveau mot de passe vérifié', $pra->verifyPassword($userUpdated['mot_de_passe_par'] ?? '', 'newsecret123'));
 
 // Nettoyage
 if ($user) {
-    $stmtAffectation = $db->prepare("DELETE FROM affecter WHERE id_spe = :id_spe AND Id_pra = :id_pra");
-    $stmtAffectation->execute(['id_spe' => $user['id_spe'], 'id_pra' => $user['Id_pra']]);
-    $db->exec("DELETE FROM Practicien WHERE Id_pra = " . (int) $user['Id_pra']);
+    check('Suppression du compte de test sans historique', $adminModel->deleteAccount(
+        'practicien',
+        (int) $user['Id_pra'],
+        (int) $user['id_spe']
+    ) === 'deleted');
 }
 $stmtRegion = $db->prepare("DELETE FROM Region WHERE reg_code = :reg_code");
 $stmtRegion->execute(['reg_code' => $regionTest]);

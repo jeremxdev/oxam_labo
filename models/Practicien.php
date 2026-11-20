@@ -105,8 +105,8 @@ class Practicien {
             }
 
             $stmt = $this->db->prepare(
-                "INSERT INTO Practicien (id_spe, nom_par, prenom_par, rue_par, codePostal, ville_par, mail_par, mot_de_passe_par)
-                 VALUES (:id_spe, :nom, :prenom, :rue, :code_postal, :ville, :email, :password)"
+                "INSERT INTO Practicien (id_spe, nom_par, prenom_par, rue_par, codePostal, ville_par, mail_par, mot_de_passe_par, statut_validation)
+                 VALUES (:id_spe, :nom, :prenom, :rue, :code_postal, :ville, :email, :password, 'en_attente')"
             );
             $created = $stmt->execute([
                 'id_spe' => $idSpe,
@@ -138,5 +138,27 @@ class Practicien {
             error_log('Échec de création du profil praticien : ' . $e->getMessage());
             return false;
         }
+    }
+
+    public function getPendingForApproval() {
+        $sql = "SELECT p.id_spe, p.Id_pra, p.nom_par, p.prenom_par, p.mail_par, p.rue_par, p.codePostal, p.ville_par, s.nom_spe
+                FROM Practicien p
+                JOIN Specialite s ON p.id_spe = s.id_spe
+                WHERE p.statut_validation = 'en_attente'
+                ORDER BY p.nom_par, p.prenom_par";
+        return $this->db->query($sql)->fetchAll();
+    }
+
+    public function setPendingApprovalStatus($idSpe, $idPra, $status) {
+        if (!in_array($status, ['approuve', 'refuse'], true)) {
+            return false;
+        }
+
+        $stmt = $this->db->prepare(
+            "UPDATE Practicien SET statut_validation = :status
+             WHERE id_spe = :id_spe AND Id_pra = :id_pra AND statut_validation = 'en_attente'"
+        );
+        $stmt->execute(['status' => $status, 'id_spe' => $idSpe, 'id_pra' => $idPra]);
+        return $stmt->rowCount() === 1;
     }
 }

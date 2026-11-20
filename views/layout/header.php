@@ -14,7 +14,10 @@
             <?php if (isset($_SESSION['user'])): ?>
                 <?php $role = $_SESSION['user']['role'] ?? 'visiteur'; ?>
                 <nav class="nav-links">
-                    <?php if ($role === 'practicien'): ?>
+                    <?php if ($role === 'admin'): ?>
+                        <span class="user-info"><strong>Administrateur</strong></span>
+                        <a href="index.php?action=admin" class="btn-link">Gestion des comptes</a>
+                    <?php elseif ($role === 'practicien'): ?>
                         <span class="user-info">
                             <strong>Dr. <?= htmlspecialchars($_SESSION['user']['prenom'] . ' ' . $_SESSION['user']['nom']) ?></strong> 
                             <small>(<?= htmlspecialchars($_SESSION['user']['specialite']) ?>)</small>

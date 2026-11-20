@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../models/Visiteur.php';
 require_once __DIR__ . '/../models/Practicien.php';
+require_once __DIR__ . '/../models/Admin.php';
 
 /**
  * Gère la liste des visiteurs, leur création et la modification de leur profil.
@@ -14,7 +15,8 @@ class VisiteurController {
             exit();
         }
         if (($_SESSION['user']['role'] ?? 'visiteur') !== 'visiteur') {
-            header("Location: index.php?action=practicien");
+            $destination = ($_SESSION['user']['role'] ?? '') === 'admin' ? 'admin' : 'practicien';
+            header("Location: index.php?action=$destination");
             exit();
         }
         $this->visiteurModel = new Visiteur();
@@ -43,7 +45,8 @@ class VisiteurController {
                 $error = "Le mot de passe doit contenir au moins 8 caractères.";
             } elseif ($password !== $passwordConfirm) {
                 $error = "Les deux mots de passe ne correspondent pas.";
-            } elseif ($this->visiteurModel->findByMail($email) || (new Practicien())->findByMail($email)) {
+            } elseif ($this->visiteurModel->findByMail($email) || (new Practicien())->findByMail($email) ||
+                      (new Admin())->isEmailReserved($email)) {
                 $error = "Cette adresse email est déjà utilisée par un autre compte.";
             } elseif ($this->visiteurModel->createVisiteur($nom, $prenom, $email, $telephone, $adresse, $regCode, $password)) {
                 $success = "Le visiteur $prenom $nom a été créé avec succès. Il pourra se connecter avec l'email $email.";
@@ -86,7 +89,8 @@ class VisiteurController {
                 // Email unique sur toute l'application, hors son propre compte
                 $visiteurExistant = $this->visiteurModel->findByMail($email);
                 $practicienExistant = (new Practicien())->findByMail($email);
-                $emailOccupe = ($visiteurExistant && (int) $visiteurExistant['id_vis'] !== $idVis) || $practicienExistant;
+                $adminExistant = (new Admin())->isEmailReserved($email);
+                $emailOccupe = ($visiteurExistant && (int) $visiteurExistant['id_vis'] !== $idVis) || $practicienExistant || $adminExistant;
 
                 if ($emailOccupe) {
                     $error = "Cette adresse email est déjà utilisée par un autre compte.";

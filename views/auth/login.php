@@ -4,7 +4,7 @@ include __DIR__ . '/../layout/header.php';
 ?>
 <div class="auth-card">
     <h2>Portail OXAM LABO - Connexion</h2>
-    <p class="subtitle">Saisissez votre adresse email et votre mot de passe (visiteur ou praticien)</p>
+    <p class="subtitle">Saisissez votre adresse email et votre mot de passe (visiteur, praticien ou administrateur)</p>
     <?php if (isset($error)): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>

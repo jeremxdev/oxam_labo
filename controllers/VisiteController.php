@@ -17,7 +17,8 @@ class VisiteController {
 
     private function requireVisiteur() {
         if (($_SESSION['user']['role'] ?? 'visiteur') !== 'visiteur') {
-            header("Location: index.php?action=practicien");
+            $destination = ($_SESSION['user']['role'] ?? '') === 'admin' ? 'admin' : 'practicien';
+            header("Location: index.php?action=$destination");
             exit();
         }
     }

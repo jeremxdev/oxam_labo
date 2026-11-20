@@ -1,5 +1,6 @@
 <?php
 // Tests HTTP du parcours praticien (session, gardes de role, PDF)
+require_once __DIR__ . '/../models/Practicien.php';
 $base = 'http://localhost/oxam_labo/index.php';
 $ok = true;
 
@@ -38,9 +39,23 @@ $mk = request("$base?action=practicien_register", [
     'nom_par' => 'PratTest', 'prenom_par' => 'Essai', 'mail_par' => $emailTest,
     'password' => 'motdepasse123', 'password_confirm' => 'motdepasse123',
     'id_spe' => '2', 'nouvelle_specialite' => '', 'rue_par' => '1 Rue Test',
-    'codePostal' => '49000', 'ville_par' => 'Angers',
+    'codePostal' => '49000', 'ville_par' => 'Angers', 'reg_code' => 'OUEST',
 ]);
-check('Creation du compte de test', str_contains($mk['body'], 'a été créé'));
+check('Inscription enregistrée en attente de validation', str_contains($mk['body'], 'attendre la validation'));
+
+$pendingLogin = request("$base?action=login", [
+    'email' => $emailTest,
+    'password' => 'motdepasse123',
+]);
+check('Connexion refusée tant que le compte est en attente', str_contains($pendingLogin['body'], 'en attente de validation'));
+
+$practicienModel = new Practicien();
+$pendingAccount = $practicienModel->findByMail($emailTest);
+check('Validation du compte de test', $pendingAccount && $practicienModel->setPendingApprovalStatus(
+    (int) $pendingAccount['id_spe'],
+    (int) $pendingAccount['Id_pra'],
+    'approuve'
+));
 
 // 1. Connexion praticien -> redirection espace
 $login = request("$base?action=login", [
@@ -110,5 +125,6 @@ echo PHP_EOL . ($ok ? 'TOUS LES TESTS PASSENT' : 'DES TESTS ONT ECHOUE') . PHP_E
 
 // Nettoyage du compte de test via la base (les fichiers de test suppriment leurs lignes)
 $dbTest = new PDO('mysql:host=localhost;dbname=oxam_labo;charset=utf8mb4', 'root', '');
+$dbTest->exec("DELETE FROM affecter WHERE Id_pra = (SELECT Id_pra FROM Practicien WHERE mail_par = '$emailTest')");
 $dbTest->exec("DELETE FROM Practicien WHERE mail_par = '$emailTest'");
 exit($ok ? 0 : 1);

@@ -57,6 +57,7 @@ class Visite {
         $sql = "SELECT p.id_spe, p.Id_pra, p.note_par, p.nom_par, p.prenom_par, p.rue_par, p.codePostal, p.ville_par, s.nom_spe 
                 FROM Practicien p 
                 JOIN Specialite s ON p.id_spe = s.id_spe
+                WHERE p.statut_validation = 'approuve' AND p.statut_compte = 'actif'
                 ORDER BY p.nom_par, p.prenom_par";
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll();
