@@ -170,3 +170,4 @@ switch ($action) {
         header("Location: index.php?action=visites");
         exit();
 }
+?>
