@@ -149,7 +149,15 @@ CREATE TABLE portefeuille(
 ) ENGINE=InnoDB;
 
 -- Données initiales
-INSERT INTO Region (reg_code) VALUES ('OUEST'), ('IDF-CENTRE'), ('SUD');
+-- Codes historiques (OUEST, IDF-CENTRE, SUD) conservés pour les données de démonstration,
+-- puis les 13 régions métropolitaines et les 5 régions d'outre-mer.
+INSERT INTO Region (reg_code) VALUES
+('OUEST'), ('IDF-CENTRE'), ('SUD'),
+('Auvergne-Rhône-Alpes'), ('Bourgogne-Franche-Comté'), ('Bretagne'),
+('Centre-Val de Loire'), ('Corse'), ('Grand Est'), ('Hauts-de-France'),
+('Île-de-France'), ('Normandie'), ('Nouvelle-Aquitaine'), ('Occitanie'),
+('Pays de la Loire'), ('Provence-Alpes-Côte d'Azur'),
+('Guadeloupe'), ('Martinique'), ('Guyane'), ('La Réunion'), ('Mayotte');
 
 -- Mot de passe de démonstration des comptes ci-dessous : oxam2025 (haché en bcrypt)
 INSERT INTO Visiteur (telephone_vis, nom_vis, prenom_vis, mail_vis, mot_de_passe_vis, adresse_vis) VALUES
