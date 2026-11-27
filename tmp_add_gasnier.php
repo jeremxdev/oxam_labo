@@ -1,7 +1,14 @@
 <?php
 /**
- * Ajoute le compte praticien hugo.gasnier@oxam-labo.fr (mot de passe oxam2025).
- * Idempotent : si le compte existe déjà, seul le mot de passe est vérifié.
+ * Script temporaire de réparation de données : ajoute le praticien de démonstration
+ * hugo.gasnier@oxam-labo.fr (mot de passe oxam2025) dans la base réelle.
+ *
+ * Étapes : refus si l'email appartient déjà à un visiteur, recherche/création de
+ * la spécialité Cardiologie, création ou mise à jour du mot de passe du praticien,
+ * puis ajout au portefeuille de Jean Dupont.
+ * Idempotent : relançable sans créer de doublon.
+ *
+ * À n'exécuter qu'en local : php tmp_add_gasnier.php (modifie la base oxam_labo).
  */
 require_once __DIR__ . '/config/database.php';
 

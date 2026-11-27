@@ -1,4 +1,5 @@
--- Ajoute les identifiants de connexion aux praticiens déjà enregistrés.
+-- Migration 003 : ajoute les identifiants de connexion (email + mot de passe) aux praticiens déjà enregistrés.
+-- Génère un email provisoire et un mot de passe provisoire pour les lignes existantes.
 USE oxam_labo;
 
 -- Compte de connexion du praticien : email (identifiant) et mot de passe haché

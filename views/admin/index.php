@@ -1,4 +1,9 @@
 <?php
+// Tableau de bord administrateur : gestion des comptes (validation, activation, suppression).
+// Affiche $pendingPracticiens (demandes de praticiens à approuver), $accounts (tous les comptes),
+// les messages $error / $success et deux tableaux HTML avec boucles foreach.
+// Chaque action est un formulaire POST protégé par le jeton CSRF de la session.
+// Inclus par AdminController::index() (route "admin" de index.php).
 include __DIR__ . '/../layout/header.php';
 $typeLabels = ['visiteur' => 'Visiteur', 'practicien' => 'Praticien', 'admin' => 'Administrateur'];
 $approvalLabels = ['en_attente' => 'En attente', 'approuve' => 'Approuvé', 'refuse' => 'Refusé'];

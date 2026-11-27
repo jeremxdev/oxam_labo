@@ -1,5 +1,8 @@
 <?php
-// Formulaire d'inscription d'un praticien et de sélection ou création de sa spécialité et région.
+// Page d'inscription d'un praticien : formulaire POST à action=practicien_register.
+// Affiche les listes $specialites et $regions (boucles foreach) pour la spécialité et la région,
+// plus $error / $success après traitement. Le compte créé reste en attente de validation admin.
+// Inclus par PracticienController::register() (route "practicien_register" de index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="auth-card">

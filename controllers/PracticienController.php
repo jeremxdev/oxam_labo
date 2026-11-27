@@ -5,9 +5,28 @@ require_once __DIR__ . '/../models/Admin.php';
 require_once __DIR__ . '/../models/Visite.php';
 
 /**
- * Gère l'inscription, l'espace personnel et la mise à jour du profil des praticiens.
+ * Contrôleur de l'espace praticien : inscription, tableau de bord et profil.
+ *
+ * Actions gérées : register() (demande de compte publique), index() (espace
+ * praticien avec ses visites) et profil() (modification des informations).
+ * S'appuie sur Practicien, Visiteur, Visite et Admin (validation par l'administrateur).
+ * Rend views/auth/register_practicien.php, views/practicien/index.php et
+ * views/practicien/profil.php.
+ * Contrôle d'accès : register() est public ; index() et profil() exigent le rôle
+ * "practicien" et un profil toujours présent en base.
  */
 class PracticienController {
+    /**
+     * Affiche le formulaire d'inscription praticien et enregistre la demande.
+     *
+     * Sans paramètre : lit $_POST en méthode POST. Contrôle la présence des champs,
+     * le code postal, le choix exact d'une spécialité (existante ou nouvelle),
+     * l'email, le mot de passe (8 caractères minimum et confirmation), l'unicité
+     * de l'email sur toute l'application et la taille maximale des champs.
+     * Crée ensuite le compte via Practicien::createPracticien() avec le statut
+     * "en_attente" ; la connexion ne sera possible qu'après validation admin.
+     * Rend views/auth/register_practicien.php avec $error, $success, $specialites, $regions.
+     */
     public function register() {
         $error = null;
         $success = null;
@@ -26,10 +45,12 @@ class PracticienController {
             $regCode = trim($_POST['reg_code'] ?? '');
             $idSpe = ($_POST['id_spe'] ?? '') === '' ? null : filter_var($_POST['id_spe'], FILTER_VALIDATE_INT);
             $nouvelleSpecialite = trim($_POST['nouvelle_specialite'] ?? '');
+            // Une seule des deux options est autorisée : spécialité existante OU nouvelle spécialité.
             $aChoisiSpecialite = $idSpe !== null && $idSpe !== false && $idSpe > 0;
             $specialiteValide = ($aChoisiSpecialite && $nouvelleSpecialite === '') ||
                 ($idSpe === null && $nouvelleSpecialite !== '');
 
+            // Première passe : champs obligatoires, code postal, région et spécialité.
             if ($nom === '' || $prenom === '' || $rue === '' || $ville === '' || $regCode === '' ||
                 !preg_match('/^\d{1,5}$/', $codePostal) || !$specialiteValide) {
                 $error = "Veuillez vérifier les champs, le code postal, la région et le choix de spécialité.";
@@ -47,7 +68,7 @@ class PracticienController {
                 $error = "Les deux mots de passe ne correspondent pas.";
             }
 
-            // Email unique sur toute l'application (visiteurs ET praticiens)
+            // Email unique sur toute l'application (visiteurs ET praticiens ET admins).
             if ($error === null && ($practicienModel->findByMail($email) || $visiteurModel->findByMail($email) ||
                 (new Admin())->isEmailReserved($email))) {
                 $error = "Cette adresse email est déjà utilisée.";
@@ -61,6 +82,7 @@ class PracticienController {
                 $error = "Les champs texte ne doivent pas dépasser 50 caractères.";
             }
 
+            // Toutes les validations sont passées : création de la demande de compte.
             if ($error === null && $practicienModel->createPracticien($aChoisiSpecialite ? $idSpe : null, $nouvelleSpecialite, $nom, $prenom, $rue, $codePostal, $ville, $email, $password, $regCode)) {
                 $success = "Votre demande de compte praticien a été enregistrée. Vous pourrez vous connecter après validation par un administrateur.";
             } elseif ($error === null) {
@@ -68,11 +90,20 @@ class PracticienController {
             }
         }
 
+        // Données de référence pour les listes déroulantes du formulaire.
         $specialites = $practicienModel->getAllSpecialites();
         $regions = $practicienModel->getAllRegions();
         require __DIR__ . '/../views/auth/register_practicien.php';
     }
 
+    /**
+     * Affiche l'espace du praticien connecté avec la liste de ses visites.
+     *
+     * Vérifie la session et le rôle "practicien" (redirection sinon), recharge
+     * le profil depuis la base pour garantir qu'il existe encore et récupère
+     * les comptes rendus via Visite::getVisitesByPracticien().
+     * Rend views/practicien/index.php avec $profil et $visites.
+     */
     public function index() {
         if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login");
@@ -87,6 +118,7 @@ class PracticienController {
         $practicienModel = new Practicien();
         $visiteModel = new Visite();
 
+        // Un profil supprimé entre-temps invalide la session en cours.
         $profil = $practicienModel->getPracticienById($_SESSION['user']['id_spe'], $_SESSION['user']['id_pra']);
         if (!$profil) {
             session_destroy();
@@ -98,6 +130,16 @@ class PracticienController {
         require __DIR__ . '/../views/practicien/index.php';
     }
 
+    /**
+     * Affiche et met à jour le profil du praticien connecté.
+     *
+     * Contrôle d'accès : session et rôle "practicien" obligatoires.
+     * En POST : valide les champs (obligatoires, longueurs, code postal, email),
+     * le mot de passe facultatif (8 caractères minimum s'il est fourni),
+     * l'unicité de l'email hors son propre compte, puis met à jour la base via
+     * Practicien::updatePracticien(). La session est actualisée en cas de succès.
+     * Rend views/practicien/profil.php avec $profil, $error, $success, $specialites.
+     */
     public function profil() {
         if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login");
@@ -147,6 +189,7 @@ class PracticienController {
                 $adminExistant = (new Admin())->isEmailReserved($email);
                 $emailOccupe = ($practicienExistant && (int) $practicienExistant['Id_pra'] !== $idPra) || $visiteurExistant || $adminExistant;
 
+                // Mot de passe laissé vide = conservé (null transmis au modèle).
                 if ($emailOccupe) {
                     $error = "Cette adresse email est déjà utilisée par un autre compte.";
                 } elseif ($practicienModel->updatePracticien($idPra, $nom, $prenom, $email, $rue, $codePostal, $ville, $password !== '' ? $password : null)) {
@@ -160,6 +203,7 @@ class PracticienController {
             }
         }
 
+        // Relecture du profil après mise à jour (ou pour l'affichage initial).
         $profil = $practicienModel->getPracticienById($idSpe, $idPra);
         if (!$profil) {
             session_destroy();

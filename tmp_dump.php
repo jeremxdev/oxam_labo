@@ -1,4 +1,11 @@
 <?php
+/**
+ * Script temporaire de diagnostic : vidange rapide des tables métier.
+ *
+ * Parcourt les tables de démonstration et affiche jusqu'à 15 lignes par table
+ * au format JSON (ou "(vide)"). Sert à vérifier visuellement l'état des données
+ * après un import de schema.sql. En lecture seule : php tmp_dump.php.
+ */
 require_once __DIR__ . '/config/database.php';
 $pdo = Database::getConnection();
 

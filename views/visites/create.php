@@ -1,5 +1,8 @@
 <?php
-// Formulaire de saisie d'un rapport de visite, des médicaments présentés et des échantillons.
+// Formulaire de saisie d'un rapport de visite (POST vers action=visite_create).
+// Liste $practiciens (option "id_spe-Id_pra") et $medicaments, utilisés deux fois : cases à cocher
+// pour les médicaments présentés, quantités pour les échantillons offerts.
+// Inclus par VisiteController::create() (route "visite_create" de index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="form-card">

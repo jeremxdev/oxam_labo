@@ -1,5 +1,8 @@
 <?php
-// Liste les rapports de visite du visiteur connecté et propose leur recherche et leurs actions.
+// Liste des rapports de visite du visiteur connecté ($visites) avec recherche client-side et actions.
+// Prépare la légende $statutsVisite et filtre $visitesRefusees (statut "refusée") pour l'alerte.
+// Chaque ligne offre le PDF et, si le bilan est vide, la suppression (lien GET avec confirmation JS).
+// Inclus par VisiteController::index() (route "visites" de index.php).
 $statutsVisite = ['en_attente' => 'En attente', 'acceptee' => 'Acceptée', 'refusee' => 'Refusée'];
 $visitesRefusees = array_filter($visites, function ($v) {
     return ($v['statut_vis'] ?? 'en_attente') === 'refusee';

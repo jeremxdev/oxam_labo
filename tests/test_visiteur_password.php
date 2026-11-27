@@ -1,5 +1,14 @@
 <?php
-// Script de test temporaire : cycle de vie d'un visiteur avec mot de passe
+/**
+ * Test fonctionnel (couche modèle) du mot de passe des comptes visiteur.
+ *
+ * Vérifie la création d'un visiteur de test, le stockage bcrypt du mot de passe,
+ * l'acceptation/refus des identifiants, l'absence du hash dans getAllVisiteurs(),
+ * la connexion d'un compte de démonstration et la détection des doublons d'email.
+ * Le visiteur créé par le test est supprimé en fin de script.
+ *
+ * Exécution : php tests/test_visiteur_password.php. Sortie : [OK]/[FAIL] et code 0/1.
+ */
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/Visiteur.php';
 
@@ -7,6 +16,11 @@ $v = new Visiteur();
 $db = Database::getConnection();
 $ok = true;
 
+/**
+ * Affiche le résultat d'une assertion et fait échouer le script si elle est fausse.
+ * @param string $label Libellé du contrôle affiché.
+ * @param bool $cond Résultat du contrôle à évaluer.
+ */
 function check($label, $cond) {
     global $ok;
     echo ($cond ? "[OK]   " : "[FAIL] ") . $label . PHP_EOL;

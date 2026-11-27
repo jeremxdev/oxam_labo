@@ -1,5 +1,8 @@
 <?php
-// Formulaire de création d'un compte du personnel et de son affectation géographique.
+// Formulaire de création d'un compte du personnel (POST vers action=user_create) : identité,
+// mot de passe, rôle hiérarchique (select "role") et région d'affectation ($regions, boucle foreach).
+// Messages $error / $success après traitement.
+// Inclus par UserController::create() (route "user_create" non encore déclarée dans le routeur index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="form-card">

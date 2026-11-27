@@ -1,5 +1,8 @@
 <?php
-// Formulaire de consultation et de modification du profil praticien.
+// Formulaire de consultation et de modification du profil praticien ($profil) : identité,
+// coordonnées et mot de passe facultatif (champ vide = conservation du mot de passe actuel).
+// La spécialité et la région sont affichées en lecture seule. Messages $error / $success.
+// Inclus par PracticienController::profil() (route "practicien_profil" de index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="form-card">

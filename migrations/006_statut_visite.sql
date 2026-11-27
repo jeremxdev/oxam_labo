@@ -1,4 +1,5 @@
--- Ajoute le statut d'acceptation des visites pour le praticien concerné.
+-- Migration 006 : ajoute le statut d'acceptation des visites pour le praticien concerné.
+-- Nouveau statut "en_attente" par défaut, modifiable depuis l'espace praticien.
 USE oxam_labo;
 
 ALTER TABLE Visite

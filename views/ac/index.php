@@ -1,5 +1,7 @@
 <?php
-// Liste les activités complémentaires et leurs organisateurs.
+// Liste les activités complémentaires ($activites) et leurs organisateurs : date, thème, lieu.
+// Boucle foreach avec échappement htmlspecialchars sur chaque cellule, plus un lien vers la création.
+// Inclus par AcController::index() (route "ac" de index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="header-action">

@@ -1,4 +1,8 @@
 <?php
+// Formulaire d'édition d'un compte administrateur (email) et réinitialisation de son mot de passe.
+// Affiche $account (valeurs à modifier), $type / $id / $idSpe (identifiants du compte), $regions
+// pour la liste déroulante, et les messages $error / $success. POST protégé par CSRF.
+// Inclus par AdminController::edit() (route "admin_edit" de index.php) — accès réservé à l'admin.
 include __DIR__ . '/../layout/header.php';
 $typeLabels = ['visiteur' => 'visiteur', 'practicien' => 'praticien', 'admin' => 'administrateur'];
 $nomMaxLength = $type === 'visiteur' ? 25 : 50;

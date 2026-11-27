@@ -1,5 +1,16 @@
-// Ajoute les contrôles côté navigateur aux formulaires et tableaux de visites.
+// Fichier : public/js/main.js — comportements côté navigateur du portail.
+//
+// Rôle : ajouter les contrôles côté client aux pages du portail, sans dépendre
+// du serveur : validation de la date de création de visite et filtre de
+// recherche instantané sur la liste des visites.
+//
+// Interactions : cible les éléments des vues views/visites/*.php
+// (#visitForm, #date_vis, #searchInput, #visitsTable) incluses via le layout
+// views/layout/footer.php. Ce script ne fait qu'empêcher l'envoi du formulaire
+// ou masquer des lignes : la validation d'autorité reste côté serveur.
 document.addEventListener('DOMContentLoaded', () => {
+    // Formulaire de création de visite : on bloque l'envoi si la date est vide.
+    // (Le message est affiché par un simple alert ; la page reste en place.)
     const form = document.getElementById('visitForm');
     if (form) {
         form.addEventListener('submit', (e) => {
@@ -12,6 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Filtre instantané de la liste des visites : saisi dans #searchInput,
+// on masque (display: none) toutes les lignes du tableau #visitsTable dont le
+// texte ne contient pas la chaîne tapée (recherche insensible à la casse).
+// Appelée par l'attribut onkeyup/oninput posé sur le champ de recherche.
 function filterVisits() {
     const input = document.getElementById('searchInput');
     const filter = input.value.toLowerCase();

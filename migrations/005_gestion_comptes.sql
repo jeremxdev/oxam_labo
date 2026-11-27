@@ -1,4 +1,5 @@
--- Ajoute l'activation des comptes visiteurs, praticiens et administrateurs.
+-- Migration 005 : ajoute l'activation des comptes visiteurs, praticiens et administrateurs (statut_compte).
+-- Dépend des migrations 002, 003 et 004. Le statut par défaut est "actif".
 USE oxam_labo;
 
 ALTER TABLE Visiteur

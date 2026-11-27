@@ -1,5 +1,7 @@
 <?php
-// Formulaire de connexion commun aux visiteurs et aux praticiens.
+// Page de connexion du portail : formulaire POST (email + mot de passe) soumis à action=login.
+// Affiche $error si la tentative a échoué ; aucune donnée de session n'est rendue ici.
+// Inclus par AuthController::login() (route "login" de index.php) pour visiteurs, praticiens et admins.
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="auth-card">

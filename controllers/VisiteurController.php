@@ -5,11 +5,25 @@ require_once __DIR__ . '/../models/Admin.php';
 require_once __DIR__ . '/../models/Visite.php';
 
 /**
- * Gère la liste et la création des visiteurs (administrateur) ainsi que le profil du visiteur connecté.
+ * Contrôleur des comptes visiteur : administration et profil personnel.
+ *
+ * Actions gérées : index() et create() (réservées à l'administrateur),
+ * profil() (visiteur connecté).
+ * S'appuie sur Visiteur, Practicien, Visite et Admin pour vérifier l'unicité
+ * des emails et charger les visites refusées.
+ * Rend views/visiteurs/index.php, views/visiteurs/create.php et
+ * views/visiteurs/profil.php.
+ * Contrôle d'accès : session obligatoire ; requireAdmin() et requireVisiteur()
+ * redirigent les rôles non autorisés vers leur espace.
  */
 class VisiteurController {
+    /** Modèle des visiteurs, initialisé par le constructeur. */
     private $visiteurModel;
 
+    /**
+     * Vérifie la session puis instancie le modèle Visiteur.
+     * Sans session : redirection vers la connexion.
+     */
     public function __construct() {
         if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login");
@@ -18,6 +32,11 @@ class VisiteurController {
         $this->visiteurModel = new Visiteur();
     }
 
+    /**
+     * Garde d'accès interne : autorise uniquement le rôle "admin".
+     * Redirige les visiteurs vers action=visites, les praticiens vers
+     * action=practicien et les anonymes vers la connexion.
+     */
     private function requireAdmin() {
         if (($_SESSION['user']['role'] ?? '') !== 'admin') {
             $role = $_SESSION['user']['role'] ?? '';
@@ -27,6 +46,10 @@ class VisiteurController {
         }
     }
 
+    /**
+     * Garde d'accès interne : autorise uniquement le rôle "visiteur".
+     * Les autres rôles sont redirigés vers leur espace (admin ou praticien).
+     */
     private function requireVisiteur() {
         if (($_SESSION['user']['role'] ?? 'visiteur') !== 'visiteur') {
             $destination = ($_SESSION['user']['role'] ?? '') === 'admin' ? 'admin' : 'practicien';
@@ -35,12 +58,24 @@ class VisiteurController {
         }
     }
 
+    /**
+     * Affiche la liste de tous les visiteurs (espace administrateur).
+     * Charge les visiteurs via Visiteur::getAllVisiteurs() et rend views/visiteurs/index.php.
+     */
     public function index() {
         $this->requireAdmin();
         $visiteurs = $this->visiteurModel->getAllVisiteurs();
         require __DIR__ . '/../views/visiteurs/index.php';
     }
 
+    /**
+     * Crée un compte visiteur depuis l'espace administrateur.
+     *
+     * En POST : valide la taille du mot de passe (8 minimum), sa confirmation,
+     * l'unicité de l'email sur visiteurs/praticiens/admins, puis crée le compte
+     * via Visiteur::createVisiteur().
+     * En GET (ou après échec) : charge les régions et rend views/visiteurs/create.php.
+     */
     public function create() {
         $this->requireAdmin();
         $error = null;
@@ -74,6 +109,16 @@ class VisiteurController {
         require __DIR__ . '/../views/visiteurs/create.php';
     }
 
+    /**
+     * Affiche et met à jour le profil du visiteur connecté.
+     *
+     * En POST : vérifie les champs obligatoires, l'email, les longueurs autorisées,
+     * le mot de passe facultatif (8 caractères minimum s'il est fourni) et
+     * l'unicité de l'email hors son propre compte, puis appelle
+     * Visiteur::updateVisiteur(). La session est mise à jour après succès.
+     * Charge enfin le profil, les régions et les visites refusées, puis rend
+     * views/visiteurs/profil.php avec $profil, $regions, $visitesRefusees, $error, $success.
+     */
     public function profil() {
         $this->requireVisiteur();
         $error = null;
@@ -130,6 +175,7 @@ class VisiteurController {
             exit();
         }
         $regions = $this->visiteurModel->getAllRegions();
+        // Visites refusées affichées dans le profil pour information du visiteur.
         $visitesRefusees = (new Visite())->getVisitesRefuseesByVisiteur($idVis);
         require __DIR__ . '/../views/visiteurs/profil.php';
     }

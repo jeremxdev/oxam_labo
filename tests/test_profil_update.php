@@ -1,5 +1,15 @@
 <?php
-// Script de test : modification des profils visiteur et praticien (couche modèle)
+/**
+ * Test fonctionnel (couche modèle) de la mise à jour des profils.
+ *
+ * Crée deux visiteurs et deux praticiens de test, puis vérifie pour chacun :
+ * modification sans mot de passe (ancien hash conservé), changement de mot de
+ * passe (bcrypt), changement de région et absence de doublon dans Travailler,
+ * détection des emails déjà utilisés, et absence du hash dans les profils.
+ * Les comptes de test sont supprimés en fin de script.
+ *
+ * Exécution : php tests/test_profil_update.php. Sortie : [OK]/[FAIL] et code 0/1.
+ */
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/Visiteur.php';
 require_once __DIR__ . '/../models/Practicien.php';
@@ -9,6 +19,11 @@ $pra = new Practicien();
 $db = Database::getConnection();
 $ok = true;
 
+/**
+ * Affiche le résultat d'une assertion et fait échouer le script si elle est fausse.
+ * @param string $label Libellé du contrôle affiché.
+ * @param bool $cond Résultat du contrôle à évaluer.
+ */
 function check($label, $cond) {
     global $ok;
     echo ($cond ? "[OK]   " : "[FAIL] ") . $label . PHP_EOL;

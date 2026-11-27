@@ -1,4 +1,12 @@
 <?php
+/**
+ * Script temporaire de diagnostic de l'état de la base après les migrations.
+ *
+ * Affiche : la base courante, tous les praticiens avec l'état de leur mot de
+ * passe (vide / oxam2025 / autre), tous les visiteurs, puis recherche les
+ * occurrences de "gasnier" dans les colonnes nom/prénom/email de toutes les tables.
+ * En lecture seule : php tmp_state2.php.
+ */
 require_once __DIR__ . '/config/database.php';
 $pdo = Database::getConnection();
 

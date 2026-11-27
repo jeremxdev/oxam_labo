@@ -1,15 +1,40 @@
 <?php
-// Tests HTTP du parcours praticien (session, gardes de role, PDF)
+/**
+ * Tests HTTP (bout en bout) du parcours praticien via le serveur local.
+ *
+ * Vérifie l'inscription en attente de validation, le refus de connexion avant
+ * approbation, la connexion et la redirection vers l'espace praticien, les
+ * gardes de rôle (praticien bloqué sur les pages visiteur et inversement),
+ * l'accès au compte-rendu PDF par les personnes autorisées, son refus pour les
+ * autres et la redirection des anonymes vers la connexion.
+ *
+ * Prérequis : Laragon/Apache démarré avec le projet sous http://localhost/oxam_labo.
+ * Le compte de test créé par le formulaire est supprimé en fin de script.
+ * Sortie : [OK]/[FAIL] par assertion et code 0/1.
+ */
 require_once __DIR__ . '/../models/Practicien.php';
 $base = 'http://localhost/oxam_labo/index.php';
 $ok = true;
 
+/**
+ * Affiche le résultat d'une assertion et fait échouer le script si elle est fausse.
+ * @param string $label Libellé du contrôle affiché.
+ * @param bool $cond Résultat du contrôle à évaluer.
+ */
 function check($label, $cond) {
     global $ok;
     echo ($cond ? "[OK]   " : "[FAIL] ") . $label . PHP_EOL;
     if (!$cond) $ok = false;
 }
 
+/**
+ * Effectue une requête HTTP GET ou POST vers l'application et renvoie la réponse.
+ *
+ * @param string $url URL cible (index.php?action=...).
+ * @param array|null $post Données à envoyer en POST (null = GET).
+ * @param string|null $cookie Valeur du cookie de session à renvoyer.
+ * @return array code HTTP, en-tête Location, cookie de session et corps de réponse.
+ */
 function request($url, $post = null, $cookie = null) {
     $ctx = ['http' => [
         'method' => $post === null ? 'GET' : 'POST',

@@ -1,4 +1,16 @@
-/* Styles communs de la navigation, des formulaires, des tableaux et des messages du portail. */
+/* Portail OXAM Labo — feuille de style unique.
+ *
+ * Rôle : styles communs de la navigation, des formulaires, des tableaux et des
+ * messages d'alerte du portail (visiteurs, praticiens et administrateurs).
+ *
+ * Interactions : inclus une seule fois par views/layout/header.php, donc utilisé
+ * par toutes les vues views/**. Les utilitaires renommés (.badge-*, .btn-*)
+ * reprennent les codes de statut venus de la base (statut_vis : en_attente /
+ * acceptee / refusee, colonne statut_compte).
+ */
+
+/* Variables CSS : palette commune (bleu institutionnel + accent turquoise).
+   Réutilisées partout via var(--...) pour rester homogène. */
 :root {
     --primary: #1e3a8a;
     --primary-light: #3b82f6;
@@ -9,10 +21,15 @@
     --border: #e2e8f0;
 }
 
+/* Réinitialisation globale : bordures comprises dans la largeur,
+   marges/paddings remis à zéro et police par défaut de l'application. */
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
+/* Corps de page : fond clair, colonne flex pour coller le pied de page
+   en bas de l'écran même sur les pages courtes. */
 body { background-color: var(--bg-light); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
 
+/* --- Barre de navigation (views/layout/header.php) --- */
 .navbar { background-color: var(--primary); color: white; padding: 1rem 2rem; }
 .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 .brand { color: white; font-size: 1.5rem; font-weight: bold; text-decoration: none; }
@@ -21,15 +38,21 @@ body { background-color: var(--bg-light); color: var(--text-color); display: fle
 .nav-links a { color: white; text-decoration: none; }
 .user-info { font-size: 0.9rem; color: #cbd5e1; }
 
+/* Conteneur principal des pages : largeur limitée et centrée. */
 .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; flex: 1; }
 
+/* Cartes de connexion / d'inscription / de formulaire (pages centrées). */
 .auth-card, .form-card { background: var(--card-bg); max-width: 650px; margin: 2rem auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
 .subtitle { color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem; }
 
+/* Champs de formulaire : libellé empilé au-dessus du champ, champs pleine largeur. */
 .form-group { margin-bottom: 1.2rem; }
 .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
 .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-size: 1rem; }
 
+/* Boutons : variante principale, réduite (small), secondaire,
+   puis boutons d'action rapides : déconnexion, export PDF, suppression,
+   acceptation/refus d'une visite (praticien) et formulaires alignés en ligne. */
 .btn-primary, .btn-primary-sm { background-color: var(--primary-light); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; text-decoration: none; display: inline-block; }
 .btn-primary-sm { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
 .btn-secondary { background-color: #64748b; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.9rem; }
@@ -40,14 +63,20 @@ body { background-color: var(--bg-light); color: var(--text-color); display: fle
 .btn-refuse { background: #dc2626; color: white; padding: 0.3rem 0.6rem; border: none; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
 .inline-form { display: inline; }
 
+/* Présentation des échantillons de médicaments saisis dans une visite. */
 .samples-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
 .sample-item { background: #f1f5f9; padding: 10px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; }
 
+/* Messages flash (erreurs et succès) renvoyés par les contrôleurs
+   via les paramètres d'URL (err=..., ok=...) puis affichés dans les vues. */
 .alert { padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
 .alert-danger { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
 .alert-success { background-color: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
 .alert ul { margin: 0.5rem 0 0 1.2rem; }
 
+/* Tableaux de données : conteneur scrollable horizontal + lignes zébrées
+   par bordure basse. Les badges de statut reprennent les valeurs de la colonne
+   statut_vis (en_attente / acceptee / refusee). */
 .table-responsive { overflow-x: auto; background: white; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
 .data-table { width: 100%; border-collapse: collapse; }
 .data-table th, .data-table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); }
@@ -57,12 +86,17 @@ body { background-color: var(--bg-light); color: var(--text-color); display: fle
 .badge-acceptee { background: #d1fae5; color: #065f46; }
 .badge-refusee { background: #fee2e2; color: #991b1b; }
 
+/* Champ de recherche filtrant le tableau (appelé par filterVisits() de
+   public/js/main.js) et encart des comptes de démonstration proposés sur la
+   page de connexion. */
 .search-box input { width: 100%; padding: 0.75rem; margin-bottom: 1.5rem; border: 1px solid var(--border); border-radius: 6px; }
 .demo-accounts { margin-top: 2rem; padding: 1rem; background: #f1f5f9; border-radius: 6px; font-size: 0.85rem; }
 .demo-accounts ul { margin-left: 1.2rem; margin-top: 0.5rem; }
 
+/* Pied de page (views/layout/footer.php) : collé en bas du flux. */
 .footer { text-align: center; padding: 1rem; background: #e2e8f0; margin-top: auto; font-size: 0.9rem; }
 
+/* Adaptation mobile : la barre de navigation passe en colonne sous 768px. */
 @media (max-width: 768px) {
     .nav-container { flex-direction: column; gap: 10px; }
 }

@@ -1,5 +1,20 @@
 <?php
+/**
+ * Test de la gestion des comptes par l'administrateur (couche modèle).
+ *
+ * Rôle : vérifier, en base réelle, les opérations exposées au back-office par
+ * Admin + Visiteur : activation/désactivation, réinitialisation de mot de passe,
+ * suppression (avec protection contre la suppression d'un compte « à historique »
+ * et contre la désactivation du dernier admin actif).
+ *
+ * Lancement : php tests/test_admin_accounts.php (uniquement en CLI — le script
+ * renvoie un 404 s'il est appelé depuis un navigateur).
+ * Interprétation : chaque ligne affiche [OK] ou [FAIL] ; le script se termine
+ * par « TOUS LES TESTS PASSENT » (code retour 0) ou « DES TESTS ONT ECHOUE »
+ * (code retour 1). Il crée puis supprime ses propres comptes de test.
+ */
 if (PHP_SAPI !== 'cli') {
+    // Garde de sécurité : ce script écrit en base, il n'est jamais exposé via HTTP.
     http_response_code(404);
     exit();
 }
@@ -16,6 +31,8 @@ $suffix = bin2hex(random_bytes(5));
 $visitorEmail = "visitor.admin.$suffix@oxam-labo.fr";
 $adminEmail = "admin.test.$suffix@oxam-labo.fr";
 
+// Helper d'affichage : imprime [OK]/[FAIL] devant chaque vérification et
+// mémorise l'échec global pour le code de retour du script.
 function check($label, $condition) {
     global $ok;
     echo ($condition ? "[OK]   " : "[FAIL] ") . $label . PHP_EOL;
@@ -24,6 +41,10 @@ function check($label, $condition) {
     }
 }
 
+// --- Parcours « visiteur » : création du compte de test puis activation ---
+// Un compte créé doit être actif par défaut ; l'admin doit pouvoir le
+// désactiver (isAccountActive passe à faux → déconnexion forcée côté web),
+// le réactiver et réinitialiser son mot de passe.
 $region = $db->query("SELECT reg_code FROM Region ORDER BY reg_code LIMIT 1")->fetchColumn();
 check('Région disponible pour le compte de test', (bool) $region);
 check('Création du compte visiteur de test', $visiteur->createVisiteur(
@@ -37,6 +58,11 @@ check('Réactivation du visiteur', $admin->setAccountStatus('visiteur', (int) $v
 check('Réinitialisation du mot de passe visiteur', $admin->resetPassword('visiteur', (int) $visitor['id_vis'], null, 'newpassword1'));
 $visitor = $visiteur->findByMail($visitorEmail);
 check('Nouveau mot de passe visiteur vérifié', $visiteur->verifyPassword($visitor['mot_de_passe_vis'] ?? '', 'newpassword1'));
+
+// --- Protection des suppressions : « has_history » vs « deleted » ---
+// On rattache le visiteur à une activité complémentaire (tables AC + Organiser) :
+// deleteAccount doit refuser (retour 'has_history') tant que le compte a un
+// historique, puis accepter ('deleted') une fois les liens retirés.
 $insertActivity = $db->prepare("INSERT INTO AC (theme, lieu, date_ac) VALUES ('TestAdmin', 'Cholet', CURDATE())");
 $insertActivity->execute();
 $activityId = (int) $db->lastInsertId();

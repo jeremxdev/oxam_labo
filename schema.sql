@@ -1,4 +1,7 @@
--- Schéma initial de la base oxam_labo : tables métier, relations et données de démonstration.
+-- Schéma complet de la base oxam_labo : tables métier, relations et données de démonstration.
+-- Ce fichier est la version de référence : il inclut déjà les évolutions apportées
+-- par les scripts du dossier migrations/ (mot de passe, validation, statuts de compte
+-- et de visite). Les migrations ne servent qu'à mettre à jour une ancienne base.
 -- Base de données Merise exacte (oxam_labo)
 CREATE DATABASE IF NOT EXISTS oxam_labo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE oxam_labo;

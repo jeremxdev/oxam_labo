@@ -1,5 +1,16 @@
 <?php
-// Script de test temporaire : cycle de vie d'un compte praticien
+/**
+ * Test fonctionnel (couche modèle) du cycle de vie d'un compte praticien.
+ *
+ * Vérifie : création du compte et de sa région, stockage haché du mot de passe,
+ * vérification des identifiants, absence du hash dans les profils et listes,
+ * unicité de l'email, approbation par l'administrateur, activation/désactivation
+ * du compte, réinitialisation du mot de passe et suppression du compte de test.
+ *
+ * Exécution : php tests/test_practicien_compte.php (depuis la racine du projet).
+ * Attention : modifie la base de données réelle ; tous les fixtures créés sont
+ * supprimés en fin de script. Sortie : [OK]/[FAIL] par assertion et code 0/1.
+ */
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/Practicien.php';
 require_once __DIR__ . '/../models/Visiteur.php';
@@ -11,6 +22,11 @@ $vis = new Visiteur();
 $db = Database::getConnection();
 $ok = true;
 
+/**
+ * Affiche le résultat d'une assertion et fait échouer le script si elle est fausse.
+ * @param string $label Libellé du contrôle affiché.
+ * @param bool $cond Résultat du contrôle à évaluer.
+ */
 function check($label, $cond) {
     global $ok;
     echo ($cond ? "[OK]   " : "[FAIL] ") . $label . PHP_EOL;

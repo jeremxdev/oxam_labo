@@ -1,5 +1,8 @@
 <?php
-// Formulaire de modification du profil du visiteur connecté.
+// Profil du visiteur connecté : affiche $profil (valeurs pré-remplies), $regions (région actuelle
+// sélectionnée) et l'alerte des visites refusées ($visitesRefusees, boucle foreach).
+// Formulaire POST vers action=visiteur_profil ; mot de passe facultatif ; messages $error / $success.
+// Inclus par VisiteurController::profil() (route "visiteur_profil" de index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="form-card">

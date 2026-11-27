@@ -1,5 +1,8 @@
 <?php
-// Espace praticien : affiche le profil du compte et les visites qui lui sont associées.
+// Espace praticien : affiche le profil du compte ($profil) et les visites qui lui sont associées ($visites).
+// Chaque visite encore "en_attente" peut être acceptée ou refusée (formulaires POST vers action=visite_statut).
+// Messages de retour lus dans $_GET['msg'] / $_GET['err'] ; légende $statutsVisite pour les badges.
+// Inclus par PracticienController::index() (route "practicien" de index.php).
 $statutsVisite = ['en_attente' => 'En attente', 'acceptee' => 'Acceptée', 'refusee' => 'Refusée'];
 include __DIR__ . '/../layout/header.php';
 ?>

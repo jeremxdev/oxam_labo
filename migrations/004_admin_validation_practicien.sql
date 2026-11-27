@@ -1,4 +1,5 @@
--- Ajoute l'approbation des comptes praticiens et les comptes administrateur.
+-- Migration 004 : ajoute l'approbation des comptes praticiens et crée la table des administrateurs.
+-- Dépend de la migration 003 (colonne mot_de_passe_par). Les praticiens déjà présents restent approuvés.
 USE oxam_labo;
 
 -- Les praticiens déjà enregistrés restent actifs ; les nouvelles inscriptions

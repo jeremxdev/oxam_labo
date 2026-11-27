@@ -1,5 +1,7 @@
 <?php
-// Tableau récapitulatif des comptes du personnel, de leurs rôles et régions.
+// Tableau récapitulatif des comptes du personnel ($users) : nom, email, rôle et région.
+// Boucle foreach avec échappement htmlspecialchars sur chaque cellule.
+// Inclus par UserController::index() (route "users" non encore déclarée dans le routeur index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="header-action">

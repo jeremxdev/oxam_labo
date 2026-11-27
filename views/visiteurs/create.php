@@ -1,5 +1,7 @@
 <?php
-// Formulaire de création d'un visiteur et de son affectation régionale.
+// Formulaire de création d'un visiteur par l'administrateur (POST vers action=visiteur_create).
+// Affiche $regions (menu déroulant d'affectation, boucle foreach) et les messages $error / $success.
+// Inclus par VisiteurController::create() (route "visiteur_create" de index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="form-card">

@@ -1,4 +1,5 @@
--- Ajoute un champ de mot de passe haché aux visiteurs et initialise les comptes déjà existants.
+-- Migration 002 : ajoute un champ de mot de passe haché aux visiteurs et initialise les comptes déjà existants.
+-- Dépend de la migration 001 (table Visiteur). Les comptes existants reçoivent un mot de passe provisoire.
 USE oxam_labo;
 
 -- Ajout du champ de connexion (mot de passe haché avec password_hash / bcrypt)

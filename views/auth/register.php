@@ -1,5 +1,8 @@
 <?php
-// Formulaire d'inscription d'un visiteur avec son affectation régionale.
+// Page d'inscription d'un visiteur : formulaire POST à action=register (identité, coordonnées,
+// mot de passe et région d'affectation). Affiche $error en cas de refus, $success après création,
+// et la liste $regions (boucle foreach) dans le menu déroulant.
+// Inclus par AuthController::register() (route "register" de index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="auth-card">

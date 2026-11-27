@@ -1,4 +1,12 @@
 <?php
+/**
+ * Script temporaire de diagnostic : contrôle la présence et l'état du compte
+ * hugo.gasnier@oxam-labo.fr dans la base réelle.
+ *
+ * Affiche son identité et sa spécialité, vérifie si son mot de passe est vide,
+ * égal à "oxam2025" ou différent, et signale un conflit d'email chez les visiteurs.
+ * En lecture seule : php tmp_check_hugo.php.
+ */
 require_once __DIR__ . '/config/database.php';
 $pdo = Database::getConnection();
 

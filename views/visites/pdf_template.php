@@ -1,4 +1,9 @@
-<?php // Présente un compte-rendu de visite en page autonome pour impression ou enregistrement PDF. ?>
+<?php
+// Modèle autonome (sans layout) d'un compte-rendu de visite, destiné à l'impression ou à l'export PDF.
+// Affiche $visite : en-tête, motif, bilan, médicaments présentés et échantillons offerts,
+// toujours échappés avec htmlspecialchars (nl2br pour les retours à la ligne du bilan).
+// Inclus par VisiteController::pdf() (route "visite_pdf") après contrôle du droit d'accès.
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

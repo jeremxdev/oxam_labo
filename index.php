@@ -1,9 +1,26 @@
 <?php
-// Point d'entrée HTTP : démarre la session et distribue les actions vers leurs contrôleurs.
+/**
+ * Point d'entrée unique de l'application (front controller / routeur).
+ *
+ * Rôle : démarrer la session PHP, contrôler l'état du compte connecté
+ * (activation/désactivation par l'administrateur) puis distribuer le
+ * paramètre GET "action" vers le contrôleur correspondant.
+ *
+ * Il interagit avec :
+ *  - les contrôleurs de controllers/ (Auth, Practicien, Admin, Visite,
+ *    Visiteur, Ac) chargés à la volée selon la route ;
+ *  - le modèle models/Admin.php pour vérifier que le compte est actif ;
+ *  - les vues rendues par ces contrôleurs (views/...).
+ *
+ * Convention d'URL : index.php?action=<route> (+ paramètres GET).
+ */
 session_start();
 
 $action = $_GET['action'] ?? 'visites';
 
+// Garde de session : pour toute requête hormis la déconnexion, on vérifie que le
+// compte connecté (visiteur, praticien ou administrateur) est toujours "actif"
+// en base — un compte désactivé par l'admin est déconnecté immédiatement.
 if (isset($_SESSION['user']) && $action !== 'logout') {
     require_once __DIR__ . '/models/Admin.php';
     $account = $_SESSION['user'];
@@ -29,12 +46,17 @@ if (isset($_SESSION['user']) && $action !== 'logout') {
     }
 }
 
+// Par défaut, l'administrateur atterrit sur son tableau de bord
+// plutôt que sur la liste des visites.
 if (!isset($_GET['action']) && (($_SESSION['user']['role'] ?? '') === 'admin')) {
     header("Location: index.php?action=admin");
     exit();
 }
 
 switch ($action) {
+
+    // --- Routes d'authentification (AuthController) ---
+    // Connexion (formulaire + traitement) et création de compte visiteur.
     case 'login':
         require_once __DIR__ . '/controllers/AuthController.php';
         (new AuthController())->login();
@@ -43,6 +65,9 @@ switch ($action) {
         require_once __DIR__ . '/controllers/AuthController.php';
         (new AuthController())->register();
         break;
+    // --- Espace praticien (PracticienController) ---
+    // Inscription d'un praticien (statut "en_attente" jusqu'à validation),
+    // tableau de bord de l'espace et édition de son profil.
     case 'practicien_register':
         require_once __DIR__ . '/controllers/PracticienController.php';
         (new PracticienController())->register();
@@ -55,6 +80,9 @@ switch ($action) {
         require_once __DIR__ . '/controllers/PracticienController.php';
         (new PracticienController())->profil();
         break;
+
+    // --- Back-office administrateur (AdminController) ---
+    // Tableau de bord (comptes, validations) et édition d'un compte.
     case 'admin':
         require_once __DIR__ . '/controllers/AdminController.php';
         (new AdminController())->index();
@@ -63,10 +91,15 @@ switch ($action) {
         require_once __DIR__ . '/controllers/AdminController.php';
         (new AdminController())->edit();
         break;
+    // Déconnexion : destruction de la session (le contrôle ci-dessus exclut
+    // explicitement cette action de la vérification du compte actif).
     case 'logout':
         require_once __DIR__ . '/controllers/AuthController.php';
         (new AuthController())->logout();
         break;
+
+    // --- Gestion des visites (VisiteController) : liste, création,
+    //     suppression, changement de statut et export PDF du compte-rendu. ---
     case 'visites':
         require_once __DIR__ . '/controllers/VisiteController.php';
         (new VisiteController())->index();
@@ -87,6 +120,9 @@ switch ($action) {
         require_once __DIR__ . '/controllers/VisiteController.php';
         (new VisiteController())->pdf();
         break;
+
+    // --- Gestion des visiteurs (VisiteurController) : liste, création
+    //     du compte et modification du profil. ---
     case 'visiteurs':
         require_once __DIR__ . '/controllers/VisiteurController.php';
         (new VisiteurController())->index();
@@ -99,6 +135,8 @@ switch ($action) {
         require_once __DIR__ . '/controllers/VisiteurController.php';
         (new VisiteurController())->profil();
         break;
+
+    // --- Activités complémentaires (AcController) : liste et création. ---
     case 'ac':
         require_once __DIR__ . '/controllers/AcController.php';
         (new AcController())->index();
@@ -107,6 +145,8 @@ switch ($action) {
         require_once __DIR__ . '/controllers/AcController.php';
         (new AcController())->create();
         break;
+
+    // --- Route inconnue : retour par défaut à la liste des visites. ---
     default:
         header("Location: index.php?action=visites");
         exit();

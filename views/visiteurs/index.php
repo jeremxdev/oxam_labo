@@ -1,5 +1,7 @@
 <?php
-// Tableau de consultation des visiteurs et de leurs coordonnées.
+// Liste en lecture seule de tous les visiteurs ($visiteurs) et de leurs coordonnées,
+// réservée à l'administrateur : boucle foreach avec échappement htmlspecialchars sur chaque cellule.
+// Inclus par VisiteurController::index() (route "visiteurs" de index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="header-action">

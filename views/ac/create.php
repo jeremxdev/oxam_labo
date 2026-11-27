@@ -1,5 +1,7 @@
 <?php
-// Formulaire de création d'une activité complémentaire.
+// Formulaire de création d'une activité complémentaire (POST vers action=ac_create) :
+// thème, lieu et date. L'organisateur est attribué côté serveur au visiteur connecté.
+// Inclus par AcController::create() (route "ac_create" de index.php).
 include __DIR__ . '/../layout/header.php';
 ?>
 <div class="form-card">

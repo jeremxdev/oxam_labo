@@ -1,10 +1,22 @@
 <?php
+/**
+ * Script temporaire de vérification complète du compte Gasnier.
+ *
+ * Deux parties :
+ * 1) Teste la logique réelle de l'application (findByMail, vérification bcrypt,
+ *    spécialité, email non dupliqué, liste des praticiens, comptes de démo).
+ * 2) Crée une base temporaire oxam_labo_tmpcheck, y importe schema.sql après
+ *    neutralisation des instructions CREATE DATABASE/USE, puis vérifie que le
+ *    compte Gasnier et son portefeuille y sont correctement restaurés.
+ * La base temporaire est supprimée à la fin. Sortie : [OK]/[FAIL] et code 0/1.
+ */
 require_once __DIR__ . '/config/database.php';
 require_once __DIR__ . '/models/Practicien.php';
 require_once __DIR__ . '/models/Visiteur.php';
 require_once __DIR__ . '/models/Visite.php';
 
 $ok = true;
+/** Affiche une assertion [OK]/[FAIL] et positionne le code de sortie du script. */
 function check($label, $cond) {
     global $ok;
     echo ($cond ? "[OK]   " : "[FAIL] ") . $label . PHP_EOL;
@@ -73,7 +85,10 @@ echo "Base temporaire supprimée\n";
 echo PHP_EOL . ($ok ? 'TOUS LES TESTS PASSENT' : 'DES TESTS ONT ECHOUE') . PHP_EOL;
 exit($ok ? 0 : 1);
 
-// Petit adaptateur pour appeler getAllPracticiens sans dépendre du reste
+/**
+ * Petit adaptateur pour appeler Visite::getAllPracticiens() sans charger
+ * prématurément le modèle Visite (déclaré après les tests).
+ */
 class VisiteSafe {
     public function getAllPracticiens() {
         require_once __DIR__ . '/models/Visite.php';
