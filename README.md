@@ -18,7 +18,8 @@ Application web PHP/MySQL de suivi des visites de visiteurs médicaux, de leur p
 - Création et consultation des comptes rendus de visite.
 - Association de praticiens, de médicaments présentés et d'échantillons à une visite.
 - Sélection des praticiens approuvés lors de la saisie d'une visite.
-- Consultation et création d'activités complémentaires.
+- Consultation et création d'activités complémentaires par les visiteurs.
+- Administration complète des activités complémentaires (création, modification, suppression et choix des organisateurs) réservée à l'administrateur.
 - Affichage d'un compte rendu de visite dans une page imprimable (action « PDF » dans l'interface), limité au visiteur émetteur ou au praticien concerné.
 
 > **Authentification :** visiteurs, praticiens et administrateurs se connectent avec leur adresse e-mail et leur mot de passe haché. Chaque adresse email ne peut créer qu'un seul compte, quelle que soit sa nature. Les nouveaux comptes praticien restent inaccessibles avant validation. Cette application est un projet de démonstration et ne doit pas être exposée en production sans renforcer l'authentification et la sécurité (par exemple : limitation des tentatives de connexion, réinitialisation de mot de passe, HTTPS).
@@ -134,10 +135,14 @@ Les pages sont routées par le paramètre `action` de `index.php` :
 | `visiteurs` | Liste des visiteurs (administrateur uniquement) |
 | `visiteur_create` | Création d'un visiteur (administrateur uniquement) |
 | `visiteur_profil` | Consultation et modification du profil visiteur |
-| `ac` | Liste des activités complémentaires |
-| `ac_create` | Création d'une activité complémentaire |
+| `ac` | Liste des activités complémentaires (visiteur) |
+| `ac_create` | Création d'une activité complémentaire (visiteur) |
+| `admin_ac` | Administration des activités complémentaires (administrateur uniquement) |
+| `admin_ac_create` | Création d'une AC avec choix des organisateurs (administrateur uniquement) |
+| `admin_ac_edit&id=<id>` | Modification d'une AC et de ses organisateurs (administrateur uniquement) |
+| `admin_ac_delete` (POST `id`) | Suppression d'une AC (administrateur uniquement, protégée par jeton CSRF) |
 
-Les pages de visites, d'activités et le profil nécessitent une session de type visiteur. L'espace praticien nécessite un compte praticien approuvé. Les pages `admin`, `visiteurs` et `visiteur_create` sont réservées à l'administrateur. Celui-ci ne peut que changer le statut des visiteurs et des praticiens (ou supprimer leur compte) : leurs informations personnelles et leur mot de passe ne sont modifiables que depuis leur propre profil. Seuls les comptes administrateurs restent modifiables depuis l'administration. L'inscription des visiteurs et des praticiens est publique.
+Les pages de visites, d'activités (`ac`, `ac_create`) et le profil nécessitent une session de type visiteur. L'espace praticien nécessite un compte praticien approuvé. Les pages `admin`, `visiteurs`, `visiteur_create` et `admin_ac*` sont réservées à l'administrateur ; les écritures sur les AC passent par des formulaires POST protégés par un jeton CSRF. Celui-ci ne peut que changer le statut des visiteurs et des praticiens (ou supprimer leur compte) : leurs informations personnelles et leur mot de passe ne sont modifiables que depuis leur propre profil. Seuls les comptes administrateurs restent modifiables depuis l'administration. L'inscription des visiteurs et des praticiens est publique.
 
 ## Base de données
 

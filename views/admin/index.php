@@ -12,6 +12,12 @@ $approvalLabels = ['en_attente' => 'En attente', 'approuve' => 'Approuvé', 'ref
     <h1>Gestion des comptes</h1>
     <p class="subtitle">Modifiez les comptes, changez leur statut, réinitialisez leur mot de passe ou supprimez-les.</p>
 
+    <!-- Accès rapide à la gestion des activités complémentaires (AdminAcController). -->
+    <p style="margin-bottom: 1rem;">
+        <a href="index.php?action=admin_ac" class="btn-link">Gérer les activités complémentaires</a>
+        <a href="index.php?action=admin_ac_create" class="btn-primary-sm">+ Nouvelle activité complémentaire</a>
+    </p>
+
     <?php if ($error): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>

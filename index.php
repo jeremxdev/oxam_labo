@@ -7,7 +7,7 @@
  * paramètre GET "action" vers le contrôleur correspondant.
  *
  * Il interagit avec :
- *  - les contrôleurs de controllers/ (Auth, Practicien, Admin, Visite,
+ *  - les contrôleurs de controllers/ (Auth, Practicien, Admin, AdminAc, Visite,
  *    Visiteur, Ac) chargés à la volée selon la route ;
  *  - le modèle models/Admin.php pour vérifier que le compte est actif ;
  *  - les vues rendues par ces contrôleurs (views/...).
@@ -144,6 +144,25 @@ switch ($action) {
     case 'ac_create':
         require_once __DIR__ . '/controllers/AcController.php';
         (new AcController())->create();
+        break;
+
+    // --- Administration des activités complémentaires (AdminAcController) :
+    //     liste, création, modification et suppression (CRUD complet). ---
+    case 'admin_ac':
+        require_once __DIR__ . '/controllers/AdminAcController.php';
+        (new AdminAcController())->index();
+        break;
+    case 'admin_ac_create':
+        require_once __DIR__ . '/controllers/AdminAcController.php';
+        (new AdminAcController())->create();
+        break;
+    case 'admin_ac_edit':
+        require_once __DIR__ . '/controllers/AdminAcController.php';
+        (new AdminAcController())->edit();
+        break;
+    case 'admin_ac_delete':
+        require_once __DIR__ . '/controllers/AdminAcController.php';
+        (new AdminAcController())->delete();
         break;
 
     // --- Route inconnue : retour par défaut à la liste des visites. ---

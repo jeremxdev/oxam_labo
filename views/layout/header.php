@@ -21,10 +21,12 @@
                 <?php $role = $_SESSION['user']['role'] ?? 'visiteur'; ?>
                 <nav class="nav-links">
                     <?php if ($role === 'admin'): ?>
-                        <!-- Menu administrateur : gestion des comptes, consultation et création de visiteurs -->
+                        <!-- Menu administrateur : gestion des comptes, visiteurs et activités complémentaires -->
                         <span class="user-info"><strong>Administrateur</strong></span>
                         <a href="index.php?action=admin" class="btn-link">Gestion des comptes</a>
                         <a href="index.php?action=visiteurs" class="btn-link">Visiteurs</a>
+                        <a href="index.php?action=admin_ac" class="btn-link">Activités Comp. (AC)</a>
+                        <a href="index.php?action=admin_ac_create" class="btn-primary-sm">+ Nouvelle AC</a>
                         <a href="index.php?action=visiteur_create" class="btn-primary-sm">+ Nouveau Visiteur</a>
                     <?php elseif ($role === 'practicien'): ?>
                         <!-- Menu praticien : nom, spécialité, espace personnel et profil -->
